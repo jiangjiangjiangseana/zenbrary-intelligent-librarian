@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./ZenboSDK/ZenboSDK.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ZenboSDK/ZenboSDK.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

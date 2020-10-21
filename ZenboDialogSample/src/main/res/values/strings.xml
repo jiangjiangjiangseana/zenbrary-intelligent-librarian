@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ZenboDialogSample</string>
+
+    <string name="dialog_example">歡迎蒞臨達賢圖書館，\n
+        有什麼是我可以幫你的嗎?\n
+        Welcome!\n
+        How may I help you?
+    </string>
+
+    <string name="login">
+        登入 login
+    </string>
+
+    <string name="bookSearch">
+        書籍查詢 Book Search
+    </string>
+
+    <string name="question">
+        我有問題! I have a question!
+    </string>
+
+    <string name="equipment">
+        設備介紹 Equipment Introduce
+    </string>
+</resources>
