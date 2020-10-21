@@ -291,6 +291,7 @@ public class ZenboDialogSample extends RobotActivity {
                             output.write(rawData.getBytes(charset));
                         } catch (Exception e) {
                             e.printStackTrace();
+                            System.out.println("fail to receive response");
                         }
                         InputStream response = null;
                         try {

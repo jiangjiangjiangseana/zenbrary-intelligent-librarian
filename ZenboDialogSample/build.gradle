@@ -22,11 +22,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    //implementation 'com.android.support:appcompat-v7:26.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation project(':RobotActivityLibrary')
     //implementation 'com.android.support:design:26.1.0'
-    implementation 'com.github.alamkanak:android-week-view:1.2.6'
-    implementation 'com.applandeo:material-calendar-view:1.7.0'
+    //implementation 'com.github.alamkanak:android-week-view:1.2.6'
+    //implementation 'com.applandeo:material-calendar-view:1.7.0'
 
 
 }

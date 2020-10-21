@@ -3,7 +3,6 @@ package com.asus.zenbodialogsample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
@@ -53,25 +52,9 @@ public class Personal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
 
-         //關於layout
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        final TextView contentView = (TextView) findViewById(R.id.content_view);
-        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView view = (NavigationView) findViewById(R.id.navigation_view);
-        view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Toast.makeText(Personal.this, menuItem.getTitle() + " pressed", Toast.LENGTH_LONG).show();
-                contentView.setText(menuItem.getTitle());
-
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
-            }
 
 
-        });
+
 
     }
 

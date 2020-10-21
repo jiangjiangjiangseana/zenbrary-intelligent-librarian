@@ -4,25 +4,6 @@
             "outputFile": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\a434bfda77b875ce2e843fa32790407d\\res\\values-land\\values-land.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "232"
-                    },
-                    "to": {
-                        "startLines": "6",
-                        "startColumns": "4",
-                        "startOffsets": "328",
-                        "endLines": "9",
-                        "endColumns": "12",
-                        "endOffsets": "505"
-                    }
-                },
-                {
                     "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4,5",

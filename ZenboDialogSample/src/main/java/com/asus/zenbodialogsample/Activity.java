@@ -2,7 +2,6 @@ package com.asus.zenbodialogsample;
 
 import android.os.Bundle;
 
-import com.alamkanak.weekview.WeekView;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;

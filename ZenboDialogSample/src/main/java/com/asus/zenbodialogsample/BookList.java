@@ -93,6 +93,7 @@ public class BookList extends RobotActivity{
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Toast.makeText(BookList.this,"點選第 "+(i +1) +" 個 \n內容："+booknameList.get(i), Toast.LENGTH_SHORT).show();
                     bookName = bookList.get(i);
+                    System.out.println("book_name: "+bookName);
                 }
             });
 
