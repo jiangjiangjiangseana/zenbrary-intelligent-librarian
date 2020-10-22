@@ -13,6 +13,8 @@ import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
+import com.asus.robotframework.API.VisionConfig.PersonDetectConfig;
+import com.asus.robotframework.API.VisionConfig;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -67,6 +69,7 @@ public class ZenboDialogSample extends RobotActivity {
         bButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.vision.cancelDetectFace();
                 targetUrl = "http://140.119.19.18:5000/api/v1/book_list/";
                 int aaaab = robotAPI.robot.speakAndListen("您想找什麼書呢?", new SpeakConfig().timeout(15));
             }
@@ -76,6 +79,7 @@ public class ZenboDialogSample extends RobotActivity {
         eButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.vision.cancelDetectFace();
                 System.out.println("change layout to equip");
                 Intent equipIt = new Intent();
                 //equipIt.putExtra("resJson",resJson.toString());
@@ -88,6 +92,7 @@ public class ZenboDialogSample extends RobotActivity {
         qButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.vision.cancelDetectFace();
                 targetUrl = "http://140.119.19.18:5000/api/v1/other/";
                 int aaaab = robotAPI.robot.speakAndListen("有什麼是我能幫你的嗎?", new SpeakConfig().timeout(15));
             }
@@ -97,6 +102,7 @@ public class ZenboDialogSample extends RobotActivity {
         aButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.vision.cancelDetectFace();
                 System.out.println("change layout to activity");
                 Intent activityIt = new Intent();
                 //equipIt.putExtra("resJson",resJson.toString());
@@ -109,6 +115,7 @@ public class ZenboDialogSample extends RobotActivity {
         gButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.vision.cancelDetectFace();
                 System.out.println("change layout to guided");
                 Intent guidedIt = new Intent();
                 //equipIt.putExtra("resJson",resJson.toString());
@@ -116,6 +123,8 @@ public class ZenboDialogSample extends RobotActivity {
                 startActivity(guidedIt);
             }
         });
+
+        int ttt = robotAPI.vision.requestDetectPerson(new VisionConfig.PersonDetectConfig());
 
     }
 
@@ -130,43 +139,6 @@ public class ZenboDialogSample extends RobotActivity {
         // jump dialog domain
         robotAPI.robot.jumpToPlan(DOMAIN, "lanuchHelloWolrd_Plan");
 
-        // listen user utterance
-//        int abc = robotAPI.robot.speak("哈囉各位！我是 Zenbo！同時也是位聰明的圖書館館員唷！"+
-//                  "達賢圖書館是我工作的地方！"+
-//                  "，隨著資訊科技的迅速發展，達賢圖" +
-//                  "書館，以提供資訊服務為主要理念，開創符合時代趨勢的科技化圖書館，並在 2020 年" +
-//                  "正式開幕，是政治大學最新成立的圖書館唷！來看看我平常都在做哪些事吧！");
-
-
-//        int second = robotAPI.robot.speak("首先是智慧問答！\n" +
-//                "當使用者遇到問題時，只需要向我走來，並\n" +
-//                "說出問題，我便會給予適當的答案!有了我，讓圖書查詢以及設備介紹更有效率，\n" +
-//                "透過最新的NLP技術，以及厲害的 BERT 模型，我能精準的分析讀者的\n" +
-//                "意圖，並提供最迅速且相關的回答！\n"
-//                );
-//
-//        int third = robotAPI.robot.speak("平常我也會擔任導覽員的絞色，比起枯燥無味的介紹，\n" +
-//                "透過我可愛的外型、活潑的因掉，及讀者對科技的好奇，我會帶領各位翱游答閒" +
-//                "圖書館，這個衝滿科技與美感的閱讀世界唷!");
-//
-//        int forth = robotAPI.robot.speak("此外，各位是否常不知道字幾想看什麼書呢？" +
-//                "透過 USER BASE 與 iTEM BASE 機制，我會創造你最可能感姓趣的書籍推薦。" +
-//                "根據你的喜好，尋找與" +
-//                "你相像的讀者，推薦他們閱讀過的書，也會根據你過去借閱的書，找出" +
-//                "相似度最高的圖書推薦給你唷。");
-
-//           int fifth = robotAPI.robot.speak("除了圖書館單芳麵的推薦，我還有紀錄評論的工作！讀者在\n" +
-//                   "閱讀完書籍後可以直接給予書籍形容詞標籤\n" +
-//                   " ，讓書籍之間有更多關聯性，也可以藉由這些標籤達到\n" +
-//                   "多樣化的搜尋，推薦給你更多你可能有興趣的圖書清單唷！");
-//
-//           int sixth = robotAPI.robot.speak("最後，聰明的我能夠同步圖書館的活動資訊，將豐富的活動資源都讓各位知道，不讓各位\n" +
-//                   "漏掉任何依個可能感興趣的活動唷！\n" +
-//                   "同時，也可以根據活動資訊來選擇適合的閱讀空間，以減少因活動受\n" +
-//                   "到的乾擾。");
-
-
-//            int seventh = robotAPI.robot.speak("以上就是我的工作內容，希望我的出現，能夠讓答閒圖書館更加科技化，也能夠帶給各位更優質的閱讀環境，快來找我玩吧~!");
 
 
         // show hint
@@ -203,12 +175,15 @@ public class ZenboDialogSample extends RobotActivity {
         //stop listen user utterance
         robotAPI.robot.stopSpeakAndListen();
 
+
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        robotAPI.vision.cancelDetectFace();
+
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
@@ -225,6 +200,13 @@ public class ZenboDialogSample extends RobotActivity {
         @Override
         public void initComplete() {
             super.initComplete();
+        }
+
+        @Override
+        public void onDetectPersonResult(java.util.List resultList){
+            System.out.println("a person detected");
+            int sayActivity = robotAPI.robot.speak("歡迎~今天有二手書市集喔!");
+
         }
     };
 

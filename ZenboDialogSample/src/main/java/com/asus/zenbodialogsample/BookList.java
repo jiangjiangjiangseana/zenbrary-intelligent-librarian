@@ -54,6 +54,7 @@ public class BookList extends RobotActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("sucess to change to book list");
         setContentView(R.layout.activity_book_list);
         listView = (ListView) findViewById(R.id.bookList);
         bookListClass = BookList.this;
@@ -91,9 +92,62 @@ public class BookList extends RobotActivity{
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(BookList.this,"點選第 "+(i +1) +" 個 \n內容："+booknameList.get(i), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BookList.this,"點選第 "+(i +1) +" 個 \n"+booknameList.get(i), Toast.LENGTH_SHORT).show();
                     bookName = bookList.get(i);
-                    System.out.println("book_name: "+bookName);
+
+                    System.out.println("book_name_is: "+bookName.getClass() + "  "+bookName);
+                    //start search a book
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("start running");
+                            String uniqueID = UUID.randomUUID().toString();
+                            String rawData = "{\"question\":\""+bookName+"\",\"session_id\":\""+uniqueID+"\"}";
+                            String charset = "UTF-8";
+
+                            URLConnection connection = null;
+                            try {
+                                connection = new URL(bookUrl).openConnection();
+                            } catch (Exception e) {
+                                Log.d(TAG,"connection failed");
+                                e.printStackTrace();
+                            }
+                            connection.setDoOutput(true); // Triggers POST.
+                            connection.setRequestProperty("Accept-Charset", charset);
+                            connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                            try (OutputStream output = connection.getOutputStream()) {
+                                Log.d("output format",output.toString());
+                                output.write(rawData.getBytes(charset));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            InputStream response = null;
+                            try {
+                                response = connection.getInputStream();
+                                System.out.println("receiving : "+response.toString());
+                            } catch (Exception e) {
+                                System.out.println("error in receiving");
+                                e.printStackTrace();
+                            }
+
+
+
+                            bookListClass.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+
+                                    System.out.println("切換頁面到Book");
+                                    Intent bookIt = new Intent();
+                                    //loginIt.putExtra("resJson",resJson.toString());
+                                    bookIt.setClass(BookList.this,Book.class);
+                                    startActivity(bookIt);
+
+
+                                }
+                            });
+                        }
+                    }).start();
                 }
             });
 
@@ -120,58 +174,7 @@ public class BookList extends RobotActivity{
     protected void onResume() {
         super.onResume();
 
-        //start search a book
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("start running");
-                String uniqueID = UUID.randomUUID().toString();
-                String rawData = "{\"question\":\""+bookName+"\",\"session_id\":\""+uniqueID+"\"}";
-                String charset = "UTF-8";
 
-                URLConnection connection = null;
-                try {
-                    connection = new URL(bookUrl).openConnection();
-                } catch (Exception e) {
-                    Log.d(TAG,"connection failed");
-                    e.printStackTrace();
-                }
-                connection.setDoOutput(true); // Triggers POST.
-                connection.setRequestProperty("Accept-Charset", charset);
-                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
-                try (OutputStream output = connection.getOutputStream()) {
-                    Log.d("output format",output.toString());
-                    output.write(rawData.getBytes(charset));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                InputStream response = null;
-                try {
-                    response = connection.getInputStream();
-                    System.out.println("receiving : "+response.toString());
-                } catch (Exception e) {
-                    System.out.println("error in receiving");
-                    e.printStackTrace();
-                }
-
-
-
-                bookListClass.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-
-                            System.out.println("切換頁面到Book");
-                            Intent bookIt = new Intent();
-                            //loginIt.putExtra("resJson",resJson.toString());
-                            bookIt.setClass(BookList.this,Book.class);
-                            startActivity(bookIt);
-
-
-                    }
-                });
-            }
-        }).start();
     }
 
 
