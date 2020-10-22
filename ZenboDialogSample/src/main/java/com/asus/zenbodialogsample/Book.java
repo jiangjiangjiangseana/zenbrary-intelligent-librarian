@@ -37,15 +37,20 @@ public class Book extends RobotActivity{
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-
+    static Book bookClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("sucess to change to book");
         setContentView(R.layout.activity_book);
-
-
+        bookClass = Book.this;
+        Intent bookIt = this.getIntent();
+        String resAuthor = bookIt.getStringExtra("resAuthor");
+        String resBookName = bookIt.getStringExtra("resBookName");
+        String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
+        System.out.println("book_info receive: "+resAuthor+resBookName+resLocandAvai);
 
     }
 

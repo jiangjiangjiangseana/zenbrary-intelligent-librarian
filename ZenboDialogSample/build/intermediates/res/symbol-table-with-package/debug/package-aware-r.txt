@@ -606,6 +606,7 @@ id beginning
 id blocking
 id bookButton
 id bookList
+id bookName
 id bottom
 id buttonPanel
 id cancel_action

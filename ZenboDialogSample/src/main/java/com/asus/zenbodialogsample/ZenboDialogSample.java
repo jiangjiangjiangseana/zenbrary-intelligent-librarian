@@ -174,6 +174,7 @@ public class ZenboDialogSample extends RobotActivity {
         super.onPause();
         //stop listen user utterance
         robotAPI.robot.stopSpeakAndListen();
+        robotAPI.vision.cancelDetectFace();
 
 
     }
@@ -205,7 +206,15 @@ public class ZenboDialogSample extends RobotActivity {
         @Override
         public void onDetectPersonResult(java.util.List resultList){
             System.out.println("a person detected");
-            int sayActivity = robotAPI.robot.speak("歡迎~今天有二手書市集喔!");
+
+            //int sayActivity = robotAPI.robot.speak("歡迎~今天有二手書市集喔!");
+//            try {
+//                Thread.currentThread().sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//                System.out.println("fail to sleep");
+//            }
+//            robotAPI.robot.stopSpeak();
 
         }
     };

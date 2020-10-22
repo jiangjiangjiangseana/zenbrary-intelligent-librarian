@@ -21,6 +21,8 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
@@ -48,6 +50,9 @@ public class BookList extends RobotActivity{
     static String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
     static BookList bookListClass;
     static String bookName;
+    static String resAuthor ;
+    static String resBookName ;
+    static String resLocandAvai ;
 
 
 
@@ -61,8 +66,8 @@ public class BookList extends RobotActivity{
         Intent it = this.getIntent();
         String resJsonString = it.getStringExtra("resJson");
         try {
-            JSONObject resJson = new JSONObject(resJsonString);
-            JSONArray bookListJson = resJson.getJSONArray("book_list");
+            final JSONObject[] resJson = {new JSONObject(resJsonString)};
+            JSONArray bookListJson = resJson[0].getJSONArray("book_list");
             final ArrayList<String> bookList = new ArrayList<String>();
             if (bookListJson != null) {
                 for (int i = 0; i < bookListJson.length(); i++) {
@@ -94,16 +99,23 @@ public class BookList extends RobotActivity{
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Toast.makeText(BookList.this,"點選第 "+(i +1) +" 個 \n"+booknameList.get(i), Toast.LENGTH_SHORT).show();
                     bookName = bookList.get(i);
-
-                    System.out.println("book_name_is: "+bookName.getClass() + "  "+bookName);
+                    System.out.println("1111111");
+                    //change string to arraylist
+                    List<String> book_info = new ArrayList<String>(Arrays.asList(bookName.split(",")));
+                    Collections.reverse(book_info);
+                    String book_number = book_info.get(0);
+                    book_number = book_number.substring(0,book_number.length()-1);
+                    System.out.println("book_number: "+book_number.getClass() + "  "+book_number);
                     //start search a book
+                    final String finalBook_number = book_number;
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             System.out.println("start running");
                             String uniqueID = UUID.randomUUID().toString();
-                            String rawData = "{\"question\":\""+bookName+"\",\"session_id\":\""+uniqueID+"\"}";
+                            String rawData = "{\"mms_id\":\""+ finalBook_number +"\",\"session_id\":\""+uniqueID+"\"}";
                             String charset = "UTF-8";
+                            System.out.println("book info request: "+rawData);
 
                             URLConnection connection = null;
                             try {
@@ -124,12 +136,44 @@ public class BookList extends RobotActivity{
                             InputStream response = null;
                             try {
                                 response = connection.getInputStream();
-                                System.out.println("receiving : "+response.toString());
+                                System.out.println("receiving book_info : "+response.toString() + " " + response);
                             } catch (Exception e) {
-                                System.out.println("error in receiving");
+                                System.out.println("error in receiving book_info");
                                 e.printStackTrace();
                             }
+                            try {
+                                System.out.println("start translate book_info: ");
+                                String text;
+                                if (response != null) {
+                                    Writer writer = new StringWriter();
+                                    char[] buffer = new char[1024];
+                                    try {
+                                        Reader reader = new BufferedReader(
+                                                new InputStreamReader(response, "UTF-8"));
+                                        int n;
+                                        while ((n = reader.read(buffer)) != -1) {
+                                            writer.write(buffer, 0, n);
+                                        }
+                                    } finally {
+                                        response.close();
+                                    }
+                                    text =  writer.toString();
+                                } else {
+                                    text =  "";
+                                }
+                                System.out.println("response book_info: "+text);
+                                resJson[0] = new JSONObject(text);
+                                System.out.println("resJson: "+ resJson[0]);
 
+                                resAuthor = resJson[0].getString("author");
+                                resBookName = resJson[0].getString("book_name");
+                                resLocandAvai = resJson[0].getString("location_and_available");
+                                System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai);
+                            } catch (Exception  e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                                System.out.println("error in translate book_info");
+                            }
 
 
                             bookListClass.runOnUiThread(new Runnable() {
@@ -139,7 +183,9 @@ public class BookList extends RobotActivity{
 
                                     System.out.println("切換頁面到Book");
                                     Intent bookIt = new Intent();
-                                    //loginIt.putExtra("resJson",resJson.toString());
+                                    bookIt.putExtra("resAuthor",resAuthor);
+                                    bookIt.putExtra("resBookName",resBookName);
+                                    bookIt.putExtra("resLocandAvai",resLocandAvai.toString());
                                     bookIt.setClass(BookList.this,Book.class);
                                     startActivity(bookIt);
 
