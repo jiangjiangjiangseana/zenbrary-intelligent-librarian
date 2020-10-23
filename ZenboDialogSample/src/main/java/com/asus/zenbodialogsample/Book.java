@@ -51,6 +51,14 @@ public class Book extends RobotActivity{
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
         System.out.println("book_info receive: "+resAuthor+resBookName+resLocandAvai);
+        //(todo)處理loca and avai,讓他分開
+
+        bookName = (TextView)findViewById(R.id.bookName);
+        authorName = (TextView)findViewById(R.id.authorName);
+        location = (TextView)findViewById(R.id.location);
+        available = (TextView)findViewById(R.id.available);
+
+
 
     }
 

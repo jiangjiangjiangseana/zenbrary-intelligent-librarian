@@ -13,17 +13,75 @@
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="309dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        tools:src="@tools:sample/avatars" />
+
+
     <TextView
         android:id="@+id/bookName"
-        android:layout_width="300dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imageView"
         android:text="書名: "
         android:textSize="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="90dp"
         android:layout_marginLeft="10dp"
         android:textColor="#B0ABBC" />
 
+    <TextView
+        android:id="@+id/authorName"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookName"
+
+        android:text="作者: "
+        android:textSize="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#B0ABBC" />
+
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/authorName"
+
+        android:text="位置: "
+        android:textSize="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#B0ABBC" />
+
+    <TextView
+        android:id="@+id/available"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+
+        android:text="狀態: "
+        android:textSize="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#B0ABBC" />
+
+
+    <TextView
+        android:id="@+id/introduce"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageView"
+        android:text="簡介: \n"
+        android:textSize="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#B0ABBC" />
 
     <Button
         android:id="@+id/backButton"
@@ -35,4 +93,44 @@
         android:textColor="#A180A6"
         android:layout_marginTop="50dp"
         android:text="返回前頁" />
+
+
+
+
+    <TextView
+        android:id="@+id/recommend"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backButton"
+        android:text="相似書籍: "
+        android:textSize="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="850dp"
+        android:textColor="#B0ABBC" />
+
+    <ListView
+        android:id="@+id/recommendList"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:layout_below="@+id/recommend"
+        android:layout_marginLeft="850dp"
+        android:layout_marginTop="30dp"
+        android:background="#C2C2F8"
+        android:foregroundTint="#AA3434"
+        android:gravity="center"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp" />
+
+
+    <Button
+        android:id="@+id/hashtagBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="900dp"
+        android:layout_below="@+id/recommendList"
+        android:padding="5dp"
+        android:background="#ECE3ED"
+        android:textColor="#A180A6"
+        android:layout_marginTop="50dp"
+        android:text="新增Hashtag" />
 </RelativeLayout>
