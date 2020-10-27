@@ -3,6 +3,7 @@ package com.asus.zenbodialogsample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
@@ -45,6 +46,7 @@ public class ZenboDialogSample extends RobotActivity {
     static ZenboDialogSample zenboDialogSample;
     static JSONObject resJson;
     static String targetUrl;
+    static boolean personDetected ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ZenboDialogSample extends RobotActivity {
         setContentView(R.layout.activity_zenbo_dialog_sample);
         zenboDialogSample = ZenboDialogSample.this;
         mTextView = (TextView) findViewById(R.id.textview_info);
+        personDetected = false;
         // loginButton 初始化
         Button lButton = findViewById(R.id.loginButton);
         lButton.setOnClickListener(new Button.OnClickListener() {
@@ -125,7 +128,7 @@ public class ZenboDialogSample extends RobotActivity {
         });
 
         int ttt = robotAPI.vision.requestDetectPerson(new VisionConfig.PersonDetectConfig());
-
+        System.out.println("ttt: "+ttt);
     }
 
 
@@ -179,6 +182,14 @@ public class ZenboDialogSample extends RobotActivity {
 
     }
 
+    //限制內建返回按鍵
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -206,14 +217,12 @@ public class ZenboDialogSample extends RobotActivity {
         @Override
         public void onDetectPersonResult(java.util.List resultList){
             System.out.println("a person detected");
+            personDetected = true;
+            if(personDetected){
+            int sayActivity = robotAPI.robot.speak("歡迎~今天有二手書市集喔!");
+            personDetected = false;
+            }
 
-            //int sayActivity = robotAPI.robot.speak("歡迎~今天有二手書市集喔!");
-//            try {
-//                Thread.currentThread().sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//                System.out.println("fail to sleep");
-//            }
 //            robotAPI.robot.stopSpeak();
 
         }
@@ -244,6 +253,7 @@ public class ZenboDialogSample extends RobotActivity {
 
         @Override
         public void onResult(JSONObject jsonObject) {
+            //robotAPI.vision.cancelDetectFace();
             String text;
             final String[] resClass = new String[1];
             final String question;

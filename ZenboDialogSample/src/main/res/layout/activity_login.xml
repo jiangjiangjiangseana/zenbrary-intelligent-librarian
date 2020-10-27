@@ -95,4 +95,17 @@
         android:text="註冊 Register" />
 
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="130dp"
+
+        android:padding="5dp"
+        android:background="#ECE3ED"
+        android:textColor="#A180A6"
+        android:layout_marginTop="50dp"
+        android:text="返回前頁" />
+
+
 </RelativeLayout>

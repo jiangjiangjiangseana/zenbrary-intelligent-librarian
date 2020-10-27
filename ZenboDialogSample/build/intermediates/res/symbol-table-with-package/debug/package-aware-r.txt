@@ -601,6 +601,8 @@ id add
 id alertTitle
 id always
 id async
+id authorName
+id available
 id backButton
 id beginning
 id blocking
@@ -644,12 +646,14 @@ id ifRoom
 id image
 id imageView
 id info
+id introduce
 id italic
 id line1
 id line3
 id listMode
 id listView
 id list_item
+id location
 id loginButton
 id logoutBtn
 id media_actions
@@ -672,7 +676,9 @@ id progress_horizontal
 id pw
 id questionButton
 id radio
+id recommend
 id recommendBtn
+id recommendList
 id registerButton
 id right_icon
 id right_side

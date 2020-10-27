@@ -3,6 +3,7 @@ package com.asus.zenbodialogsample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class BookList extends RobotActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        robotAPI.vision.cancelDetectFace();
         System.out.println("sucess to change to book list");
         setContentView(R.layout.activity_book_list);
         listView = (ListView) findViewById(R.id.bookList);
@@ -216,6 +218,14 @@ public class BookList extends RobotActivity{
 
     }
 
+    //限制內建返回按鍵
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -257,6 +267,14 @@ public class BookList extends RobotActivity{
         public void initComplete() {
             super.initComplete();
 
+        }
+
+
+        public boolean onKeyDown(int keyCode, KeyEvent event){
+            if(keyCode == KeyEvent.KEYCODE_BACK){
+                return true;
+            }
+            return false;
         }
     };
 

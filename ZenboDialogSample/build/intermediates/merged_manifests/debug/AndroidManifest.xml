@@ -40,10 +40,14 @@
         <activity android:name="com.asus.zenbodialogsample.BookList" />
         <activity android:name="com.asus.zenbodialogsample.Book" />
         <activity android:name="com.asus.zenbodialogsample.EquipmentIntro" />
-        <activity android:name="com.asus.zenbodialogsample.Login" />
+        <activity
+            android:name="com.asus.zenbodialogsample.Login"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name="com.asus.zenbodialogsample.Personal" />
         <!-- <activity android:name=".Recommend"></activity> -->
-        <activity android:name="com.asus.zenbodialogsample.Register" />
+        <activity
+            android:name="com.asus.zenbodialogsample.Register"
+            android:windowSoftInputMode="stateHidden" />
         <!-- <activity android:name=".Tour"></activity> -->
         <!-- <activity android:name=".Activity"></activity> -->
         <meta-data
