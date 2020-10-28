@@ -615,6 +615,7 @@ id cancel_action
 id checkbox
 id chronometer
 id collapseActionView
+id confirm
 id confirmButton
 id contentPanel
 id content_view
@@ -622,11 +623,17 @@ id custom
 id customPanel
 id decor_content_parent
 id default_activity_button
+id department
 id disableHome
 id drawer_layout
 id editText1
 id editText2
 id editText3
+id editText_account
+id editText_confirm
+id editText_department
+id editText_pw
+id editText_studentId
 id editTexta
 id editTextb
 id edit_query
@@ -636,6 +643,9 @@ id equipmentButton
 id expand_activities_button
 id expanded_menu
 id forever
+id gender
+id gender_female
+id gender_male
 id guidedButton
 id hashtagBtn
 id home
@@ -676,6 +686,7 @@ id progress_horizontal
 id pw
 id questionButton
 id radio
+id radio_gender
 id recommend
 id recommendBtn
 id recommendList
@@ -708,6 +719,7 @@ id src_atop
 id src_in
 id src_over
 id status_bar_latest_event_content
+id studentId
 id submenuarrow
 id submit_area
 id tabMode

@@ -1,5 +1,7 @@
 package com.asus.zenbodialogsample;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,8 +86,8 @@ public class Book extends RobotActivity{
         for(int i=0;i<avai_info.size();i++){
             System.out.println("substring: "+avai_info.get(i));
             String state = avai_info.get(i);
-            System.out.println("on the shelf"+ state=="available");
-            if(state =="\"available\""){
+            System.out.println("on the shelf"+ state.equals("\"available\""));
+            if(state.equals("\"available\"")){
                avai = true;
                loc += loca_info.get(i);
             }
@@ -109,7 +111,20 @@ public class Book extends RobotActivity{
         });
 
 
+        //backButton 初始化
+        Button hashButton = findViewById(R.id.hashtagBtn);
+        backButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hashtag_alert();
+            }
+        });
+
+
     }
+
+
+
 
     //限制內建返回按鍵
     public boolean onKeyDown(int keyCode, KeyEvent event){
@@ -138,6 +153,37 @@ public class Book extends RobotActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void hashtag_alert(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Book.this);
+        dialog.setTitle("基本訊息對話按鈕");
+        dialog.setMessage("基本訊息對話功能介紹");
+        dialog.setNegativeButton("NO",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                Toast.makeText(Book.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        dialog.setPositiveButton("YES",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                Toast.makeText(Book.this, "我了解了",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        dialog.setNeutralButton("取消",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        dialog.show();
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
