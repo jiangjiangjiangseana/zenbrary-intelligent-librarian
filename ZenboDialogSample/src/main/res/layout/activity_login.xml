@@ -39,7 +39,7 @@
 
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/login_account"
         android:layout_width="700dp"
         android:layout_marginLeft="30dp"
         android:layout_height="wrap_content"
@@ -53,14 +53,14 @@
         android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/login_account"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="密碼 Password: "
         android:textColor="#9370DB" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/login_pw"
         android:layout_marginLeft="30dp"
         android:layout_width="700dp"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:id="@+id/loginButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/editText2"
+        android:layout_toRightOf="@+id/login_account"
         android:layout_below="@+id/textview_info"
         android:backgroundTint="#929AC3"
         android:layout_marginLeft="50dp"
@@ -87,7 +87,7 @@
         android:id="@+id/registerButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/editText2"
+        android:layout_toRightOf="@+id/login_pw"
         android:layout_below="@+id/loginButton"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"

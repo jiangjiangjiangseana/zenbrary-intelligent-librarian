@@ -1008,6 +1008,10 @@
         "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
+        "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\layout_activity_hashtag.xml.flat",
+        "source": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\src\\main\\res\\layout\\activity_hashtag.xml"
+    },
+    {
         "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_light.xml.flat",
         "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\drawable\\tooltip_frame_light.xml"
     },

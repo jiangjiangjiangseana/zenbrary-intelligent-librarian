@@ -16,6 +16,12 @@ import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -40,27 +46,29 @@ public class Login extends RobotActivity{
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-
+    static Login loginClass;
+    static String loginUrl = "http://140.119.19.18:5001/api/v1/userinfo/";
+    static String user_info;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginClass = Login.this;
 
         //loginButton初始化
         Button loginBt = (Button) findViewById(R.id.loginButton);
         loginBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText et1 = (EditText) findViewById(R.id.editText1);
-                EditText et2 = (EditText) findViewById(R.id.editText2);
-                String account = et1.getText().toString();
-                String password = et2.getText().toString();
+                EditText login_account = (EditText) findViewById(R.id.login_account);
+                EditText login_pw = (EditText) findViewById(R.id.login_pw);
+                String account = login_account.getText().toString();
+                String password = login_pw.getText().toString();
                 //connect to server login function
+                login(account,password);
 
-
-                //go to user pages
 
 
             }
@@ -102,6 +110,86 @@ public class Login extends RobotActivity{
         return false;
     }
 
+
+    public void login(final String account, final String password){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("start running login");
+                String rawData = "{\"email\":\""+ account +"\",\"password\":\""+password+"\"}";
+                String charset = "UTF-8";
+                System.out.println("login request: "+rawData);
+
+                URLConnection connection = null;
+                try {
+                    connection = new URL(loginUrl).openConnection();
+                } catch (Exception e) {
+                    Log.d(TAG,"login connection failed");
+                    e.printStackTrace();
+                }
+                connection.setDoOutput(true); // Triggers POST.
+                connection.setRequestProperty("Accept-Charset", charset);
+                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                try (OutputStream output = connection.getOutputStream()) {
+                    Log.d("login output format",output.toString());
+                    output.write(rawData.getBytes(charset));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                InputStream response = null;
+                try {
+                    response = connection.getInputStream();
+                    System.out.println("receiving login_result : "+response.toString() + " " + response);
+                } catch (Exception e) {
+                    System.out.println("error in receiving login_result");
+                    e.printStackTrace();
+                }
+                try {
+                    System.out.println("start translate user_info: ");
+
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        user_info =  writer.toString();
+                    } else {
+                        user_info =  "";
+                    }
+                    System.out.println("response user_info: "+user_info+ user_info.getClass());
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate user_info");
+                }
+
+
+                loginClass.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        System.out.println("切換到user");
+                        //go back to login
+                        Intent userIt = new Intent();
+                        userIt.putExtra("user_info",user_info.toString());
+                        userIt.setClass(Login.this,Personal.class);
+                        startActivity(userIt);
+
+                    }
+                });
+            }
+        }).start();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -122,6 +210,7 @@ public class Login extends RobotActivity{
     protected void onDestroy() {
         super.onDestroy();
     }
+
 
     public static RobotCallback robotCallback = new RobotCallback() {
         @Override

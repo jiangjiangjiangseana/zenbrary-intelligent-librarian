@@ -44,13 +44,19 @@ public class Personal extends AppCompatActivity {
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-
+    static Personal userClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
+        System.out.println("sucess to change to user");
+        userClass = Personal.this;
+        Intent userIt = this.getIntent();
+        String user_info = userIt.getStringExtra("user_info");
+        System.out.println("user_info sucess: "+ user_info);
+
 
 
 

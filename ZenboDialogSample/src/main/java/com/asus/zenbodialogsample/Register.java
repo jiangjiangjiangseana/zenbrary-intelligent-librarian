@@ -43,11 +43,13 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.Toast;
 
+import static java.lang.Integer.parseInt;
+
 public class Register extends RobotActivity{
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-    public static String registerUrl = "http://140.119.19.18:5000/api/v1/register/";
+    public static String registerUrl = "http://140.119.19.18:5001/api/v1/register/";
     static Register registerClass;
 
 
@@ -140,7 +142,7 @@ public class Register extends RobotActivity{
             @Override
             public void run() {
                 System.out.println("start running register");
-                String rawData = "{\"uid\":\""+ student_id +"\",\"email\":\""+account+"\",\"gender\":\""+gender+"\",\"department\":\""+department+"\",\"password\":\""+password+"\"}";
+                String rawData = "{\"uid\":\""+ parseInt(student_id) +"\",\"email\":\""+account+"\",\"gender\":\""+gender+"\",\"department\":\""+department+"\",\"password\":\""+password+"\"}";
                 String charset = "UTF-8";
                 System.out.println("register request: "+rawData);
 
@@ -158,6 +160,7 @@ public class Register extends RobotActivity{
                     Log.d("register output format",output.toString());
                     output.write(rawData.getBytes(charset));
                 } catch (Exception e) {
+                    System.out.println("error in receiving register result");
                     e.printStackTrace();
                 }
                 InputStream response = null;

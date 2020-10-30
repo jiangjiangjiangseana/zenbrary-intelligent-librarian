@@ -625,11 +625,11 @@ id decor_content_parent
 id default_activity_button
 id department
 id disableHome
-id drawer_layout
 id editText1
 id editText2
 id editText3
 id editText_account
+id editText_alert
 id editText_confirm
 id editText_department
 id editText_pw
@@ -648,6 +648,7 @@ id gender_female
 id gender_male
 id guidedButton
 id hashtagBtn
+id hashtag_text
 id home
 id homeAsUp
 id icon
@@ -665,6 +666,8 @@ id listView
 id list_item
 id location
 id loginButton
+id login_account
+id login_pw
 id logoutBtn
 id media_actions
 id message
@@ -693,6 +696,7 @@ id recommendList
 id registerButton
 id right_icon
 id right_side
+id score
 id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
@@ -781,6 +785,7 @@ layout activity_activity
 layout activity_book
 layout activity_book_list
 layout activity_equip
+layout activity_hashtag
 layout activity_login
 layout activity_personal
 layout activity_recommend

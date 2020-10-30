@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
@@ -17,7 +20,14 @@ import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 
@@ -41,6 +51,11 @@ public class Book extends RobotActivity{
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     static Book bookClass;
+    static String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
+    static String resrecAuthor ;
+    static String resrecBookName ;
+    static String resrecLocandAvai ;
+    static String resrecRecommendation;
 
 
     @Override
@@ -54,7 +69,8 @@ public class Book extends RobotActivity{
         String resAuthor = bookIt.getStringExtra("resAuthor");
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
-        System.out.println("book_info receive: "+resAuthor+resBookName+resLocandAvai+ resLocandAvai.getClass());
+        String resRecommendation = bookIt.getStringExtra("resRecommendation");
+        System.out.println("book_info receive: "+resAuthor+resBookName+resLocandAvai+ resLocandAvai.getClass()+ " "+resRecommendation);
         //(todo)處理loca and avai,讓他分開
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
@@ -70,6 +86,22 @@ public class Book extends RobotActivity{
         }
         System.out.println("local: "+loca_info);
         System.out.println("avai:" +avai_info);
+
+        System.out.println("recommendation: "+resRecommendation+resRecommendation.getClass());
+        final List<String> recommendation = new ArrayList<String>(Arrays.asList(resRecommendation.split("@@")));
+        System.out.println("recommendation result: "+ recommendation);
+        final List<String> recommendation_bookName = new ArrayList<String>();
+        final List<String> recommendation_number = new ArrayList<String>();
+        for(int i=0;i<recommendation.size();i++){
+            System.out.println("recommendation第"+i+"組: "+recommendation.get(i));
+            String reco_couple = recommendation.get(i);
+            List<String> temp = new ArrayList<String>(Arrays.asList(reco_couple.split("##")));
+            recommendation_bookName.add(temp.get(0));
+            recommendation_number.add(temp.get(1));
+        }
+        System.out.println("reco_bookName: "+recommendation_bookName);
+        System.out.println("reco_number:" +recommendation_number);
+
 
         TextView bookName = (TextView)findViewById(R.id.bookName);
         TextView authorName = (TextView)findViewById(R.id.authorName);
@@ -97,7 +129,22 @@ public class Book extends RobotActivity{
         }else{
             robotAPI.robot.speak("這本書現在不再各圖書館內唷");
         }
-
+        //推薦清單initial
+        ListView recommendList = (ListView)findViewById(R.id.recommendList);
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendation_bookName);
+        recommendList.setAdapter(adapter);
+        recommendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                 @Override
+                                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                                     Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
+                                                     String recommendationName = recommendation_bookName.get(i);
+                                                     System.out.println("1111111");
+                                                     //change string to arraylist
+                                                     String recommendationNumber = recommendation_number.get(i);
+                                                     System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
+                                                     requestBook(recommendationNumber);
+                                                 }
+                                             });
 
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
@@ -113,7 +160,7 @@ public class Book extends RobotActivity{
 
         //backButton 初始化
         Button hashButton = findViewById(R.id.hashtagBtn);
-        backButton.setOnClickListener(new Button.OnClickListener() {
+        hashButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hashtag_alert();
@@ -156,35 +203,141 @@ public class Book extends RobotActivity{
     }
 
     public void hashtag_alert(){
-        AlertDialog.Builder dialog = new AlertDialog.Builder(Book.this);
-        dialog.setTitle("基本訊息對話按鈕");
-        dialog.setMessage("基本訊息對話功能介紹");
-        dialog.setNegativeButton("NO",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-                Toast.makeText(Book.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
-            }
 
-        });
-        dialog.setPositiveButton("YES",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-                Toast.makeText(Book.this, "我了解了",Toast.LENGTH_SHORT).show();
-            }
+        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
 
-        });
-        dialog.setNeutralButton("取消",new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-                Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
-            }
+        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
 
-        });
+        LayoutInflater inflater = LayoutInflater.from(Book.this);
+        final View v = inflater.inflate(R.layout.activity_hashtag, null);
+
+        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
+        AlertDialog dialog = new AlertDialog.Builder(Book.this)
+                .setTitle("請輸入Hashtag")
+                .setView(v)
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editText = (EditText) (v.findViewById(R.id.editText_alert));
+                        Toast.makeText(getApplicationContext(), "你的id是" +
+
+                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("NO",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(Book.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
+                    }
+
+                })
+                .setNeutralButton("取消",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
+                    }
+
+                })
+                .show();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
     }
+
+    public void requestBook(final String mms_id){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("start running");
+                String uniqueID = UUID.randomUUID().toString();
+                String rawData = "{\"mms_id\":\""+ mms_id +"\",\"session_id\":\""+uniqueID+"\"}";
+                String charset = "UTF-8";
+                System.out.println("book info request: "+rawData);
+
+                URLConnection connection = null;
+                try {
+                    connection = new URL(bookUrl).openConnection();
+                } catch (Exception e) {
+                    Log.d(TAG,"connection failed");
+                    e.printStackTrace();
+                }
+                connection.setDoOutput(true); // Triggers POST.
+                connection.setRequestProperty("Accept-Charset", charset);
+                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                try (OutputStream output = connection.getOutputStream()) {
+                    Log.d("output format",output.toString());
+                    output.write(rawData.getBytes(charset));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                InputStream response = null;
+                try {
+                    response = connection.getInputStream();
+                    System.out.println("receiving book_info : "+response.toString() + " " + response);
+                } catch (Exception e) {
+                    System.out.println("error in receiving book_info");
+                    e.printStackTrace();
+                }
+                try {
+                    System.out.println("start translate book_info: ");
+                    String text;
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        text =  writer.toString();
+                    } else {
+                        text =  "";
+                    }
+                    System.out.println("response book_info: "+text);
+
+                    JSONObject resJson;
+                    resJson = new JSONObject(text);
+                    System.out.println("resJson: "+ resJson);
+
+                    resrecAuthor = resJson.getString("author");
+                    resrecBookName = resJson.getString("book_name");
+                    resrecLocandAvai = resJson.getString("location_and_available");
+                    resrecRecommendation = resJson.getString("recommendation");
+                    System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate book_info");
+                }
+
+
+                bookClass.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        System.out.println("切換頁面到Book");
+                        Intent bookIt = new Intent();
+                        bookIt.putExtra("resAuthor",resrecAuthor);
+                        bookIt.putExtra("resBookName",resrecBookName);
+                        bookIt.putExtra("resLocandAvai",resrecLocandAvai.toString());
+                        bookIt.putExtra("resRecommendation",resrecRecommendation.toString());
+                        bookIt.setClass(Book.this,Book.class);
+                        startActivity(bookIt);
+
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
     public static RobotCallback robotCallback = new RobotCallback() {
         @Override

@@ -54,6 +54,7 @@ public class BookList extends RobotActivity{
     static String resAuthor ;
     static String resBookName ;
     static String resLocandAvai ;
+    static String resRecommendation;
 
 
 
@@ -69,12 +70,12 @@ public class BookList extends RobotActivity{
         String resJsonString = it.getStringExtra("resJson");
         try {
             final JSONObject[] resJson = {new JSONObject(resJsonString)};
-            JSONArray bookListJson = resJson[0].getJSONArray("book_list");
-            final ArrayList<String> bookList = new ArrayList<String>();
-            if (bookListJson != null) {
-                for (int i = 0; i < bookListJson.length(); i++) {
-                    bookList.add(bookListJson.getString(i));
-                }
+                JSONArray bookListJson = resJson[0].getJSONArray("book_list");
+                final ArrayList<String> bookList = new ArrayList<String>();
+                if (bookListJson != null) {
+                    for (int i = 0; i < bookListJson.length(); i++) {
+                        bookList.add(bookListJson.getString(i));
+                    }
             }
             if (bookList.isEmpty()) {
                 Intent backIT = new Intent();
@@ -170,7 +171,8 @@ public class BookList extends RobotActivity{
                                 resAuthor = resJson[0].getString("author");
                                 resBookName = resJson[0].getString("book_name");
                                 resLocandAvai = resJson[0].getString("location_and_available");
-                                System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai);
+                                resRecommendation = resJson[0].getString("recommendation");
+                                System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai+ " "+ resRecommendation);
                             } catch (Exception  e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
@@ -188,6 +190,7 @@ public class BookList extends RobotActivity{
                                     bookIt.putExtra("resAuthor",resAuthor);
                                     bookIt.putExtra("resBookName",resBookName);
                                     bookIt.putExtra("resLocandAvai",resLocandAvai.toString());
+                                    bookIt.putExtra("resRecommendation",resRecommendation.toString());
                                     bookIt.setClass(BookList.this,Book.class);
                                     startActivity(bookIt);
 
