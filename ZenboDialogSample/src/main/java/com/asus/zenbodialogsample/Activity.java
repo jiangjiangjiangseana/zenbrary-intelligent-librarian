@@ -1,6 +1,10 @@
 package com.asus.zenbodialogsample;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.widget.Button;
 
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -14,7 +18,23 @@ public class Activity extends RobotActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
+        Html.ImageGetter imgGetter = new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String source) {
+                Drawable drawable = null;
+                drawable = Activity.this.getResources().getDrawable(
+                        Integer.parseInt(source)
+                );
+                drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
+                return drawable;
 
+            }
+        };
+
+        Button button1 = (Button) findViewById(R.id.button1);
+
+        Spanned span = Html.fromHtml("<img src=\""+R.drawable.ic_launcher+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
+        button1.setText(span);
 
     }
 

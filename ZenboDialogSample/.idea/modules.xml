@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1030874207/RobotActivityLibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/-1030874207/RobotActivityLibrary.iml" group="zenbrary-intelligent-librarian/RobotActivityLibrary" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-724499820/RobotDevSample.iml" filepath="$PROJECT_DIR$/.idea/modules/-724499820/RobotDevSample.iml" group="zenbrary-intelligent-librarian/RobotDevSample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/993043759/RobotSensorSample.iml" filepath="$PROJECT_DIR$/.idea/modules/993043759/RobotSensorSample.iml" group="zenbrary-intelligent-librarian/RobotSensorSample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ZenboDialogSample.iml" filepath="$PROJECT_DIR$/.idea/ZenboDialogSample.iml" group="zenbrary-intelligent-librarian/ZenboDialogSample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-236650455/ZenboGoToLocation.iml" filepath="$PROJECT_DIR$/.idea/modules/-236650455/ZenboGoToLocation.iml" group="zenbrary-intelligent-librarian/ZenboGoToLocation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/195491921/ZenboHelloWorld.iml" filepath="$PROJECT_DIR$/.idea/modules/195491921/ZenboHelloWorld.iml" group="zenbrary-intelligent-librarian/ZenboHelloWorld" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2104229111/ZenboSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/-2104229111/ZenboSDK.iml" group="zenbrary-intelligent-librarian/ZenboSDK" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/68426800/zenbrary-intelligent-librarian.iml" filepath="$PROJECT_DIR$/.idea/modules/68426800/zenbrary-intelligent-librarian.iml" group="zenbrary-intelligent-librarian" />
+    </modules>
+  </component>
+</project>
