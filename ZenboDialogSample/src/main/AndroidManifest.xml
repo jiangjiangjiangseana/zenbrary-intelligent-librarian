@@ -26,11 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Guest"></activity>
         <activity android:name=".BookList"></activity>
         <activity android:name=".Book"></activity>
         <activity android:name=".EquipmentIntro"></activity>
         <activity android:name=".Login" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".Personal"></activity>
+        <activity android:name=".Personal" android:windowSoftInputMode="stateHidden"></activity>
 <!--        <activity android:name=".Recommend"></activity>-->
         <activity android:name=".Register" android:windowSoftInputMode="stateHidden"></activity>
 <!--        <activity android:name=".Tour"></activity>-->

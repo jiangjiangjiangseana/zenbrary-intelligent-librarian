@@ -14,14 +14,12 @@
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
-
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="309dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="271dp"
+        android:layout_height="244dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
         tools:src="@tools:sample/avatars" />
 
     <TextView
@@ -29,8 +27,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
-        android:text="姓名: 塔塔"
-        android:textSize="40dp"
+        android:text="姓名: "
+        android:textSize="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
 
@@ -41,8 +39,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_name"
-        android:text="學號: 100143008"
-        android:textSize="40dp"
+        android:text="學號: "
+        android:textSize="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:textColor="#B0ABBC" />
@@ -52,8 +50,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/user_id"
-        android:text="信箱:\ntata@nccu.edu.tw"
-        android:textSize="40dp"
+        android:text="信箱:"
+        android:textSize="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:textColor="#B0ABBC" />
@@ -63,34 +61,29 @@
         android:id="@+id/content_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/imageView"
         android:text="最近借閱: "
-        android:textSize="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC" />
+        android:textColor="#B0ABBC"
+        android:textSize="40dp" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="642dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_width="565dp"
+        android:layout_height="664dp"
+        android:layout_marginLeft="45dp"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@+id/imageView"
         android:background="#9370DB"
         android:foregroundTint="#AA3434"
-        android:gravity="center"
-        />
-
-
-
-
+        android:gravity="center" />
 
     <Button
         android:id="@+id/recommendBtn"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/listView"
         android:text="我的推薦"
         android:textSize="30dp"
@@ -103,7 +96,7 @@
     <Button
         android:id="@+id/hashtagBtn"
         android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/recommendBtn"
         android:layout_toRightOf="@+id/listView"
         android:text="開始HashTag"
@@ -117,17 +110,15 @@
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_toRightOf="@id/listView"
-        android:text="登出"
-        android:textSize="30dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/hashtagBtn"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="330dp"
+        android:layout_toRightOf="@id/listView"
         android:background="#ECE3ED"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="30dp"
-        android:textColor="#A180A6"/>
-
-
+        android:text="登出"
+        android:textColor="#A180A6"
+        android:textSize="30dp" />
 
 
 </RelativeLayout>

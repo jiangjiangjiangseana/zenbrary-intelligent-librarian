@@ -1,16 +1,16 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboHelloWorld\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+            "outputFile": "/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboHelloWorld/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboHelloWorld\\src\\main\\res\\values-w820dp\\dimens.xml",
+                    "source": "/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboHelloWorld/src/main/res/values-w820dp/dimens.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "4",
-                        "startOffsets": "295",
+                        "startOffsets": "291",
                         "endColumns": "57",
-                        "endOffsets": "348"
+                        "endOffsets": "344"
                     },
                     "to": {
                         "startLines": "2",

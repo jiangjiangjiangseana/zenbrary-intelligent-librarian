@@ -1,15 +1,15 @@
 #Internal package file, do not edit.
-#Sat Aug 29 16:35:07 CST 2020
-1.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboGoToLocation\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+#Sat Nov 07 17:27:35 CST 2020
+1.base=/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboGoToLocation/build/intermediates/dex/debug/mergeExtDexDebug/out
 2.path=classes.dex
 0.baseType=DIRECTORY
-2.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboGoToLocation\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
+2.base=/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboGoToLocation/build/intermediates/dex/debug/mergeProjectDexDebug/out
 2.set=DEX
 1.baseType=DIRECTORY
 count=3
 1.set=DEX
 0.path=classes_0.dex
 0.set=DEX
-0.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboGoToLocation\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\out
+0.base=/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboGoToLocation/build/intermediates/dex/debug/mergeLibDexDebug/out
 2.baseType=DIRECTORY
 1.path=classes.dex

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#F8F8FF"
+    android:orientation="horizontal"
+    tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
+
+    <TextView
+        android:id="@+id/textview_info"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:text="@string/dialog_example"
+        android:textColor="#9370DB"
+        android:textSize="45dp"
+        />
+
+
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_info"
+        android:backgroundTint="#929AC3"
+        android:text="@string/bookSearch"
+        />
+
+    <Button
+        android:id="@+id/equipmentButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookButton"
+        android:backgroundTint="#929AC3"
+        android:text="@string/equipment"
+        />
+
+    <Button
+        android:id="@+id/activityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/equipmentButton"
+        android:backgroundTint="#929AC3"
+        android:text="活動通知 Activity Search"
+        />
+
+
+    <Button
+        android:id="@+id/guidedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityButton"
+        android:backgroundTint="#929AC3"
+        android:text="園區導覽 Guided Tour"
+        />
+
+
+    <Button
+        android:id="@+id/questionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guidedButton"
+        android:backgroundTint="#929AC3"
+        android:text="@string/question"
+        />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="130dp"
+
+        android:padding="5dp"
+        android:background="#ECE3ED"
+        android:textColor="#A180A6"
+        android:layout_marginTop="50dp"
+        android:text="返回前頁" />
+
+
+
+
+</RelativeLayout>
