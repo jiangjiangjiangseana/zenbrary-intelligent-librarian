@@ -35,7 +35,7 @@
 <!--        <activity android:name=".Recommend"></activity>-->
         <activity android:name=".Register" android:windowSoftInputMode="stateHidden"></activity>
 <!--        <activity android:name=".Tour"></activity>-->
-<!--        <activity android:name=".Activity"></activity>-->
+        <activity android:name=".Activity"></activity>
     </application>
 
 </manifest>

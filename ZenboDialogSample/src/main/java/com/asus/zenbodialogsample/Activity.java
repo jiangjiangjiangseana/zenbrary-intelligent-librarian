@@ -25,7 +25,7 @@ public class Activity extends RobotActivity {
                 drawable = Activity.this.getResources().getDrawable(
                         Integer.parseInt(source)
                 );
-                drawable.setBounds(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight());
+                drawable.setBounds(0,0,120,100);
                 return drawable;
 
             }
@@ -33,7 +33,7 @@ public class Activity extends RobotActivity {
 
         Button button1 = (Button) findViewById(R.id.button1);
 
-        Spanned span = Html.fromHtml("<img src=\""+R.drawable.ic_launcher+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
+        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
         button1.setText(span);
 
     }

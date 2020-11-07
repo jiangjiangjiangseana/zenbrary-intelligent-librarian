@@ -17,6 +17,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/RobotDevTheme" >
         <meta-data
             android:name="zenbo_ds_domainuuid"
@@ -52,7 +53,8 @@
             android:name="com.asus.zenbodialogsample.Register"
             android:windowSoftInputMode="stateHidden" />
         <!-- <activity android:name=".Tour"></activity> -->
-        <!-- <activity android:name=".Activity"></activity> -->
+        <activity android:name="com.asus.zenbodialogsample.Activity" />
+
         <meta-data
             android:name="android.support.VERSION"
             android:value="26.1.0" />

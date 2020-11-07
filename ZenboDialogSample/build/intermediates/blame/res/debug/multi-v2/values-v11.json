@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/charlene/Desktop/zenbrary-intelligent-librarian/ZenboDialogSample/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+            "outputFile": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v11\\values-v11.xml",
             "map": [
                 {
-                    "source": "/Users/charlene/.gradle/caches/transforms-2/files-2.1/e8174b1a788e9d854ade1c2eb15d661c/res/values-v11/values-v11.xml",
+                    "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\values-v11\\values-v11.xml",
                     "from": {
                         "startLines": "2,8,14,20,26,32,38,39,43,47,48,52,56,57,61,66,71,76,78,80,81,82,136,191",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
