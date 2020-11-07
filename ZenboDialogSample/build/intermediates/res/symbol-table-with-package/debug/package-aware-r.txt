@@ -646,6 +646,7 @@ id forever
 id gender
 id gender_female
 id gender_male
+id guestButton
 id guidedButton
 id hashtagBtn
 id hashtag_text
@@ -690,6 +691,7 @@ id pw
 id questionButton
 id radio
 id radio_gender
+id ratingBar1
 id recommend
 id recommendBtn
 id recommendList
@@ -785,12 +787,12 @@ layout activity_activity
 layout activity_book
 layout activity_book_list
 layout activity_equip
+layout activity_guest
 layout activity_hashtag
 layout activity_login
 layout activity_personal
 layout activity_recommend
 layout activity_register
-layout activity_tour
 layout activity_zenbo_dialog_sample
 layout drawer_header
 layout notification_action

@@ -68,9 +68,6 @@ public class Login extends RobotActivity{
                 String password = login_pw.getText().toString();
                 //connect to server login function
                 login(account,password);
-
-
-
             }
         });
 
@@ -180,6 +177,7 @@ public class Login extends RobotActivity{
                         System.out.println("切換到user");
                         //go back to login
                         Intent userIt = new Intent();
+                        System.out.println("comfirm user info: "+ user_info);
                         userIt.putExtra("user_info",user_info.toString());
                         userIt.setClass(Login.this,Personal.class);
                         startActivity(userIt);

@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
@@ -46,15 +47,15 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.Toast;
 
-public class Book extends RobotActivity{
+public class Book extends RobotActivity {
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     static Book bookClass;
     static String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
-    static String resrecAuthor ;
-    static String resrecBookName ;
-    static String resrecLocandAvai ;
+    static String resrecAuthor;
+    static String resrecBookName;
+    static String resrecLocandAvai;
     static String resrecRecommendation;
 
 
@@ -70,81 +71,81 @@ public class Book extends RobotActivity{
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
         String resRecommendation = bookIt.getStringExtra("resRecommendation");
-        System.out.println("book_info receive: "+resAuthor+resBookName+resLocandAvai+ resLocandAvai.getClass()+ " "+resRecommendation);
+        System.out.println("book_info receive: " + resAuthor + resBookName + resLocandAvai + resLocandAvai.getClass() + " " + resRecommendation);
         //(todo)處理loca and avai,讓他分開
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
-        System.out.println("split result: "+ localAndAvai);
+        System.out.println("split result: " + localAndAvai);
         List<String> loca_info = new ArrayList<String>();
         List<String> avai_info = new ArrayList<String>();
-        for(int i=0;i<localAndAvai.size();i++){
-            System.out.println("loc第"+i+"組: "+localAndAvai.get(i).substring(2));
+        for (int i = 0; i < localAndAvai.size(); i++) {
+            System.out.println("loc第" + i + "組: " + localAndAvai.get(i).substring(2));
             String couple = localAndAvai.get(i).substring(2);
             List<String> temp = new ArrayList<String>(Arrays.asList(couple.split(",")));
             loca_info.add(temp.get(0));
             avai_info.add(temp.get(1));
         }
-        System.out.println("local: "+loca_info);
-        System.out.println("avai:" +avai_info);
+        System.out.println("local: " + loca_info);
+        System.out.println("avai:" + avai_info);
 
-        System.out.println("recommendation: "+resRecommendation+resRecommendation.getClass());
+        System.out.println("recommendation: " + resRecommendation + resRecommendation.getClass());
         final List<String> recommendation = new ArrayList<String>(Arrays.asList(resRecommendation.split("@@")));
-        System.out.println("recommendation result: "+ recommendation);
+        System.out.println("recommendation result: " + recommendation);
         final List<String> recommendation_bookName = new ArrayList<String>();
         final List<String> recommendation_number = new ArrayList<String>();
-        for(int i=0;i<recommendation.size();i++){
-            System.out.println("recommendation第"+i+"組: "+recommendation.get(i));
+        for (int i = 0; i < recommendation.size(); i++) {
+            System.out.println("recommendation第" + i + "組: " + recommendation.get(i));
             String reco_couple = recommendation.get(i);
             List<String> temp = new ArrayList<String>(Arrays.asList(reco_couple.split("##")));
             recommendation_bookName.add(temp.get(0));
             recommendation_number.add(temp.get(1));
         }
-        System.out.println("reco_bookName: "+recommendation_bookName);
-        System.out.println("reco_number:" +recommendation_number);
+        System.out.println("reco_bookName: " + recommendation_bookName);
+        System.out.println("reco_number:" + recommendation_number);
 
 
-        TextView bookName = (TextView)findViewById(R.id.bookName);
-        TextView authorName = (TextView)findViewById(R.id.authorName);
-        TextView location = (TextView)findViewById(R.id.location);
-        TextView available = (TextView)findViewById(R.id.available);
-        TextView introduce = (TextView)findViewById(R.id.introduce);
+        TextView bookName = (TextView) findViewById(R.id.bookName);
+        TextView authorName = (TextView) findViewById(R.id.authorName);
+        TextView location = (TextView) findViewById(R.id.location);
+        TextView available = (TextView) findViewById(R.id.available);
+        TextView introduce = (TextView) findViewById(R.id.introduce);
 
-        bookName.setText("書名: "+resBookName);
-        authorName.setText("作者: "+resAuthor);
-        location.setText("位置: "+ loca_info);
-        available.setText("狀態: "+avai_info);
+        bookName.setText("書名: " + resBookName);
+        authorName.setText("作者: " + resAuthor);
+        location.setText("位置: " + loca_info);
+        available.setText("狀態: " + avai_info);
         boolean avai = false;
         String loc = "";
-        for(int i=0;i<avai_info.size();i++){
-            System.out.println("substring: "+avai_info.get(i));
+        for (int i = 0; i < avai_info.size(); i++) {
+            System.out.println("substring: " + avai_info.get(i));
             String state = avai_info.get(i);
-            System.out.println("on the shelf"+ state.equals("\"available\""));
-            if(state.equals("\"available\"")){
-               avai = true;
-               loc += loca_info.get(i);
+            System.out.println("on the shelf" + state.equals("\"available\""));
+            if (state.equals("\"available\"")) {
+                avai = true;
+                loc += loca_info.get(i);
             }
         }
-        if(avai==true) {
+        if (avai == true) {
             robotAPI.robot.speak("這本書現在在" + loc + "唷");
-        }else{
+        } else {
             robotAPI.robot.speak("這本書現在不再各圖書館內唷");
         }
         //推薦清單initial
-        ListView recommendList = (ListView)findViewById(R.id.recommendList);
+        ListView recommendList = (ListView) findViewById(R.id.recommendList);
         ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendation_bookName);
         recommendList.setAdapter(adapter);
         recommendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                                 @Override
-                                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                                     Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
-                                                     String recommendationName = recommendation_bookName.get(i);
-                                                     System.out.println("1111111");
-                                                     //change string to arraylist
-                                                     String recommendationNumber = recommendation_number.get(i);
-                                                     System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
-                                                     requestBook(recommendationNumber);
-                                                 }
-                                             });
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
+                String recommendationName = recommendation_bookName.get(i);
+                System.out.println("1111111");
+                //change string to arraylist
+                String recommendationNumber = recommendation_number.get(i);
+                System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
+                requestBook(recommendationNumber);
+            }
+        });
 
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
@@ -152,13 +153,13 @@ public class Book extends RobotActivity{
             @Override
             public void onClick(View v) {
                 Intent backIT = new Intent();
-                backIT.setClass(Book.this,ZenboDialogSample.class);
+                backIT.setClass(Book.this, ZenboDialogSample.class);
                 startActivity(backIT);
             }
         });
 
 
-        //backButton 初始化
+        //hashButton 初始化
         Button hashButton = findViewById(R.id.hashtagBtn);
         hashButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -168,7 +169,12 @@ public class Book extends RobotActivity{
         });
 
 
-    }
+
+
+
+
+
+}
 
 
 
@@ -180,6 +186,7 @@ public class Book extends RobotActivity{
         }
         return false;
     }
+
 
     @Override
     protected void onResume() {
@@ -203,13 +210,17 @@ public class Book extends RobotActivity{
     }
 
     public void hashtag_alert(){
-
+    System.out.println("hash function called");
         //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
 
         //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
 
         LayoutInflater inflater = LayoutInflater.from(Book.this);
         final View v = inflater.inflate(R.layout.activity_hashtag, null);
+
+
+
+
 
         //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
         AlertDialog dialog = new AlertDialog.Builder(Book.this)
@@ -224,14 +235,6 @@ public class Book extends RobotActivity{
                                 editText.getText().toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("NO",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        // TODO Auto-generated method stub
-                        Toast.makeText(Book.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
-                    }
-
-                })
                 .setNeutralButton("取消",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -243,6 +246,18 @@ public class Book extends RobotActivity{
                 .show();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
+        //rateBar 初始化
+        RatingBar mRatingBar = (RatingBar) dialog.findViewById(R.id.ratingBar1);
+        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
+                = new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
+            }
+        };
+        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
+
+
     }
 
     public void requestBook(final String mms_id){
