@@ -55,6 +55,9 @@ public class BookList extends RobotActivity{
     static String resBookName ;
     static String resLocandAvai ;
     static String resRecommendation;
+    static String resCover;
+    static String resHashtag;
+    static String resIntroduction;
 
 
 
@@ -79,7 +82,7 @@ public class BookList extends RobotActivity{
             }
             if (bookList.isEmpty()) {
                 Intent backIT = new Intent();
-                backIT.setClass(BookList.this,ZenboDialogSample.class);
+                backIT.setClass(BookList.this,Guest.class);
                 startActivity(backIT);
                 robotAPI.robot.speakAndListen("不好意思，請重複一次問題",new SpeakConfig().timeout(15));
             } else {
@@ -172,7 +175,10 @@ public class BookList extends RobotActivity{
                                 resBookName = resJson[0].getString("book_name");
                                 resLocandAvai = resJson[0].getString("location_and_available");
                                 resRecommendation = resJson[0].getString("recommendation");
-                                System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai+ " "+ resRecommendation);
+                                resCover = resJson[0].getString("cover");
+                                resHashtag = resJson[0].getString("hashtag");
+                                resIntroduction = resJson[0].getString("introduction");
+                                System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai+ " "+ resRecommendation+ " "+resCover+ " "+resHashtag+ " "+resIntroduction);
                             } catch (Exception  e) {
                                 // TODO Auto-generated catch block
                                 e.printStackTrace();
@@ -191,6 +197,9 @@ public class BookList extends RobotActivity{
                                     bookIt.putExtra("resBookName",resBookName);
                                     bookIt.putExtra("resLocandAvai",resLocandAvai.toString());
                                     bookIt.putExtra("resRecommendation",resRecommendation.toString());
+                                    bookIt.putExtra("resCover",resCover);
+                                    bookIt.putExtra("resHashtag",resHashtag);
+                                    bookIt.putExtra("resIntroduction",resIntroduction);
                                     bookIt.setClass(BookList.this,Book.class);
                                     startActivity(bookIt);
 

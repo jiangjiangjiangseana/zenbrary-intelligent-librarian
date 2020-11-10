@@ -3,6 +3,9 @@ package com.asus.zenbodialogsample;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -11,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
@@ -57,6 +61,10 @@ public class Book extends RobotActivity {
     static String resrecBookName;
     static String resrecLocandAvai;
     static String resrecRecommendation;
+    static String resrecCover;
+    static String resrecHashtag;
+    static String resrecIntroduction;
+
 
 
     @Override
@@ -71,7 +79,10 @@ public class Book extends RobotActivity {
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
         String resRecommendation = bookIt.getStringExtra("resRecommendation");
-        System.out.println("book_info receive: " + resAuthor + resBookName + resLocandAvai + resLocandAvai.getClass() + " " + resRecommendation);
+        String resCover = bookIt.getStringExtra("resCover");
+        String resHashtag = bookIt.getStringExtra("resHashtag");
+        final String resIntroduction = bookIt.getStringExtra("resIntroduction");
+        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction );
         //(todo)處理loca and avai,讓他分開
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
@@ -108,12 +119,14 @@ public class Book extends RobotActivity {
         TextView authorName = (TextView) findViewById(R.id.authorName);
         TextView location = (TextView) findViewById(R.id.location);
         TextView available = (TextView) findViewById(R.id.available);
-        TextView introduce = (TextView) findViewById(R.id.introduce);
 
         bookName.setText("書名: " + resBookName);
         authorName.setText("作者: " + resAuthor);
         location.setText("位置: " + loca_info);
         available.setText("狀態: " + avai_info);
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView))
+                .execute(resCover);
+
         boolean avai = false;
         String loc = "";
         for (int i = 0; i < avai_info.size(); i++) {
@@ -169,7 +182,18 @@ public class Book extends RobotActivity {
         });
 
 
-
+        //introduceButton 初始化
+        Button introButton = findViewById(R.id.introduceButton);
+        introButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String noIntro = "暫無簡介";
+                if(resIntroduction.equals("")){
+                    introduce_alert(noIntro);
+                }else{
+                introduce_alert(resIntroduction);}
+            }
+        });
 
 
 
@@ -208,6 +232,31 @@ public class Book extends RobotActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+//轉url圖片的class
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
     public void hashtag_alert(){
     System.out.println("hash function called");
@@ -217,10 +266,6 @@ public class Book extends RobotActivity {
 
         LayoutInflater inflater = LayoutInflater.from(Book.this);
         final View v = inflater.inflate(R.layout.activity_hashtag, null);
-
-
-
-
 
         //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
         AlertDialog dialog = new AlertDialog.Builder(Book.this)
@@ -238,8 +283,8 @@ public class Book extends RobotActivity {
                 .setNeutralButton("取消",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        // TODO Auto-generated method stub
-                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
+//                        // TODO Auto-generated method stub
+//                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
                     }
 
                 })
@@ -258,6 +303,24 @@ public class Book extends RobotActivity {
         mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
 
 
+    }
+    public void introduce_alert(String introduction){
+        System.out.println("introduce function called");
+        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
+        AlertDialog dialog = new AlertDialog.Builder(Book.this)
+                .setTitle("書籍簡介")
+                .setMessage(introduction)
+                .setNeutralButton("取消",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
+                    }
+
+                })
+                .show();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        dialog.show();
     }
 
     public void requestBook(final String mms_id){
@@ -324,6 +387,9 @@ public class Book extends RobotActivity {
                     resrecBookName = resJson.getString("book_name");
                     resrecLocandAvai = resJson.getString("location_and_available");
                     resrecRecommendation = resJson.getString("recommendation");
+                    resrecCover = resJson.getString("cover");
+                    resrecHashtag = resJson.getString("hashtag");
+                    resrecIntroduction = resJson.getString("introduction");
                     System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
@@ -343,6 +409,9 @@ public class Book extends RobotActivity {
                         bookIt.putExtra("resBookName",resrecBookName);
                         bookIt.putExtra("resLocandAvai",resrecLocandAvai.toString());
                         bookIt.putExtra("resRecommendation",resrecRecommendation.toString());
+                        bookIt.putExtra("resCover",resrecCover);
+                        bookIt.putExtra("resHashtag",resrecHashtag);
+                        bookIt.putExtra("resIntroduction",resrecIntroduction);
                         bookIt.setClass(Book.this,Book.class);
                         startActivity(bookIt);
 

@@ -662,7 +662,7 @@ id ifRoom
 id image
 id imageView
 id info
-id introduce
+id introduceButton
 id italic
 id line1
 id line3

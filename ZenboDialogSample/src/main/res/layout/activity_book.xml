@@ -74,16 +74,22 @@
         app:autoSizeTextType="uniform" />
 
 
-    <TextView
-        android:id="@+id/introduce"
-        android:layout_width="500dp"
+
+
+
+    <Button
+        android:id="@+id/introduceButton"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/imageView"
-        android:text="簡介: \n"
-        android:textSize="30dp"
+        android:padding="5dp"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC" />
+        android:background="#ECE3ED"
+        android:textColor="#A180A6"
+        android:text="書籍簡介" />
+
+
 
     <Button
         android:id="@+id/backButton"
@@ -135,4 +141,6 @@
         android:textColor="#A180A6"
         android:layout_marginTop="50dp"
         android:text="新增Hashtag" />
+
+
 </RelativeLayout>

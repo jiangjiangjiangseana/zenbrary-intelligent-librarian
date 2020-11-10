@@ -2364,7 +2364,7 @@ public final class R {
     public static final int image=0x7f070059;
     public static final int imageView=0x7f07005a;
     public static final int info=0x7f07005b;
-    public static final int introduce=0x7f07005c;
+    public static final int introduceButton=0x7f07005c;
     public static final int italic=0x7f07005d;
     public static final int line1=0x7f07005e;
     public static final int line3=0x7f07005f;
