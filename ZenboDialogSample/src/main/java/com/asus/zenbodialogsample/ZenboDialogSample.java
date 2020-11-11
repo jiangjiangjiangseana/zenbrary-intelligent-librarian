@@ -146,7 +146,7 @@ public class ZenboDialogSample extends RobotActivity {
             System.out.println("a person detected");
             personDetected = true;
             if(personDetected){
-            int sayActivity = robotAPI.robot.speak("歡迎~!");
+            //int sayActivity = robotAPI.robot.speak("歡迎~!");
             personDetected = false;
             }
 

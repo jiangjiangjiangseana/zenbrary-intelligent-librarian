@@ -30,7 +30,7 @@
         android:text="姓名: "
         android:textSize="30dp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
 
         android:textColor="#B0ABBC" />
 
@@ -42,7 +42,7 @@
         android:text="學號: "
         android:textSize="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:textColor="#B0ABBC" />
 
     <TextView
@@ -53,43 +53,108 @@
         android:text="信箱:"
         android:textSize="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:textColor="#B0ABBC" />
 
 
-    <TextView
-        android:id="@+id/content_view"
-        android:layout_width="300dp"
+    <Button
+        android:id="@+id/recentBtn"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/imageView"
-        android:text="最近借閱: "
-        android:textColor="#B0ABBC"
-        android:textSize="40dp" />
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="565dp"
-        android:layout_height="664dp"
-        android:layout_marginLeft="45dp"
+        android:layout_toRightOf="@id/imageView"
+        android:text="最近瀏覽"
+        android:textSize="30dp"
+        android:background="#ECE3ED"
         android:layout_marginTop="70dp"
-        android:layout_marginBottom="4dp"
-        android:layout_toRightOf="@+id/imageView"
-        android:background="#9370DB"
-        android:foregroundTint="#AA3434"
-        android:gravity="center" />
+        android:layout_marginLeft="580dp"
+        android:textColor="#A180A6"/>
+
+<!--    <ListView-->
+<!--        android:id="@+id/listView"-->
+<!--        android:layout_width="565dp"-->
+<!--        android:layout_height="664dp"-->
+<!--        android:layout_marginLeft="45dp"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:layout_marginBottom="4dp"-->
+<!--        android:layout_toRightOf="@+id/imageView"-->
+<!--        android:background="#9370DB"-->
+<!--        android:foregroundTint="#AA3434"-->
+<!--        android:gravity="center" />-->
+
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="520dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#929AC3"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/imageView"
+        android:text="@string/bookSearch"
+        android:textSize="35dp"
+        />
+
+    <Button
+        android:id="@+id/equipmentButton"
+        android:layout_width="520dp"
+        android:layout_marginLeft="30dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/bookButton"
+        android:backgroundTint="#929AC3"
+        android:layout_toRightOf="@id/imageView"
+        android:text="@string/equipment"
+        android:textSize="35dp"
+        />
+
+    <Button
+        android:id="@+id/activityButton"
+        android:layout_width="520dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/equipmentButton"
+        android:layout_marginLeft="30dp"
+        android:backgroundTint="#929AC3"
+        android:layout_toRightOf="@id/imageView"
+        android:text="活動通知 Activity Search"
+        android:textSize="35dp"
+        />
+
+
+    <Button
+        android:id="@+id/guidedButton"
+        android:layout_width="520dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/activityButton"
+        android:layout_marginLeft="30dp"
+        android:backgroundTint="#929AC3"
+        android:layout_toRightOf="@id/imageView"
+        android:textSize="35dp"
+        android:text="區域查詢 Guided Tour"
+        />
+
+
+    <Button
+        android:id="@+id/questionButton"
+        android:layout_width="520dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/guidedButton"
+        android:textSize="35dp"
+        android:backgroundTint="#929AC3"
+        android:text="@string/question"
+        android:layout_toRightOf="@id/imageView"
+        />
 
     <Button
         android:id="@+id/recommendBtn"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/listView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@id/recentBtn"
         android:text="我的推薦"
         android:textSize="30dp"
         android:background="#ECE3ED"
         android:layout_marginTop="70dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="580dp"
         android:textColor="#A180A6"/>
 
 
@@ -98,12 +163,12 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/recommendBtn"
-        android:layout_toRightOf="@+id/listView"
+        android:layout_toRightOf="@+id/imageView"
         android:text="開始HashTag"
         android:textSize="30dp"
         android:background="#ECE3ED"
         android:layout_marginTop="70dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="580dp"
         android:textColor="#A180A6"/>
 
 
@@ -112,9 +177,9 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/hashtagBtn"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="330dp"
-        android:layout_toRightOf="@id/listView"
+        android:layout_marginLeft="580dp"
+        android:layout_marginTop="200dp"
+        android:layout_toRightOf="@id/imageView"
         android:background="#ECE3ED"
         android:text="登出"
         android:textColor="#A180A6"

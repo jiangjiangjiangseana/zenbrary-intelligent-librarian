@@ -667,7 +667,6 @@ id italic
 id line1
 id line3
 id listMode
-id listView
 id list_item
 id location
 id loginButton
@@ -696,6 +695,7 @@ id questionButton
 id radio
 id radio_gender
 id ratingBar1
+id recentBtn
 id recommend
 id recommendBtn
 id recommendList
