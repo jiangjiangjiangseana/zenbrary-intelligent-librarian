@@ -11,25 +11,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginLeft="400dp"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginLeft="800dp"
-        android:text="Button" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -37,7 +18,31 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="600dp"
+            android:layout_height="600dp"
+            android:layout_marginTop="130dp"
+            android:text="Button" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="600dp"
+                android:layout_height="600dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="130dp"
+                android:text="Button" />
+
+            <Button
+            android:id="@+id/button3"
+            android:layout_width="600dp"
+            android:layout_height="600dp"
+            android:layout_marginLeft="800dp"
+            android:layout_marginTop="130dp"
+            android:text="Button" />
+
+        </LinearLayout>
     </HorizontalScrollView>
 </RelativeLayout>

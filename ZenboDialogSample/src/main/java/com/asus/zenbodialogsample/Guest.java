@@ -42,7 +42,7 @@ import static java.lang.Integer.parseInt;
 public class Guest extends RobotActivity {
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-    public String calenderUrl = "http://140.119.18/api/v1/calendar/";
+    public String calendarUrl = "http://140.119.19.18:5000/api/v1/calendar/";
     private static TextView mTextView;
     public static String  resAnswer;
     static String rescurrentDate;
@@ -202,13 +202,13 @@ public class Guest extends RobotActivity {
             public void run() {
                 System.out.println("start running calendar");
                 String uniqueID = UUID.randomUUID().toString();
-                String rawData = "{\"session_id\":\""+ parseInt(uniqueID) +"\"}";
+                String rawData = "{\"session_id\":\""+ uniqueID +"\"}";
                 String charset = "UTF-8";
                 System.out.println("calendar request: "+rawData);
 
                 URLConnection connection = null;
                 try {
-                    connection = new URL(calenderUrl).openConnection();
+                    connection = new URL(calendarUrl).openConnection();
                 } catch (Exception e) {
                     System.out.println("calendar connection failed");
                     e.printStackTrace();
@@ -254,7 +254,7 @@ public class Guest extends RobotActivity {
                     System.out.println("response calendar_info: "+text);
                     JSONObject resJson;
                     resJson = new JSONObject(text);
-                    System.out.println("resJson: "+ resJson);
+                    System.out.println("calendar_resJson: "+ resJson);
 
                     rescurrentDate = resJson.getString("current_date");
                     resfirstWeek = resJson.getString("first_week_calendar");
@@ -270,12 +270,11 @@ public class Guest extends RobotActivity {
                 guest.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
-                        System.out.println("切換回到Login");
-                        //go back to login
+                        System.out.println("切換到Activity");
                         Intent calendarIt = new Intent();
-                        calendarIt.putExtra("resJson",resJson.toString());
+                        calendarIt.putExtra("rescurrentData",rescurrentDate);
+                        calendarIt.putExtra("resfirstWeek",resfirstWeek);
+                        calendarIt.putExtra("ressecWeek",ressecWeek);
                         calendarIt.setClass(Guest.this,Activity.class);
                         startActivity(calendarIt);
 

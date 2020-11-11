@@ -1,5 +1,6 @@
 package com.asus.zenbodialogsample;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,6 +19,14 @@ public class Activity extends RobotActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
+
+        Intent it = this.getIntent();
+        String resCurrentDate = it.getStringExtra("rescurrentDate");
+        String resFirstWeek = it.getStringExtra("resfirstWeek");
+        String resSecondWeek = it.getStringExtra("ressecWeek");
+        System.out.println("Success to Activity with: "+resCurrentDate+" "+resFirstWeek+ " "+resSecondWeek);
+
+
         Html.ImageGetter imgGetter = new Html.ImageGetter() {
             @Override
             public Drawable getDrawable(String source) {
