@@ -13,6 +13,7 @@ import com.asus.robotframework.API.RobotErrorCode;
 import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
+import com.google.gson.JsonObject;
 import com.robot.asus.robotactivity.RobotActivity;
 import com.asus.robotframework.API.VisionConfig.PersonDetectConfig;
 import com.asus.robotframework.API.VisionConfig;
@@ -35,14 +36,18 @@ import java.net.URLConnection;
 import java.util.UUID;
 import android.widget.Button;
 
-
+import static java.lang.Integer.parseInt;
 
 
 public class Guest extends RobotActivity {
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
+    public String calenderUrl = "http://140.119.18/api/v1/calendar/";
     private static TextView mTextView;
     public static String  resAnswer;
+    static String rescurrentDate;
+    static String resfirstWeek;
+    static String ressecWeek;
     static Guest guest;
     static JSONObject resJson;
     static String targetUrl;
@@ -97,10 +102,7 @@ public class Guest extends RobotActivity {
             public void onClick(View v) {
                 robotAPI.vision.cancelDetectFace();
                 System.out.println("change layout to activity");
-                Intent activityIt = new Intent();
-                //equipIt.putExtra("resJson",resJson.toString());
-                activityIt.setClass(Guest.this,Activity.class);
-                startActivity(activityIt);
+                calendarAPI();
             }
         });
         // guidedButton 初始化
@@ -193,6 +195,96 @@ public class Guest extends RobotActivity {
         robotAPI.vision.cancelDetectFace();
 
     }
+
+    public void calendarAPI(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("start running calendar");
+                String uniqueID = UUID.randomUUID().toString();
+                String rawData = "{\"session_id\":\""+ parseInt(uniqueID) +"\"}";
+                String charset = "UTF-8";
+                System.out.println("calendar request: "+rawData);
+
+                URLConnection connection = null;
+                try {
+                    connection = new URL(calenderUrl).openConnection();
+                } catch (Exception e) {
+                    System.out.println("calendar connection failed");
+                    e.printStackTrace();
+                }
+                connection.setDoOutput(true); // Triggers POST.
+                connection.setRequestProperty("Accept-Charset", charset);
+                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                try (OutputStream output = connection.getOutputStream()) {
+                    Log.d("calendar output format",output.toString());
+                    output.write(rawData.getBytes(charset));
+                } catch (Exception e) {
+                    System.out.println("error in receiving calendar result");
+                    e.printStackTrace();
+                }
+                InputStream response = null;
+                try {
+                    response = connection.getInputStream();
+                    System.out.println("receiving calendar_result : "+response.toString() + " " + response);
+                } catch (Exception e) {
+                    System.out.println("error in receiving calendar_result");
+                    e.printStackTrace();
+                }
+                try {
+                    System.out.println("start translate calendar_result: ");
+                    String text;
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        text =  writer.toString();
+                    } else {
+                        text =  "";
+                    }
+                    System.out.println("response calendar_info: "+text);
+                    JSONObject resJson;
+                    resJson = new JSONObject(text);
+                    System.out.println("resJson: "+ resJson);
+
+                    rescurrentDate = resJson.getString("current_date");
+                    resfirstWeek = resJson.getString("first_week_calendar");
+                    ressecWeek = resJson.getString("second_week_calendar");
+                    System.out.println("response calendar_info: "+rescurrentDate +" "+resfirstWeek+ " "+ ressecWeek);
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate calendar_info");
+                }
+
+
+                guest.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        System.out.println("切換回到Login");
+                        //go back to login
+                        Intent calendarIt = new Intent();
+                        calendarIt.putExtra("resJson",resJson.toString());
+                        calendarIt.setClass(Guest.this,Activity.class);
+                        startActivity(calendarIt);
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
     public static RobotCallback robotCallback = new RobotCallback() {
         @Override
