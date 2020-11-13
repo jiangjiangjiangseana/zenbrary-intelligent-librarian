@@ -1,10 +1,12 @@
 package com.asus.zenbodialogsample;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.asus.ctc.tool.DSAPI_Result;
@@ -40,6 +42,10 @@ public class EquipmentIntro extends RobotActivity{
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     static EquipmentIntro facilityClass;
+    static String faci_name;
+    static int faci_floor;
+    static String faci_introduce;
+    static int faci_number;
 
 
     @Override
@@ -48,16 +54,68 @@ public class EquipmentIntro extends RobotActivity{
         setContentView(R.layout.activity_equip);
         robotAPI.vision.cancelDetectFace();
         System.out.println("sucess to change to facility");
+
+        //backButton 初始化
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backIT = new Intent();
+                backIT.setClass(EquipmentIntro.this,Guest.class);
+                startActivity(backIT);
+            }
+        });
+
+
+        //layout資訊初始化
         facilityClass = EquipmentIntro.this;
         Intent it = this.getIntent();
-        String resJson = it.getStringExtra("resJson");
-        System.out.println("facility success receive: "+resJson);
-
+        String resJsonString = it.getStringExtra("resJson");
+        System.out.println("facility success receive: " + resJsonString);
+        try {
+            final JSONObject[] resJson = {new JSONObject(resJsonString)};
+            System.out.println("resfacilityJson:" + resJson);
+            faci_name = resJson[0].getString("faci_name");
+            faci_floor = resJson[0].getInt("floor");
+            faci_introduce = resJson[0].getString("introduce");
+            faci_number = resJson[0].getInt("number");
+            System.out.println("facility_name: " + faci_name + " floor: " + faci_floor + " introduce: " + faci_introduce);
+        } catch (JSONException e) {
+            System.out.println("error in change string into json");
+            e.printStackTrace();
+        }
+        if(faci_name==""||faci_floor==0){
+            Intent failIt = new Intent();
+            failIt.setClass(EquipmentIntro.this,Guest.class);
+            startActivity(failIt);
+            robotAPI.robot.speakAndListen("不好意思，請重複一次",new SpeakConfig().timeout(15));
+        }else{
+        TextView faci_name_tv = (TextView) findViewById(R.id.faci_name_textView);
+        faci_name_tv.setText(faci_name);
+        TextView faci_intro_tv = (TextView) findViewById(R.id.faci_intro_textView);
+        faci_intro_tv.setText(faci_introduce);
+        ImageView floor_image = (ImageView) findViewById(R.id.floor_image);
+        if(faci_floor == 1){
+        floor_image.setImageResource(R.drawable.t1);
+        }else if(faci_floor == 2){
+            floor_image.setImageResource(R.drawable.t2);
+        }else if(faci_floor == 3){
+            floor_image.setImageResource(R.drawable.t3);
+        }else if(faci_floor == 4){
+            floor_image.setImageResource(R.drawable.t4);
+        }else if(faci_floor == 5){
+            floor_image.setImageResource(R.drawable.t5);
+        }else if(faci_floor == 7){
+            floor_image.setImageResource(R.drawable.t7);
+        }else if(faci_floor == 8){
+            floor_image.setImageResource(R.drawable.t8);
+        }
+        robotAPI.robot.speak(faci_name+"在達賢"+faci_floor+"樓的"+faci_number+"號唷");
+        }
 
 
     }
-
-    @Override
+        @Override
     protected void onResume() {
         super.onResume();
 

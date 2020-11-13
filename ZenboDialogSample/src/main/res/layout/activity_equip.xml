@@ -12,127 +12,47 @@
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
+    <ImageView
+        android:id="@+id/floor_image"
+        android:layout_width="700dp"
+        android:layout_height="700dp"
+        android:layout_marginTop="20sp"></ImageView>
+
     <TextView
-        android:id="@+id/textview_info"
-        android:layout_width="match_parent"
+        android:id="@+id/faci_name_textView"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="70dp"
-        android:gravity="center"
-        android:text="個人資訊 Personal Information"
+        android:layout_toRightOf="@id/floor_image"
+        android:layout_marginLeft="50dp"
+        android:textSize="50dp"
         android:textColor="#9370DB"
-        android:textSize="45dp"
-        />
+        android:textAlignment="center"
+        android:layout_marginTop="40dp"
+        ></TextView>
 
     <TextView
-        android:id="@+id/account"
-        android:layout_width="wrap_content"
+        android:id="@+id/faci_intro_textView"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="信箱 E-mail: "
-        android:textColor="#9370DB"
-        android:layout_below="@+id/textview_info"
-        />
-
-    <EditText
-        android:id="@+id/editTexta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/account"
-        android:background="#CCBBFF"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTexta"
-        android:gravity="center"
-        android:text="密碼 Password: "
-        android:textColor="#9370DB" />
-
-    <EditText
-        android:id="@+id/editTextb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_below="@+id/pw"
-        android:background="#CCBBFF"
-        android:inputType="textPassword"
-        />
-
-    <TextView
-        android:id="@+id/textview1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="信箱 E-mail: "
-        android:textColor="#9370DB"
-        android:layout_below="@+id/editTextb"
-        />
-
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview1"
-        android:background="#CCBBFF"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/textview2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="信箱 E-mail: "
-        android:textColor="#9370DB"
-        android:layout_below="@+id/editText1"
-        />
-
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview2"
-        android:background="#CCBBFF"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/textview3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="信箱 E-mail: "
-        android:textColor="#9370DB"
-        android:layout_below="@+id/editText2"
-        />
-
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview3"
-        android:background="#CCBBFF"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
-
+        android:layout_toRightOf="@id/floor_image"
+        android:layout_below="@id/faci_name_textView"
+        android:layout_marginLeft="50dp"
+        android:textSize="35dp"
+        android:textColor="#A180A6"
+        android:layout_marginTop="20dp"
+        ></TextView>
 
     <Button
-        android:id="@+id/confirmButton"
-        android:layout_width="match_parent"
+        android:id="@+id/backButton"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
-        android:backgroundTint="#929AC3"
-        android:text="確認 confirm"
-        />
+        android:layout_marginLeft="280dp"
+        android:layout_toRightOf="@id/floor_image"
+        android:padding="5dp"
+        android:background="#ECE3ED"
+        android:textColor="#A180A6"
+        android:layout_marginTop="640dp"
+        android:text="返回前頁" />
 
 
 </RelativeLayout>
