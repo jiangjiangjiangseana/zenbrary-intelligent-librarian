@@ -26,6 +26,7 @@ public class Activity extends RobotActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
         TextView activityInfoText = (TextView)findViewById(R.id.activityInfoText);
+        robotAPI.robot.speak("今天有展覽喔!");
 
 
         activityInfoText.setTextSize(20);

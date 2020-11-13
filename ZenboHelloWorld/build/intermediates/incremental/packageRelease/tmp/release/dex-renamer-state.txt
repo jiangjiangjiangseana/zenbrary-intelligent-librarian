@@ -1,4 +1,4 @@
-#Sat Aug 29 16:35:29 CST 2020
+#Fri Nov 13 16:12:34 CST 2020
 base.0=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboHelloWorld\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
 path.0=classes.dex
 renamed.0=classes.dex

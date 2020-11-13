@@ -20,7 +20,7 @@
         android:layout_height="244dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
-        tools:src="@drawable/newzenbo"
+        tools:src="@drawable/zenbo"
         />
 
     <TextView

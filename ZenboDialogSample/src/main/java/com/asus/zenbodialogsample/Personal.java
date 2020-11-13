@@ -52,8 +52,8 @@ import android.view.View;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-//public class Personal extends RobotActivity{
-public class Personal extends AppCompatActivity {
+public class Personal extends RobotActivity{
+//public class Personal extends AppCompatActivity {
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
@@ -65,6 +65,7 @@ public class Personal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
+        robotAPI.robot.speak("哈囉!");
         System.out.println("sucess to change to user");
         userClass = Personal.this;
         Intent userIt = this.getIntent();
@@ -101,6 +102,7 @@ public class Personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 recommend_alert();
+                robotAPI.robot.speak("這些是我推薦給你的書籍");
             }
         });
     }
@@ -271,8 +273,8 @@ public class Personal extends AppCompatActivity {
     };
 
 
-//    public Personal() {
-//        super(robotCallback, robotListenCallback);
-//    }
+    public Personal() {
+        super(robotCallback, robotListenCallback);
+    }
 
 }
