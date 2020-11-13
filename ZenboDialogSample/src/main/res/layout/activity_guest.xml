@@ -73,7 +73,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="130dp"
-
         android:padding="5dp"
         android:background="#ECE3ED"
         android:textColor="#A180A6"
