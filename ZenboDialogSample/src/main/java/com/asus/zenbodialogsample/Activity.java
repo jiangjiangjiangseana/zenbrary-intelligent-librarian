@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -19,6 +20,10 @@ public class Activity extends RobotActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
+        TextView activityInfoText = (TextView)findViewById(R.id.activityInfoText);
+
+
+        activityInfoText.setTextSize(20);
 
         Intent it = this.getIntent();
         String resCurrentDate = it.getStringExtra("rescurrentDate");

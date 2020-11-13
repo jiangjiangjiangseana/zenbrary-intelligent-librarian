@@ -597,6 +597,7 @@ id action_mode_close_button
 id action_text
 id actions
 id activityButton
+id activityInfoText
 id activity_chooser_view_content
 id add
 id alertTitle
@@ -614,6 +615,10 @@ id bottom
 id button1
 id button2
 id button3
+id button4
+id button5
+id button6
+id button7
 id buttonPanel
 id cancel_action
 id checkbox

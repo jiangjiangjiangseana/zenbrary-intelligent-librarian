@@ -57,21 +57,13 @@
         />
 
 
-    <Button
-        android:id="@+id/guidedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activityButton"
-        android:backgroundTint="#929AC3"
-        android:text="園區導覽 Guided Tour"
-        />
 
 
     <Button
         android:id="@+id/questionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/guidedButton"
+        android:layout_below="@+id/activityButton"
         android:backgroundTint="#929AC3"
         android:text="@string/question"
         />

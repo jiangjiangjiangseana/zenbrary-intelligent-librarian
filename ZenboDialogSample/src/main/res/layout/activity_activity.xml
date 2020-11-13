@@ -5,44 +5,76 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingLeft="10dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingRight="10dp"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="600dp"
-            android:layout_height="600dp"
-            android:layout_marginTop="130dp"
-            android:text="Button" />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="600dp"
-                android:layout_height="600dp"
-                android:layout_marginLeft="200dp"
-                android:layout_marginTop="130dp"
-                android:text="Button" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
 
-            <Button
-            android:id="@+id/button3"
-            android:layout_width="600dp"
-            android:layout_height="600dp"
-            android:layout_marginLeft="800dp"
-            android:layout_marginTop="130dp"
-            android:text="Button" />
+    <Button
+    android:id="@+id/button3"
+    android:layout_width="160dp"
+    android:layout_height="150dp"
+    android:layout_marginLeft="360dp"
+    android:layout_marginTop="5dp"
+    android:text="Button" />
 
-        </LinearLayout>
-    </HorizontalScrollView>
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="540dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="720dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="900dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="1080dp"
+        android:layout_marginTop="5dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/activityInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="300dp"
+        android:text="活動資訊" />
+
+
 </RelativeLayout>

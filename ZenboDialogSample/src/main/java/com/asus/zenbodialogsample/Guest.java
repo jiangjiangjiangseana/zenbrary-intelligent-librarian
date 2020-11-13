@@ -77,12 +77,10 @@ public class Guest extends RobotActivity {
         eButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                robotAPI.robot.stopSpeak();
                 robotAPI.vision.cancelDetectFace();
-                System.out.println("change layout to equip");
-                Intent equipIt = new Intent();
-                //equipIt.putExtra("resJson",resJson.toString());
-                equipIt.setClass(Guest.this,EquipmentIntro.class);
-                startActivity(equipIt);
+                targetUrl = "http://140.119.19.18:5000/api/v1/facility/";
+                int aaaab = robotAPI.robot.speakAndListen("您想找什麼呢?", new SpeakConfig().timeout(15));
             }
         });
         // questionButton 初始化
@@ -105,19 +103,7 @@ public class Guest extends RobotActivity {
                 calendarAPI();
             }
         });
-        // guidedButton 初始化
-        Button gButton = findViewById(R.id.guidedButton);
-        gButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                robotAPI.vision.cancelDetectFace();
-                System.out.println("change layout to guided");
-                Intent guidedIt = new Intent();
-                //equipIt.putExtra("resJson",resJson.toString());
-                guidedIt.setClass(Guest.this,Tour.class);
-                startActivity(guidedIt);
-            }
-        });
+
 
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
@@ -168,6 +154,13 @@ public class Guest extends RobotActivity {
         it.putExtra("resJson",resJson.toString());
         it.setClass(Guest.this,BookList.class);
         startActivity(it);
+    }
+
+    public void changeToFacility(){
+        Intent facIt = new Intent();
+        facIt.putExtra("resJson",resJson.toString());
+        facIt.setClass(Guest.this,EquipmentIntro.class);
+        startActivity(facIt);
     }
 
     @Override
@@ -439,6 +432,9 @@ public class Guest extends RobotActivity {
                                     System.out.println("切換頁面到booklist");
                                     guest.changeToBookList();
 
+                                }else if(resClass[0].equals("facility")){
+                                    System.out.println("change to facility layout");
+                                    guest.changeToFacility();
                                 }
                             }
                         });

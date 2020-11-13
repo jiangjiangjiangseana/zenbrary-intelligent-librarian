@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.asus.ctc.tool.DSAPI_Result;
 import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -37,13 +39,19 @@ public class EquipmentIntro extends RobotActivity{
 
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-
+    static EquipmentIntro facilityClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equip);
+        robotAPI.vision.cancelDetectFace();
+        System.out.println("sucess to change to facility");
+        facilityClass = EquipmentIntro.this;
+        Intent it = this.getIntent();
+        String resJson = it.getStringExtra("resJson");
+        System.out.println("facility success receive: "+resJson);
 
 
 
