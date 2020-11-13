@@ -184,8 +184,6 @@ public class BookList extends RobotActivity{
                                 e.printStackTrace();
                                 System.out.println("error in translate book_info");
                             }
-
-
                             bookListClass.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

@@ -18,7 +18,8 @@
         android:layout_width="160dp"
         android:layout_height="150dp"
         android:layout_marginTop="5dp"
-        android:text="Button" />
+        android:text="Button"
+/>
 
     <Button
         android:id="@+id/button2"

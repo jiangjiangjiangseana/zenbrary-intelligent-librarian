@@ -52,6 +52,7 @@ public class Guest extends RobotActivity {
     static JSONObject resJson;
     static String targetUrl;
     static boolean personDetected ;
+    static String day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +123,7 @@ public class Guest extends RobotActivity {
     protected void onResume() {
         super.onResume();
 
-        // close faical
+        // close facial
         robotAPI.robot.setExpression(RobotFace.HIDEFACE);
 
         // jump dialog domain
@@ -195,7 +196,8 @@ public class Guest extends RobotActivity {
             public void run() {
                 System.out.println("start running calendar");
                 String uniqueID = UUID.randomUUID().toString();
-                String rawData = "{\"session_id\":\""+ uniqueID +"\"}";
+                day = "0";
+                String rawData = "{\"day\":\""+day+"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("calendar request: "+rawData);
 

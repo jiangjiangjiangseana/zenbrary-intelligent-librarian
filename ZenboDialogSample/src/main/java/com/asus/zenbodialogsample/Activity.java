@@ -11,9 +11,14 @@ import android.widget.TextView;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
+import com.google.gson.JsonObject;
 import com.robot.asus.robotactivity.RobotActivity;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Activity extends RobotActivity {
 
@@ -30,10 +35,33 @@ public class Activity extends RobotActivity {
         String resCurrentDate = it.getStringExtra("rescurrentDate");
         String resFirstWeek = it.getStringExtra("resfirstWeek");
         String resSecondWeek = it.getStringExtra("ressecWeek");
-//        System.out.println("Success to Activity with: "+resCurrentDate+" "+resFirstWeek+ " "+resSecondWeek);
+        System.out.println("Success to Activity with: "+resCurrentDate+" "+resFirstWeek+ " "+resSecondWeek);
+
+
+        final ArrayList<String> firstWeek = new ArrayList<>(Arrays.asList(resFirstWeek.split("],")));
+        System.out.println("First week:"+firstWeek);
+        final ArrayList<String> dates = new ArrayList<>(Arrays.asList(firstWeek.get(0).substring(2).split(",")));
+        for (int i = 0; i<dates.size(); i++){
+            System.out.println("Dates: "+dates.get(i));
+        }
+
 
         // set button
         Button button1 = (Button) findViewById(R.id.button1);
+        button1.setText(dates.get(0).substring(1,11));
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setText(dates.get(1).substring(1,11));
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setText(dates.get(2).substring(1,11));
+        Button button4 = (Button) findViewById(R.id.button4);
+        button4.setText(dates.get(3).substring(1,11));
+        Button button5 = (Button) findViewById(R.id.button5);
+        button5.setText(dates.get(4).substring(1,11));
+        Button button6 = (Button) findViewById(R.id.button6);
+        button6.setText(dates.get(5).substring(1,11));
+        Button button7 = (Button) findViewById(R.id.button7);
+        button7.setText(dates.get(6).substring(1,11));
+
 
 
 //        Html.ImageGetter imgGetter = new Html.ImageGetter() {
