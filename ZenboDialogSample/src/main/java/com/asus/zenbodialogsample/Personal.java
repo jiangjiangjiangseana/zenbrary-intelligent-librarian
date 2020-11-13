@@ -3,11 +3,16 @@ package com.asus.zenbodialogsample;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -25,6 +30,8 @@ import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
+
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -53,12 +60,12 @@ public class Personal extends AppCompatActivity {
     static Personal userClass;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         System.out.println("sucess to change to user");
-
         userClass = Personal.this;
         Intent userIt = this.getIntent();
         String user_info = userIt.getStringExtra("user_info");
@@ -85,6 +92,15 @@ public class Personal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 hashtag_alert();
+            }
+        });
+
+        //recommendBtn初始化
+        Button recommendBtn = findViewById(R.id.recommendBtn);
+        recommendBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recommend_alert();
             }
         });
     }
@@ -153,6 +169,48 @@ public class Personal extends AppCompatActivity {
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
     }
+
+
+    public void recommend_alert(){
+        System.out.println("trigger recommend_alert");
+        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
+        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
+        LayoutInflater inflater = LayoutInflater.from(Personal.this);
+        final View v = inflater.inflate(R.layout.activity_recommend, null);
+
+        Html.ImageGetter imgGetter = new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String source) {
+                Drawable drawable = null;
+                drawable = v.getResources().getDrawable(
+                        Integer.parseInt(source)
+                );
+                drawable.setBounds(0,0,120,100);
+                return drawable;
+
+            }
+        };
+
+
+
+        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
+        AlertDialog dialog = new AlertDialog.Builder(Personal.this)
+                .setTitle("我的推薦")
+                .setView(v)
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText editText = (EditText) (v.findViewById(R.id.editText_alert));
+                        Toast.makeText(getApplicationContext(), "你的id是" +
+                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        dialog.show();
+
+    }
+
+
 
     @Override
     protected void onDestroy() {

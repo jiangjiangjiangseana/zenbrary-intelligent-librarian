@@ -81,7 +81,7 @@ public class Activity extends RobotActivity {
 //
 //        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
 //        button1.setText(span);
-//
+
     }
 
     @Override

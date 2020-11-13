@@ -556,6 +556,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable cloud_server
 drawable ic_launcher
+drawable newzenbo
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -671,6 +672,15 @@ id icon_group
 id ifRoom
 id image
 id imageView
+id image_btn1
+id image_btn2
+id image_btn3
+id image_btn4
+id image_btn5
+id image_btn6
+id image_btn7
+id image_btn8
+id image_btn9
 id info
 id introduceButton
 id italic

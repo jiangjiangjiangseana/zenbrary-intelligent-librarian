@@ -10,6 +10,158 @@
     android:background="#F8F8FF"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="猜你喜歡 Recommendation: "
+        android:textSize="40dp"
+        android:textColor="#A180A6"
+        ></TextView>
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="600dp"
+        android:layout_marginTop="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ECE3ED">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn1"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#CCC0CD"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn1"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn2"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#ECE3ED"
+                android:layout_toRightOf="@+id/image_btn1"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn1"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn3"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#CCC0CD"
+                android:layout_toRightOf="@+id/image_btn2"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn2"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn3"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn4"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#ECE3ED"
+                android:layout_toRightOf="@+id/image_btn3"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn3"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn5"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#CCC0CD"
+                android:layout_toRightOf="@+id/image_btn4"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn4"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn3"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn6"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#ECE3ED"
+                android:layout_toRightOf="@+id/image_btn5"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn5"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn7"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#CCC0CD"
+                android:layout_toRightOf="@+id/image_btn6"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn4"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn6"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn8"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#ECE3ED"
+                android:layout_toRightOf="@+id/image_btn7"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn7"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn9"
+                android:layout_width="500dp"
+                android:layout_height="500dp"
+                android:background="#CCC0CD"
+                android:layout_toRightOf="@+id/image_btn8"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="500dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn8"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn6"></TextView>
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+
+
+
 
 
 
