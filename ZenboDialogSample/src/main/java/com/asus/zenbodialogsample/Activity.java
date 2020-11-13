@@ -64,24 +64,24 @@ public class Activity extends RobotActivity {
 
 
 
-//        Html.ImageGetter imgGetter = new Html.ImageGetter() {
-//            @Override
-//            public Drawable getDrawable(String source) {
-//                Drawable drawable = null;
-//                drawable = Activity.this.getResources().getDrawable(
-//                        Integer.parseInt(source)
-//                );
-//                drawable.setBounds(0,0,120,100);
-//                return drawable;
-//
-//            }
-//        };
-//
+        Html.ImageGetter imgGetter = new Html.ImageGetter() {
+            @Override
+            public Drawable getDrawable(String source) {
+                Drawable drawable = null;
+                drawable = Activity.this.getResources().getDrawable(
+                        Integer.parseInt(source)
+                );
+                drawable.setBounds(0,0,120,100);
+                return drawable;
+
+            }
+        };
+
 //        Button button1 = (Button) findViewById(R.id.button1);
-//
-//        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
-//        button1.setText(span);
-//
+
+        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
+        button1.setText(span);
+
     }
 
     @Override
