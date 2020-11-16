@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Fri Nov 13 16:12:36 CST 2020
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboHelloWorld\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
-0.path=classes.dex
-0.set=DEX
-count=1
