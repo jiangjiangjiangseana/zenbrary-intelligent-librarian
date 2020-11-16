@@ -386,7 +386,7 @@ public class Book extends RobotActivity {
                     resrecAuthor = resJson.getString("author");
                     resrecBookName = resJson.getString("book_name");
                     resrecLocandAvai = resJson.getString("location_and_available");
-                    resrecRecommendation = resJson.getString("recommendation");
+                    resrecRecommendation = resJson.getString("item_recommendation");
                     resrecCover = resJson.getString("cover");
                     resrecHashtag = resJson.getString("hashtag");
                     resrecIntroduction = resJson.getString("introduction");

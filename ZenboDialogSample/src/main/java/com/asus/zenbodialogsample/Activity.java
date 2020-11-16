@@ -26,6 +26,7 @@ public class Activity extends RobotActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
         TextView activityInfoText = (TextView)findViewById(R.id.activityInfoText);
+        robotAPI.robot.speak("今天有展覽喔!");
 
 
         activityInfoText.setTextSize(20);
@@ -79,8 +80,14 @@ public class Activity extends RobotActivity {
 
 //        Button button1 = (Button) findViewById(R.id.button1);
 
-        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
-        button1.setText(span);
+
+//        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
+//        button1.setText(span);
+
+//
+//        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
+//        button1.setText(span);
+
 
     }
 

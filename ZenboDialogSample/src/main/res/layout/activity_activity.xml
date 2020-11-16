@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="10dp"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
+    tools:context="com.asus.zenbodialogsample.ZenboDialogSample"
+    tools:ignore="ExtraText">
 
 
 
@@ -20,7 +21,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="50dp"
         android:background="#FEF9F2"
-        android:text="Button"
+
         />
 
     <Button
@@ -39,7 +40,7 @@
         android:layout_marginLeft="330dp"
         android:layout_marginTop="5dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+ />
 
     <Button
         android:id="@+id/button4"
@@ -84,6 +85,7 @@
         android:layout_marginLeft="1150dp"
         android:background="@drawable/change"/>
 
+
     <ImageView
         android:layout_width="730dp"
         android:layout_height="350dp"
@@ -98,6 +100,7 @@
         android:layout_marginTop="480dp"
         android:background="@drawable/notes" />
 
+
     <TextView
         android:id="@+id/activityTime"
         android:layout_width="wrap_content"
@@ -105,7 +108,10 @@
         android:layout_marginTop="200dp"
         android:layout_marginLeft="50dp"
         android:text="活動時間:上午8點"
+
         android:textSize="100.0px" />
+
+
 
     <TextView
         android:id="@+id/activityCategory"
@@ -113,8 +119,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="280dp"
         android:layout_marginLeft="50dp"
+
         android:text="活動資訊:走畫文山畫展"
         android:textSize="100.0px" />
+
 
     <TextView
         android:id="@+id/activityInfoText"
@@ -122,30 +130,37 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="360dp"
         android:layout_marginLeft="50dp"
+
         android:text="活動類別:展覽"
         android:textSize="100.0px" />
+
 
     <TextView
         android:id="@+id/activityTime1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="580dp"
         android:layout_marginLeft="50dp"
         android:text="活動時間:下午2點"
         android:textSize="100.0px" />
 
+
     <TextView
         android:id="@+id/activityCategory1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="730dp"
         android:layout_marginLeft="50dp"
         android:text="活動類別:參訪"
         android:textSize="100.0px"/>
+
     <TextView
         android:id="@+id/activityInfoText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="650dp"
         android:layout_marginLeft="50dp"
         android:text="活動資訊:新北市文化局(20人)"
@@ -157,6 +172,10 @@
         android:layout_marginLeft="850dp"
         android:layout_marginTop="200dp"
         android:background="@drawable/announce" />
+
+
+
+
 
 
 

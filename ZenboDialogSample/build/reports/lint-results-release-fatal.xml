@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 3.4.1">
+
+    <issue
+        id="NotSibling"
+        severity="Fatal"
+        message="`@+id/imageView` is not a sibling in the same `RelativeLayout`"
+        category="Correctness"
+        priority="6"
+        summary="Invalid Constraints"
+        explanation="Layout constraints in a given `ConstraintLayout` or `RelativeLayout` should reference other views within the same relative layout (but not itself!)"
+        errorLine1="        android:layout_toRightOf=&quot;@+id/imageView&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\jaing\AndroidStudioProjects\zenbo project\zenbocode\ZenboDialogSample\src\main\res\layout\activity_book_list.xml"
+            line="20"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotSibling"
+        severity="Fatal"
+        message="`@+id/textview_info` is not a sibling in the same `RelativeLayout`"
+        category="Correctness"
+        priority="6"
+        summary="Invalid Constraints"
+        explanation="Layout constraints in a given `ConstraintLayout` or `RelativeLayout` should reference other views within the same relative layout (but not itself!)"
+        errorLine1="        android:layout_below=&quot;@+id/textview_info&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="C:\Users\jaing\AndroidStudioProjects\zenbo project\zenbocode\ZenboDialogSample\src\main\res\layout\activity_zenbo_dialog_sample.xml"
+            line="22"
+            column="9"/>
+    </issue>
+
+</issues>

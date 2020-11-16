@@ -10,6 +10,125 @@
     android:background="#F8F8FF"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="猜你喜歡 Recommendation: "
+        android:textSize="40dp"
+        android:textColor="#A180A6"
+        ></TextView>
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="60dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ECE3ED">
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn1"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:background="@drawable/forest"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:background="#CCC0CD"
+                android:text="森林裏最恐怖的是誰?"
+                android:textSize="40dp"
+                android:textColor="#5C515E"
+                android:textAlignment="center"
+                android:layout_below="@id/image_btn1"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn2"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:background="@drawable/norway"
+                android:layout_toRightOf="@+id/image_btn1"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn1"
+                android:text="挪威的森林"
+                android:textSize="40dp"
+                android:textColor="#5C515E"
+                android:textAlignment="center"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn3"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:background="@drawable/tomato"
+                android:layout_toRightOf="@+id/image_btn2"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn2"
+                android:background="#CCC0CD"
+                android:text="哇!40公斤蕃茄大餐 : \n測量與運算的秘密"
+                android:textSize="40dp"
+                android:textColor="#5C515E"
+                android:textAlignment="center"
+                android:layout_below="@id/image_btn3"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn4"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:background="@drawable/kafka"
+                android:layout_toRightOf="@+id/image_btn3"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:text="海邊的卡夫卡"
+                android:textSize="40dp"
+                android:textColor="#5C515E"
+                android:textAlignment="center"
+                android:layout_toRightOf="@id/image_btn3"
+                android:layout_below="@id/image_btn2"></TextView>
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/image_btn5"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:background="@drawable/three_kingdoms"
+                android:layout_toRightOf="@+id/image_btn4"
+                ></android.support.v7.widget.AppCompatImageButton>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/image_btn4"
+                android:text="三國志"
+                android:textSize="40dp"
+                android:textColor="#5C515E"
+                android:textAlignment="center"
+                android:background="#CCC0CD"
+                android:layout_below="@id/image_btn3"></TextView>
+
+
+
+
+
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+
+
+
 
 
 

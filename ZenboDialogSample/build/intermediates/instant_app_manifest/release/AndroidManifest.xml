@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.asus.zenbodialogsample"
+    android:targetSandboxVersion="2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="26" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/RobotDevTheme" >
+        <meta-data
+            android:name="zenbo_ds_domainuuid"
+            android:value="9EF85697FF064D54B32FF06D21222BA2" />
+        <meta-data
+            android:name="zenbo_ds_version_9EF85697FF064D54B32FF06D21222BA2"
+            android:value="0.0.1" />
+
+        <activity android:name="com.asus.zenbodialogsample.ZenboDialogSample" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.asus.intent.category.ZENBO" />
+                <category android:name="com.asus.intent.category.ZENBO_LAUNCHER" />
+
+                <!-- please comment out the following line when you want to launch to Zenbo App Store -->
+                <!-- See Zenbo Developer Web: Zenbo-SDK-Getting-Started: Important notes on Zenbo APP developing -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.asus.zenbodialogsample.Guest" />
+        <activity android:name="com.asus.zenbodialogsample.BookList" />
+        <activity android:name="com.asus.zenbodialogsample.Book" />
+        <activity android:name="com.asus.zenbodialogsample.EquipmentIntro" />
+        <activity
+            android:name="com.asus.zenbodialogsample.Login"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.asus.zenbodialogsample.Personal"
+            android:windowSoftInputMode="stateHidden" />
+        <!-- <activity android:name=".Recommend"></activity> -->
+        <activity
+            android:name="com.asus.zenbodialogsample.Register"
+            android:windowSoftInputMode="stateHidden" />
+        <!-- <activity android:name=".Tour"></activity> -->
+        <activity android:name="com.asus.zenbodialogsample.Activity" />
+
+        <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0" />
+        <meta-data
+            android:name="android.arch.lifecycle.VERSION"
+            android:value="27.0.0-SNAPSHOT" />
+    </application>
+
+</manifest>

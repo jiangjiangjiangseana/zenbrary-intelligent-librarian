@@ -55,6 +55,7 @@ public class BookList extends RobotActivity{
     static String resBookName ;
     static String resLocandAvai ;
     static String resRecommendation;
+    static String resAssoRecommendation;
     static String resCover;
     static String resHashtag;
     static String resIntroduction;
@@ -174,7 +175,8 @@ public class BookList extends RobotActivity{
                                 resAuthor = resJson[0].getString("author");
                                 resBookName = resJson[0].getString("book_name");
                                 resLocandAvai = resJson[0].getString("location_and_available");
-                                resRecommendation = resJson[0].getString("recommendation");
+                                resRecommendation = resJson[0].getString("item_recommendation");
+                                resAssoRecommendation = resJson[0].getString("asso_recommendation");
                                 resCover = resJson[0].getString("cover");
                                 resHashtag = resJson[0].getString("hashtag");
                                 resIntroduction = resJson[0].getString("introduction");

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/charlene/Desktop/zenbrary-intelligent-librarian/RobotDevSample/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\RobotDevSample\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/charlene/.gradle/caches/transforms-2/files-2.1/e8174b1a788e9d854ade1c2eb15d661c/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
