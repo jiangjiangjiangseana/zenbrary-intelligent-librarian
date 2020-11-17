@@ -64,6 +64,9 @@ public class Book extends RobotActivity {
     static String resrecCover;
     static String resrecHashtag;
     static String resrecIntroduction;
+    static float score;
+    static String hashtagReview;
+    static String requestMms_id;
 
 
 
@@ -71,10 +74,13 @@ public class Book extends RobotActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         robotAPI.vision.cancelDetectFace();
+        System.out.println("book create score: "+score+" "+"hashtags: "+hashtagReview);
+        //undo: book hashtag book score
         System.out.println("sucess to change to book");
         setContentView(R.layout.activity_book);
         bookClass = Book.this;
         Intent bookIt = this.getIntent();
+        requestMms_id = bookIt.getStringExtra("mms_id");
         String resAuthor = bookIt.getStringExtra("resAuthor");
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
@@ -259,9 +265,9 @@ public class Book extends RobotActivity {
     }
 
     public void hashtag_alert(){
-    System.out.println("hash function called");
+        robotAPI.robot.speak("填寫hashtag請用空格隔開");
+        System.out.println("hash function called");
         //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
-
         //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
 
         LayoutInflater inflater = LayoutInflater.from(Book.this);
@@ -274,34 +280,48 @@ public class Book extends RobotActivity {
                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EditText editText = (EditText) (v.findViewById(R.id.editText_alert));
+                        EditText hashtag = (EditText) (v.findViewById(R.id.editText_hashtag));
                         Toast.makeText(getApplicationContext(), "你的id是" +
+                                hashtag.getText().toString(), Toast.LENGTH_SHORT).show();
+                        hashtagReview = hashtag.getText().toString();
+                        //rateBar 初始化
+                        RatingBar mRatingBar = (RatingBar) v.findViewById(R.id.ratingBar1);
+                        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
+                                = new RatingBar.OnRatingBarChangeListener() {
+                            @Override
+                            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
+                                score = rating;
+                            }
+                        };
+                        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
+                        System.out.println("score: "+score+" "+"hashtags: "+hashtagReview);
+                        uploadReview(Float.toString(score),hashtagReview);
 
-                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNeutralButton("取消",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-//                        // TODO Auto-generated method stub
-//                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
+                        // TODO Auto-generated method stub
+                        Toast.makeText(Book.this, "取消",Toast.LENGTH_SHORT).show();
                     }
 
                 })
                 .show();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
-        //rateBar 初始化
-        RatingBar mRatingBar = (RatingBar) dialog.findViewById(R.id.ratingBar1);
-        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
-                = new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
-            }
-        };
-        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
 
+//        //rateBar 初始化
+//        RatingBar mRatingBar = (RatingBar) dialog.findViewById(R.id.ratingBar1);
+//        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
+//                = new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
+//            }
+//        };
+//        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
 
     }
     public void introduce_alert(String introduction){
@@ -323,13 +343,49 @@ public class Book extends RobotActivity {
         dialog.show();
     }
 
-    public void requestBook(final String mms_id){
+
+    private void uploadReview(String score,String hashtags){
+        System.out.println("start to upload book review.");
+        System.out.println("receive review infomation: "+score+ " "+ hashtags);
+        String uploadReviewUrl = "http://140.119.19.18:5000/api/v1/book_upload/";
+        String uniqueID = UUID.randomUUID().toString();
+        String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"session_id\":\""+uniqueID+"\",\"hashtag\":\""+hashtags+"\",\"rating\":\""+score+"\"}";
+        String charset = "UTF-8";
+        System.out.println("upload info request: "+rawData);
+
+        URLConnection connection = null;
+        try {
+            connection = new URL(uploadReviewUrl).openConnection();
+        } catch (Exception e) {
+            Log.d(TAG,"upload review connection failed");
+            e.printStackTrace();
+        }
+        connection.setDoOutput(true); // Triggers POST.
+        connection.setRequestProperty("Accept-Charset", charset);
+        connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+        try (OutputStream output = connection.getOutputStream()) {
+            Log.d("output format",output.toString());
+            output.write(rawData.getBytes(charset));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        InputStream response = null;
+        try {
+            response = connection.getInputStream();
+            System.out.println("receiving book_info : "+response.toString() + " " + response);
+        } catch (Exception e) {
+            System.out.println("error in receiving book_info");
+            e.printStackTrace();
+        }
+    }
+
+    public void requestBook(final String resrecmms_id){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("start running");
                 String uniqueID = UUID.randomUUID().toString();
-                String rawData = "{\"mms_id\":\""+ mms_id +"\",\"session_id\":\""+uniqueID+"\"}";
+                String rawData = "{\"mms_id\":\""+ resrecmms_id +"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("book info request: "+rawData);
 
@@ -405,6 +461,7 @@ public class Book extends RobotActivity {
 
                         System.out.println("切換頁面到Book");
                         Intent bookIt = new Intent();
+                        bookIt.putExtra("mms_id",resrecmms_id);
                         bookIt.putExtra("resAuthor",resrecAuthor);
                         bookIt.putExtra("resBookName",resrecBookName);
                         bookIt.putExtra("resLocandAvai",resrecLocandAvai.toString());

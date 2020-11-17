@@ -193,6 +193,7 @@ public class BookList extends RobotActivity{
 
                                     System.out.println("切換頁面到Book");
                                     Intent bookIt = new Intent();
+                                    bookIt.putExtra("mms_id",finalBook_number);
                                     bookIt.putExtra("resAuthor",resAuthor);
                                     bookIt.putExtra("resBookName",resBookName);
                                     bookIt.putExtra("resLocandAvai",resLocandAvai.toString());

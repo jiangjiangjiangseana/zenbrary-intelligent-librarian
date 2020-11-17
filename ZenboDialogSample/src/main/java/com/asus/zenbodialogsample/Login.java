@@ -49,6 +49,7 @@ public class Login extends RobotActivity{
     static Login loginClass;
     static String loginUrl = "http://140.119.19.18:5001/api/v1/userinfo/";
     static String user_info;
+    static String responseState;
 
 
     @Override
@@ -162,6 +163,9 @@ public class Login extends RobotActivity{
                         user_info =  "";
                     }
                     System.out.println("response user_info: "+user_info+ user_info.getClass());
+                    JSONObject resJson = new JSONObject(user_info);
+                    System.out.println("resJson: "+ resJson);
+                    responseState = resJson.getString("res");
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -173,15 +177,18 @@ public class Login extends RobotActivity{
                     @Override
                     public void run() {
 
-
+                    if(responseState.equals("success")) {
                         System.out.println("切換到user");
                         //go back to login
                         Intent userIt = new Intent();
-                        System.out.println("comfirm user info: "+ user_info);
-                        userIt.putExtra("user_info",user_info.toString());
-                        userIt.setClass(Login.this,Personal.class);
+                        System.out.println("comfirm user info: " + user_info);
+                        userIt.putExtra("user_info", user_info.toString());
+                        userIt.setClass(Login.this, Personal.class);
                         startActivity(userIt);
-
+                    }else{
+                        //undo: show login fail message
+                        robotAPI.robot.speak("登入失敗，請再試一次!");
+                    }
                     }
                 });
             }

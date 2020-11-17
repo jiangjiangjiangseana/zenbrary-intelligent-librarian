@@ -42,7 +42,7 @@
 
 
     <EditText
-        android:id="@+id/editText_alert"
+        android:id="@+id/editText_hashtag"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="#E2DDF3"

@@ -51,6 +51,7 @@ public class Register extends RobotActivity{
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     public static String registerUrl = "http://140.119.19.18:5001/api/v1/register/";
     static Register registerClass;
+    static String responseState;
 
 
     @Override
@@ -99,6 +100,8 @@ public class Register extends RobotActivity{
                     registerAPI(student_id, account, password, department, gender);
                 }else{
                     System.out.println("confirm fail");
+                    //undo: show comfirm fail message to user!!!!!
+                    robotAPI.robot.speak("兩次密碼不一樣唷!");
                 }
 
             }
@@ -171,52 +174,53 @@ public class Register extends RobotActivity{
                     System.out.println("error in receiving register_result");
                     e.printStackTrace();
                 }
-//                try {
-//                    System.out.println("start translate book_info: ");
-//                    String text;
-//                    if (response != null) {
-//                        Writer writer = new StringWriter();
-//                        char[] buffer = new char[1024];
-//                        try {
-//                            Reader reader = new BufferedReader(
-//                                    new InputStreamReader(response, "UTF-8"));
-//                            int n;
-//                            while ((n = reader.read(buffer)) != -1) {
-//                                writer.write(buffer, 0, n);
-//                            }
-//                        } finally {
-//                            response.close();
-//                        }
-//                        text =  writer.toString();
-//                    } else {
-//                        text =  "";
-//                    }
-//                    System.out.println("response book_info: "+text);
-//                    resJson[0] = new JSONObject(text);
-//                    System.out.println("resJson: "+ resJson[0]);
-//
-//                    resAuthor = resJson[0].getString("author");
-//                    resBookName = resJson[0].getString("book_name");
-//                    resLocandAvai = resJson[0].getString("location_and_available");
-//                    System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai);
-//                } catch (Exception  e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                    System.out.println("error in translate book_info");
-//                }
+                try {
+                    System.out.println("start translate register response: ");
+                    String text;
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        text =  writer.toString();
+                    } else {
+                        text =  "";
+                    }
+                    System.out.println("response register: "+text);
+                    JSONObject resJson = new JSONObject(text);
+                    System.out.println("resJson: "+ resJson);
+                    responseState = resJson.getString("res");
 
-
+                    System.out.println("response register state:  "+responseState);
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate register_response");
+                }
                 registerClass.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
-
+                    if(responseState.equals("sucess")) {
                         System.out.println("切換回到Login");
                         //go back to login
                         Intent loginIt = new Intent();
                         //loginIt.putExtra("resJson",resJson.toString());
-                        loginIt.setClass(Register.this,Login.class);
+                        loginIt.setClass(Register.this, Login.class);
                         startActivity(loginIt);
+                    }else{
+                        //undo: register fail
+                        System.out.println("register fail");
+                        robotAPI.robot.speak("註冊失敗，請在試一次");
+                    }
 
                     }
                 });
