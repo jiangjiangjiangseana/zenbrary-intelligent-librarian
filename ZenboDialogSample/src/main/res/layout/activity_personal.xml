@@ -119,25 +119,13 @@
         />
 
 
-    <Button
-        android:id="@+id/guidedButton"
-        android:layout_width="520dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/activityButton"
-        android:layout_marginLeft="30dp"
-        android:backgroundTint="#929AC3"
-        android:layout_toRightOf="@id/imageView"
-        android:textSize="35dp"
-        android:text="區域查詢 Guided Tour"
-        />
-
 
     <Button
         android:id="@+id/questionButton"
         android:layout_width="520dp"
         android:layout_height="100dp"
         android:layout_marginLeft="30dp"
-        android:layout_below="@+id/guidedButton"
+        android:layout_below="@+id/activityButton"
         android:textSize="35dp"
         android:backgroundTint="#929AC3"
         android:text="@string/question"

@@ -618,11 +618,7 @@ id action_mode_close_button
 id action_text
 id actions
 id activityButton
-id activityCategory
-id activityCategory1
 id activityInfoText
-id activityInfoText1
-id activityTime
 id activityTime1
 id activity_chooser_view_content
 id add
@@ -681,7 +677,6 @@ id gender
 id gender_female
 id gender_male
 id guestButton
-id guidedButton
 id hashtagBtn
 id hashtag_text
 id home

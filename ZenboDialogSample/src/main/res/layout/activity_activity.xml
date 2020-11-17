@@ -17,66 +17,65 @@
     <Button
         android:id="@+id/button1"
         android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="50dp"
         android:background="#FEF9F2"
-
-        />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="190dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="330dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
- />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="470dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button5"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="610dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button6"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="750dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+        android:textColor="#264d73"/>
 
     <Button
         android:id="@+id/button7"
         android:layout_width="130dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="890dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:background="#FEF9F2"
-        android:text="Button" />
+        android:textColor="#264d73"/>
     <Button
         android:id="@+id/button8"
         android:layout_width="50dp"
@@ -96,7 +95,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,32 +107,16 @@
             android:layout_width="730dp"
             android:layout_height="350dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/notes"/>
-            <TextView
-                android:id="@+id/activityTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-280dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動時間:上午8點"
-                android:textSize="100.0px" />
-            <TextView
-                android:id="@+id/activityCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動資訊:走畫文山畫展"
-                android:textSize="100.0px" />
             <TextView
                 android:id="@+id/activityInfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="-280dp"
                 android:layout_marginLeft="50dp"
-                android:text="活動類別:展覽"
-                android:textSize="100.0px" />
+                android:text="活動時間:上午8點 \n\n 活動資訊:走畫文山畫展 \n\n 活動類別:展覽"
+                android:textSize="40dp" />
 
 
 
@@ -148,27 +132,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-280dp"
                 android:layout_marginLeft="50dp"
-                android:text="活動時間:下午2點"
-                android:textSize="100.0px" />
+                android:text="活動時間:下午2點 \n\n 活動類別:參訪 \n\n 活動資訊:新北市文化局(20人)"
+                android:textSize="40dp" />
 
 
-            <TextView
-                android:id="@+id/activityCategory1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動類別:參訪"
-                android:textSize="100.0px"/>
 
-            <TextView
-                android:id="@+id/activityInfoText1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動資訊:新北市文化局(20人)"
-                android:textSize="100.0px" />
 
         <ImageView
             android:layout_width="730dp"

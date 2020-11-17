@@ -29,7 +29,7 @@ public class Activity extends RobotActivity {
         robotAPI.robot.speak("今天有展覽喔!");
 
 
-        activityInfoText.setTextSize(20);
+//        activityInfoText.setTextSize(20);
 
         Intent it = this.getIntent();
 

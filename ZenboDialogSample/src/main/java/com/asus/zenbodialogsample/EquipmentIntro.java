@@ -52,6 +52,8 @@ public class EquipmentIntro extends RobotActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_equip);
+        faci_introduce = "";
+        faci_floor = 0;
         robotAPI.vision.cancelDetectFace();
         System.out.println("sucess to change to facility");
 
