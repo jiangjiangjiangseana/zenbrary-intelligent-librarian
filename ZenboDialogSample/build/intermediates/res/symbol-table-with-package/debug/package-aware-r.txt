@@ -554,6 +554,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable announce
 drawable change
 drawable chinese_lit
 drawable cloud_server
@@ -564,6 +565,7 @@ drawable ic_launcher
 drawable kafka
 drawable newzenbo
 drawable norway
+drawable notes
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -660,9 +662,9 @@ id default_activity_button
 id department
 id disableHome
 id editText_account
-id editText_alert
 id editText_confirm
 id editText_department
+id editText_hashtag
 id editText_pw
 id editText_studentId
 id edit_query

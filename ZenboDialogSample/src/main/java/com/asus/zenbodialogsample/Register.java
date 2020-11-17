@@ -199,7 +199,7 @@ public class Register extends RobotActivity{
                     System.out.println("resJson: "+ resJson);
                     responseState = resJson.getString("res");
 
-                    System.out.println("response register state:  "+responseState);
+                    System.out.println("response register state: "+responseState);
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -209,13 +209,14 @@ public class Register extends RobotActivity{
                     @Override
                     public void run() {
 
-                    if(responseState.equals("sucess")) {
+                    if(responseState.equals("success")) {
                         System.out.println("切換回到Login");
                         //go back to login
                         Intent loginIt = new Intent();
                         //loginIt.putExtra("resJson",resJson.toString());
                         loginIt.setClass(Register.this, Login.class);
                         startActivity(loginIt);
+                        robotAPI.robot.speak("註冊成功");
                     }else{
                         //undo: register fail
                         System.out.println("register fail");

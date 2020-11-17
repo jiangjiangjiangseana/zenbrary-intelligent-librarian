@@ -74,6 +74,9 @@ public class Personal extends RobotActivity{
     static Personal personal;
     static boolean isLogin;
 
+    static String user_name;
+
+
 
 
 
@@ -86,10 +89,16 @@ public class Personal extends RobotActivity{
         personal = Personal.this;
         Intent userIt = this.getIntent();
         String user_info = userIt.getStringExtra("user_info");
+        String u_id = userIt.getStringExtra("u_id");
+        String email = userIt.getStringExtra("email");
         isLogin = true;
         System.out.println("user_info sucess: "+ user_info);
 
-        //undo: user_info show on app
+        //user_info show on app
+        TextView user_id = (TextView) findViewById(R.id.user_id);
+        TextView user_email = (TextView) findViewById(R.id.user_email);
+        user_id.setText("學號: "+u_id);
+        user_email.setText("信箱: \n"+email);
 
 
         // bookButton 初始化

@@ -50,6 +50,8 @@ public class Login extends RobotActivity{
     static String loginUrl = "http://140.119.19.18:5001/api/v1/userinfo/";
     static String user_info;
     static String responseState;
+    static String u_id;
+    static String email;
 
 
     @Override
@@ -166,6 +168,8 @@ public class Login extends RobotActivity{
                     JSONObject resJson = new JSONObject(user_info);
                     System.out.println("resJson: "+ resJson);
                     responseState = resJson.getString("res");
+                    u_id = resJson.getString("uid");
+                    email = resJson.getString("email");
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -182,6 +186,8 @@ public class Login extends RobotActivity{
                         //go back to login
                         Intent userIt = new Intent();
                         System.out.println("comfirm user info: " + user_info);
+                        userIt.putExtra("u_id",u_id);
+                        userIt.putExtra("email",email);
                         userIt.putExtra("user_info", user_info.toString());
                         userIt.setClass(Login.this, Personal.class);
                         startActivity(userIt);

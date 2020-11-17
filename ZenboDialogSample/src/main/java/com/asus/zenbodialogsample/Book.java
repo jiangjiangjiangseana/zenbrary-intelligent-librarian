@@ -183,6 +183,7 @@ public class Book extends RobotActivity {
         hashButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                score = 0;
                 hashtag_alert();
             }
         });
@@ -281,20 +282,8 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         EditText hashtag = (EditText) (v.findViewById(R.id.editText_hashtag));
-                        Toast.makeText(getApplicationContext(), "你的id是" +
-                                hashtag.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Hashtag上傳成功!", Toast.LENGTH_SHORT).show();
                         hashtagReview = hashtag.getText().toString();
-                        //rateBar 初始化
-                        RatingBar mRatingBar = (RatingBar) v.findViewById(R.id.ratingBar1);
-                        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
-                                = new RatingBar.OnRatingBarChangeListener() {
-                            @Override
-                            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
-                                score = rating;
-                            }
-                        };
-                        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
                         System.out.println("score: "+score+" "+"hashtags: "+hashtagReview);
                         uploadReview(Float.toString(score),hashtagReview);
 
@@ -312,16 +301,17 @@ public class Book extends RobotActivity {
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
 
-//        //rateBar 初始化
-//        RatingBar mRatingBar = (RatingBar) dialog.findViewById(R.id.ratingBar1);
-//        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
-//                = new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
-//            }
-//        };
-//        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
+        //rateBar 初始化
+        RatingBar mRatingBar = (RatingBar) dialog.findViewById(R.id.ratingBar1);
+        RatingBar.OnRatingBarChangeListener ratingBarOnRatingBarChange
+                = new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(getApplicationContext(), "rating: " + rating, Toast.LENGTH_LONG).show();
+                score = rating;
+            }
+        };
+        mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
 
     }
     public void introduce_alert(String introduction){
@@ -344,7 +334,10 @@ public class Book extends RobotActivity {
     }
 
 
-    private void uploadReview(String score,String hashtags){
+    private void uploadReview(final String score, final String hashtags){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
         System.out.println("start to upload book review.");
         System.out.println("receive review infomation: "+score+ " "+ hashtags);
         String uploadReviewUrl = "http://140.119.19.18:5000/api/v1/book_upload/";
@@ -372,11 +365,14 @@ public class Book extends RobotActivity {
         InputStream response = null;
         try {
             response = connection.getInputStream();
-            System.out.println("receiving book_info : "+response.toString() + " " + response);
+            System.out.println("receiving book_upload_info : "+response.toString() + " " + response);
         } catch (Exception e) {
             System.out.println("error in receiving book_info");
             e.printStackTrace();
         }
+            }
+
+    }).start();
     }
 
     public void requestBook(final String resrecmms_id){
