@@ -245,7 +245,7 @@ public class Book extends RobotActivity {
         super.onDestroy();
     }
 //轉url圖片的class
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
         public DownloadImageTask(ImageView bmImage) {

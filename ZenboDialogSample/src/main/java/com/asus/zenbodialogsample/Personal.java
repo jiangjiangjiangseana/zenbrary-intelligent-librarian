@@ -77,7 +77,10 @@ public class Personal extends RobotActivity{
     static String ressecWeek;
     static Personal personal;
     static boolean isLogin;
-
+    static ArrayList<String> uu_list_mms_id = new ArrayList<>();
+    static ArrayList<String> uu_list_book_name = new ArrayList<>();
+    static ArrayList<String> uu_list_book_author = new ArrayList<>();
+    static ArrayList<String> uu_list_cover = new ArrayList<>();
     static String user_name;
 
 
@@ -95,8 +98,33 @@ public class Personal extends RobotActivity{
         String user_info = userIt.getStringExtra("user_info");
         String u_id = userIt.getStringExtra("u_id");
         String email = userIt.getStringExtra("email");
+        String uu_list = userIt.getStringExtra("uu_list");
+        List<String> temp = new ArrayList<String>(Arrays.asList(uu_list.split("#@")));
+        for(int i=0;i<temp.size();i++){
+            System.out.println("uu_list book: "+temp.get(i));
+            String book = temp.get(i);
+            int index1 = book.indexOf("@@");
+            int index2 = book.indexOf("@#");
+            int index3 = book.indexOf("##");
+            String mms_id = book.substring(0,index1);
+            String name = book.substring(index1+2,index2);
+            String author = book.substring(index2+2,index3-1);
+            String cover = book.substring(index3+2);
+            uu_list_mms_id.add(mms_id);
+            uu_list_book_name.add(name);
+            uu_list_book_author.add(author);
+            uu_list_cover.add(cover);
+        }
+
+        System.out.println("list of mms_id: "+uu_list_mms_id);
+        System.out.println("list of book_name: "+uu_list_book_name);
+        System.out.println("list of book_author: "+uu_list_book_author);
+        System.out.println("list of cover: "+uu_list_cover);
+
+
         isLogin = true;
         System.out.println("user_info sucess: "+ user_info);
+        System.out.println("user uu_list: "+uu_list);
 
         //user_info show on app
         TextView user_id = (TextView) findViewById(R.id.user_id);
@@ -188,6 +216,7 @@ public class Personal extends RobotActivity{
 
     }
 
+
     //限制內建返回按鍵
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
@@ -218,7 +247,7 @@ public class Personal extends RobotActivity{
         };
 
         //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
-        AlertDialog dialog = new AlertDialog.Builder(Personal.this)
+        final AlertDialog dialog = new AlertDialog.Builder(Personal.this)
                 .setTitle("我的推薦")
                 .setView(v)
                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {
@@ -249,6 +278,57 @@ public class Personal extends RobotActivity{
         uuBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("start to change recommendation book list.");
+                ImageView imageview1 = dialog.findViewById(R.id.imageview1);
+                ImageView imageview2 = dialog.findViewById(R.id.imageview2);
+                ImageView imageview3 = dialog.findViewById(R.id.imageview3);
+                ImageView imageview4 = dialog.findViewById(R.id.imageview4);
+                ImageView imageview5 = dialog.findViewById(R.id.imageview5);
+                ImageView imageview6 = dialog.findViewById(R.id.imageview6);
+                ImageView imageview7 = dialog.findViewById(R.id.imageview7);
+                ImageView imageview8 = dialog.findViewById(R.id.imageview8);
+                ImageView imageview9 = dialog.findViewById(R.id.imageview9);
+                ImageView imageview10 = dialog.findViewById(R.id.imageview10);
+                TextView tv1 = dialog.findViewById(R.id.textview1);
+                TextView tv2 = dialog.findViewById(R.id.textview2);
+                TextView tv3 = dialog.findViewById(R.id.textview3);
+                TextView tv4 = dialog.findViewById(R.id.textview4);
+                TextView tv5 = dialog.findViewById(R.id.textview5);
+                TextView tv6 = dialog.findViewById(R.id.textview6);
+                TextView tv7 = dialog.findViewById(R.id.textview7);
+                TextView tv8 = dialog.findViewById(R.id.textview8);
+                TextView tv9 = dialog.findViewById(R.id.textview9);
+                TextView tv10 = dialog.findViewById(R.id.textview10);
+                new Personal.DownloadImageTask(imageview1)
+                        .execute(uu_list_cover.get(0));
+                new Personal.DownloadImageTask(imageview2)
+                        .execute(uu_list_cover.get(1));
+                new Personal.DownloadImageTask(imageview3)
+                        .execute(uu_list_cover.get(2));
+                new Personal.DownloadImageTask(imageview4)
+                        .execute(uu_list_cover.get(3));
+                new Personal.DownloadImageTask(imageview5)
+                        .execute(uu_list_cover.get(4));
+                new Personal.DownloadImageTask(imageview6)
+                        .execute(uu_list_cover.get(5));
+                new Personal.DownloadImageTask(imageview7)
+                        .execute(uu_list_cover.get(6));
+                new Personal.DownloadImageTask(imageview8)
+                        .execute(uu_list_cover.get(7));
+                new Personal.DownloadImageTask(imageview9)
+                        .execute(uu_list_cover.get(8));
+                new Personal.DownloadImageTask(imageview10)
+                        .execute(uu_list_cover.get(9));
+                tv1.setText(uu_list_book_name.get(0));
+                tv2.setText(uu_list_book_name.get(1));
+                tv3.setText(uu_list_book_name.get(2));
+                tv4.setText(uu_list_book_name.get(3));
+                tv5.setText(uu_list_book_name.get(4));
+                tv6.setText(uu_list_book_name.get(5));
+                tv7.setText(uu_list_book_name.get(6));
+                tv8.setText(uu_list_book_name.get(7));
+                tv9.setText(uu_list_book_name.get(8));
+                tv10.setText(uu_list_book_name.get(9));
 
             }
         });
