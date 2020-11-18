@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#CCDDEE"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -17,12 +17,12 @@
         android:id="@+id/content_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginRight="@+id/imageView"
         android:text="點選書籍: "
         android:textSize="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC" />
+        android:textColor="#1b365e" />
 
     <ListView
         android:id="@+id/bookList"
@@ -30,12 +30,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/content_view"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="150dp"
-        android:background="#C2C2F8"
+        android:layout_marginLeft="25dp"
+        android:background="#2e3642"
         android:foregroundTint="#AA3434"
         android:gravity="center"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"/>
+        android:paddingBottom="30dp"
+        android:dividerHeight="20dp"
+        android:divider="#CCDDEE"/>
+<!--        android:paddingTop="30dp"-->
+
 
     <Button
         android:id="@+id/backButton"
