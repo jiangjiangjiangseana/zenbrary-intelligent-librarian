@@ -64,6 +64,7 @@ public class Book extends RobotActivity {
     static String resrecCover;
     static String resrecHashtag;
     static String resrecIntroduction;
+    static String resrecRating;
     static float score;
     static String hashtagReview;
     static String requestMms_id;
@@ -87,8 +88,9 @@ public class Book extends RobotActivity {
         String resRecommendation = bookIt.getStringExtra("resRecommendation");
         String resCover = bookIt.getStringExtra("resCover");
         String resHashtag = bookIt.getStringExtra("resHashtag");
+        String resRating = bookIt.getStringExtra("resRating");
         final String resIntroduction = bookIt.getStringExtra("resIntroduction");
-        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction );
+        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction+" "+resRating );
         //(todo)處理loca and avai,讓他分開
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
@@ -125,11 +127,14 @@ public class Book extends RobotActivity {
         TextView authorName = (TextView) findViewById(R.id.authorName);
         TextView location = (TextView) findViewById(R.id.location);
         TextView available = (TextView) findViewById(R.id.available);
+        TextView rating = (TextView) findViewById(R.id.score_tv);
 
         bookName.setText("書名: " + resBookName);
         authorName.setText("作者: " + resAuthor);
         location.setText("位置: " + loca_info);
         available.setText("狀態: " + avai_info);
+
+        rating.setText("評分: \n"+"   "+resRating);
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
                 .execute(resCover);
 
@@ -442,6 +447,7 @@ public class Book extends RobotActivity {
                     resrecCover = resJson.getString("cover");
                     resrecHashtag = resJson.getString("hashtag");
                     resrecIntroduction = resJson.getString("introduction");
+                    resrecRating = resJson.getString("rating");
                     System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
@@ -465,6 +471,7 @@ public class Book extends RobotActivity {
                         bookIt.putExtra("resCover",resrecCover);
                         bookIt.putExtra("resHashtag",resrecHashtag);
                         bookIt.putExtra("resIntroduction",resrecIntroduction);
+                        bookIt.putExtra("resRating",resrecRating);
                         bookIt.setClass(Book.this,Book.class);
                         startActivity(bookIt);
 

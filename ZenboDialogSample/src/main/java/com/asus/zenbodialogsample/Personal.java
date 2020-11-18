@@ -3,7 +3,10 @@ package com.asus.zenbodialogsample;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
@@ -157,14 +161,6 @@ public class Personal extends RobotActivity{
                 }
             });
 
-//        //hashButton 初始化
-//        Button hashButton = findViewById(R.id.hashtagBtn);
-//        hashButton.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hashtag_alert();
-//            }
-//        });
 
         //recommendBtn初始化
         Button recommendBtn = findViewById(R.id.recommendBtn);
@@ -200,48 +196,6 @@ public class Personal extends RobotActivity{
         return false;
     }
 
-//    public void hashtag_alert(){
-//
-//        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
-//
-//        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
-//
-//        LayoutInflater inflater = LayoutInflater.from(Personal.this);
-//        final View v = inflater.inflate(R.layout.activity_hashtag, null);
-//
-//        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
-//        AlertDialog dialog = new AlertDialog.Builder(Personal.this)
-//                .setTitle("請輸入Hashtag")
-//                .setView(v)
-//                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        EditText editText = (EditText) (v.findViewById(R.id.editText_alert));
-//                        Toast.makeText(getApplicationContext(), "你的id是" +
-//                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .setNegativeButton("NO",new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        // TODO Auto-generated method stub
-//                        Toast.makeText(Personal.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                })
-//                .setNeutralButton("取消",new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        // TODO Auto-generated method stub
-//                        Toast.makeText(Personal.this, "取消",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                })
-//                .show();
-//        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-//        dialog.show();
-//    }
-
 
     public void recommend_alert(){
         System.out.println("trigger recommend_alert");
@@ -274,6 +228,30 @@ public class Personal extends RobotActivity{
                 }).show();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = 1000;
+        lp.height = 700;
+        dialog.getWindow().setAttributes(lp);
+
+        //hotBtn初始化
+        Button hotBtn = dialog.findViewById(R.id.hotBtn);
+        hotBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //uuBtn初始化
+        Button uuBtn = dialog.findViewById(R.id.uuBtn);
+        uuBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -399,6 +377,33 @@ public class Personal extends RobotActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+
+    //轉url圖片的class
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
