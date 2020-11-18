@@ -59,6 +59,7 @@ public class BookList extends RobotActivity{
     static String resCover;
     static String resHashtag;
     static String resIntroduction;
+    static String resRating;
 
 
 
@@ -180,6 +181,7 @@ public class BookList extends RobotActivity{
                                 resCover = resJson[0].getString("cover");
                                 resHashtag = resJson[0].getString("hashtag");
                                 resIntroduction = resJson[0].getString("introduction");
+                                resRating = resJson[0].getString("rating");
                                 System.out.println("response chinese: "+resAuthor +" "+resBookName+ " "+ resLocandAvai+ " "+ resRecommendation+ " "+resCover+ " "+resHashtag+ " "+resIntroduction);
                             } catch (Exception  e) {
                                 // TODO Auto-generated catch block
@@ -193,6 +195,7 @@ public class BookList extends RobotActivity{
 
                                     System.out.println("切換頁面到Book");
                                     Intent bookIt = new Intent();
+
                                     bookIt.putExtra("mms_id",finalBook_number);
                                     bookIt.putExtra("resAuthor",resAuthor);
                                     bookIt.putExtra("resBookName",resBookName);
@@ -201,6 +204,7 @@ public class BookList extends RobotActivity{
                                     bookIt.putExtra("resCover",resCover);
                                     bookIt.putExtra("resHashtag",resHashtag);
                                     bookIt.putExtra("resIntroduction",resIntroduction);
+                                    bookIt.putExtra("resRating",resRating);
                                     bookIt.setClass(BookList.this,Book.class);
                                     startActivity(bookIt);
 

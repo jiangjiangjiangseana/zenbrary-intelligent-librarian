@@ -3,7 +3,10 @@ package com.asus.zenbodialogsample;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
@@ -73,7 +77,10 @@ public class Personal extends RobotActivity{
     static String ressecWeek;
     static Personal personal;
     static boolean isLogin;
-
+    static ArrayList<String> uu_list_mms_id = new ArrayList<>();
+    static ArrayList<String> uu_list_book_name = new ArrayList<>();
+    static ArrayList<String> uu_list_book_author = new ArrayList<>();
+    static ArrayList<String> uu_list_cover = new ArrayList<>();
     static String user_name;
 
 
@@ -91,8 +98,33 @@ public class Personal extends RobotActivity{
         String user_info = userIt.getStringExtra("user_info");
         String u_id = userIt.getStringExtra("u_id");
         String email = userIt.getStringExtra("email");
+        String uu_list = userIt.getStringExtra("uu_list");
+        List<String> temp = new ArrayList<String>(Arrays.asList(uu_list.split("#@")));
+        for(int i=0;i<temp.size();i++){
+            System.out.println("uu_list book: "+temp.get(i));
+            String book = temp.get(i);
+            int index1 = book.indexOf("@@");
+            int index2 = book.indexOf("@#");
+            int index3 = book.indexOf("##");
+            String mms_id = book.substring(0,index1);
+            String name = book.substring(index1+2,index2);
+            String author = book.substring(index2+2,index3-1);
+            String cover = book.substring(index3+2);
+            uu_list_mms_id.add(mms_id);
+            uu_list_book_name.add(name);
+            uu_list_book_author.add(author);
+            uu_list_cover.add(cover);
+        }
+
+        System.out.println("list of mms_id: "+uu_list_mms_id);
+        System.out.println("list of book_name: "+uu_list_book_name);
+        System.out.println("list of book_author: "+uu_list_book_author);
+        System.out.println("list of cover: "+uu_list_cover);
+
+
         isLogin = true;
         System.out.println("user_info sucess: "+ user_info);
+        System.out.println("user uu_list: "+uu_list);
 
         //user_info show on app
         TextView user_id = (TextView) findViewById(R.id.user_id);
@@ -157,14 +189,6 @@ public class Personal extends RobotActivity{
                 }
             });
 
-//        //hashButton 初始化
-//        Button hashButton = findViewById(R.id.hashtagBtn);
-//        hashButton.setOnClickListener(new Button.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hashtag_alert();
-//            }
-//        });
 
         //recommendBtn初始化
         Button recommendBtn = findViewById(R.id.recommendBtn);
@@ -192,6 +216,7 @@ public class Personal extends RobotActivity{
 
     }
 
+
     //限制內建返回按鍵
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if(keyCode == KeyEvent.KEYCODE_BACK){
@@ -199,48 +224,6 @@ public class Personal extends RobotActivity{
         }
         return false;
     }
-
-//    public void hashtag_alert(){
-//
-//        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
-//
-//        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
-//
-//        LayoutInflater inflater = LayoutInflater.from(Personal.this);
-//        final View v = inflater.inflate(R.layout.activity_hashtag, null);
-//
-//        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
-//        AlertDialog dialog = new AlertDialog.Builder(Personal.this)
-//                .setTitle("請輸入Hashtag")
-//                .setView(v)
-//                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        EditText editText = (EditText) (v.findViewById(R.id.editText_alert));
-//                        Toast.makeText(getApplicationContext(), "你的id是" +
-//                                editText.getText().toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//                })
-//                .setNegativeButton("NO",new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        // TODO Auto-generated method stub
-//                        Toast.makeText(Personal.this, "我還尚未了解",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                })
-//                .setNeutralButton("取消",new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        // TODO Auto-generated method stub
-//                        Toast.makeText(Personal.this, "取消",Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                })
-//                .show();
-//        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-//        dialog.show();
-//    }
 
 
     public void recommend_alert(){
@@ -264,7 +247,7 @@ public class Personal extends RobotActivity{
         };
 
         //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
-        AlertDialog dialog = new AlertDialog.Builder(Personal.this)
+        final AlertDialog dialog = new AlertDialog.Builder(Personal.this)
                 .setTitle("我的推薦")
                 .setView(v)
                 .setPositiveButton("確定", new DialogInterface.OnClickListener() {
@@ -274,6 +257,81 @@ public class Personal extends RobotActivity{
                 }).show();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = 1000;
+        lp.height = 700;
+        dialog.getWindow().setAttributes(lp);
+
+        //hotBtn初始化
+        Button hotBtn = dialog.findViewById(R.id.hotBtn);
+        hotBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //uuBtn初始化
+        Button uuBtn = dialog.findViewById(R.id.uuBtn);
+        uuBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("start to change recommendation book list.");
+                ImageView imageview1 = dialog.findViewById(R.id.imageview1);
+                ImageView imageview2 = dialog.findViewById(R.id.imageview2);
+                ImageView imageview3 = dialog.findViewById(R.id.imageview3);
+                ImageView imageview4 = dialog.findViewById(R.id.imageview4);
+                ImageView imageview5 = dialog.findViewById(R.id.imageview5);
+                ImageView imageview6 = dialog.findViewById(R.id.imageview6);
+                ImageView imageview7 = dialog.findViewById(R.id.imageview7);
+                ImageView imageview8 = dialog.findViewById(R.id.imageview8);
+                ImageView imageview9 = dialog.findViewById(R.id.imageview9);
+                ImageView imageview10 = dialog.findViewById(R.id.imageview10);
+                TextView tv1 = dialog.findViewById(R.id.textview1);
+                TextView tv2 = dialog.findViewById(R.id.textview2);
+                TextView tv3 = dialog.findViewById(R.id.textview3);
+                TextView tv4 = dialog.findViewById(R.id.textview4);
+                TextView tv5 = dialog.findViewById(R.id.textview5);
+                TextView tv6 = dialog.findViewById(R.id.textview6);
+                TextView tv7 = dialog.findViewById(R.id.textview7);
+                TextView tv8 = dialog.findViewById(R.id.textview8);
+                TextView tv9 = dialog.findViewById(R.id.textview9);
+                TextView tv10 = dialog.findViewById(R.id.textview10);
+                new Personal.DownloadImageTask(imageview1)
+                        .execute(uu_list_cover.get(0));
+                new Personal.DownloadImageTask(imageview2)
+                        .execute(uu_list_cover.get(1));
+                new Personal.DownloadImageTask(imageview3)
+                        .execute(uu_list_cover.get(2));
+                new Personal.DownloadImageTask(imageview4)
+                        .execute(uu_list_cover.get(3));
+                new Personal.DownloadImageTask(imageview5)
+                        .execute(uu_list_cover.get(4));
+                new Personal.DownloadImageTask(imageview6)
+                        .execute(uu_list_cover.get(5));
+                new Personal.DownloadImageTask(imageview7)
+                        .execute(uu_list_cover.get(6));
+                new Personal.DownloadImageTask(imageview8)
+                        .execute(uu_list_cover.get(7));
+                new Personal.DownloadImageTask(imageview9)
+                        .execute(uu_list_cover.get(8));
+                new Personal.DownloadImageTask(imageview10)
+                        .execute(uu_list_cover.get(9));
+                tv1.setText(uu_list_book_name.get(0));
+                tv2.setText(uu_list_book_name.get(1));
+                tv3.setText(uu_list_book_name.get(2));
+                tv4.setText(uu_list_book_name.get(3));
+                tv5.setText(uu_list_book_name.get(4));
+                tv6.setText(uu_list_book_name.get(5));
+                tv7.setText(uu_list_book_name.get(6));
+                tv8.setText(uu_list_book_name.get(7));
+                tv9.setText(uu_list_book_name.get(8));
+                tv10.setText(uu_list_book_name.get(9));
+
+            }
+        });
 
     }
 
@@ -399,6 +457,33 @@ public class Personal extends RobotActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+
+    //轉url圖片的class
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
