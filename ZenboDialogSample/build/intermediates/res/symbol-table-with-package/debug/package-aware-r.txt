@@ -665,6 +665,7 @@ id editText_department
 id editText_hashtag
 id editText_pw
 id editText_studentId
+id editText_user_name
 id edit_query
 id end
 id end_padder
