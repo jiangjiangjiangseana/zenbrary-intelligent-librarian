@@ -17,52 +17,55 @@
         android:id="@+id/content_view"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@+id/imageView"
         android:text="點選書籍: "
         android:textSize="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textColor="#1b365e" />
+    // android:layout_marginRight="@+id/imageView"
 
     <ListView
         android:id="@+id/bookList"
         android:layout_width="721dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/content_view"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="25dp"
         android:background="#2e3642"
         android:foregroundTint="#AA3434"
         android:gravity="center"
         android:paddingBottom="30dp"
         android:dividerHeight="20dp"
-        android:divider="#dae9f7"/>
-<!--        android:paddingTop="30dp"-->
+        android:divider="#dae9f7"
+        android:layout_marginTop="30dp"
+/>
+<!--        android:paddingTop="30dp"
+
+        android:layout_marginLeft="25dp"-->
 
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:layout_toRightOf="@+id/bookList"
-        android:padding="5dp"
-        android:background="#ECE3ED"
-        android:textColor="#A180A6"
-        android:layout_marginTop="50dp"
-        android:text="返回前頁" />
+<!--    <Button-->
+<!--        android:id="@+id/backButton"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="130dp"-->
+<!--        android:layout_toRightOf="@+id/bookList"-->
+<!--        android:padding="5dp"-->
+<!--        android:background="#ECE3ED"-->
+<!--        android:textColor="#A180A6"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:text="返回前頁" />-->
 
     <ImageView
         android:layout_width="400dp"
         android:layout_height="450dp"
-        android:layout_marginLeft="800dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginLeft="780dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/booklistpic"/>
 
-    <ImageView
-        android:layout_width="800dp"
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="880dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="850dp"
-        android:layout_marginTop="750dp"
+        android:layout_marginLeft="820dp"
+        android:layout_marginTop="650dp"
         android:background="@drawable/back"/>
 </RelativeLayout>
