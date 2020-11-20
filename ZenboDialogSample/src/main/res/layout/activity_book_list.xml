@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCDDEE"
+    android:background="#dae9f7"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:paddingBottom="30dp"
         android:dividerHeight="20dp"
-        android:divider="#CCDDEE"/>
+        android:divider="#dae9f7"/>
 <!--        android:paddingTop="30dp"-->
 
 
@@ -51,4 +51,18 @@
         android:textColor="#A180A6"
         android:layout_marginTop="50dp"
         android:text="返回前頁" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="450dp"
+        android:layout_marginLeft="800dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/booklistpic"/>
+
+    <ImageView
+        android:layout_width="800dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="850dp"
+        android:layout_marginTop="750dp"
+        android:background="@drawable/back"/>
 </RelativeLayout>
