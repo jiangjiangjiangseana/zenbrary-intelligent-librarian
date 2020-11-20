@@ -81,7 +81,12 @@ public class Personal extends RobotActivity{
     static ArrayList<String> uu_list_book_name = new ArrayList<>();
     static ArrayList<String> uu_list_book_author = new ArrayList<>();
     static ArrayList<String> uu_list_cover = new ArrayList<>();
+    static ArrayList<ArrayList> browse_log = new ArrayList<>();
+    static String u_id;
     static String user_name;
+    static String email;
+    static String uu_list;
+    static String change_intent;
 
 
 
@@ -95,10 +100,14 @@ public class Personal extends RobotActivity{
         System.out.println("sucess to change to user");
         personal = Personal.this;
         Intent userIt = this.getIntent();
-        String user_info = userIt.getStringExtra("user_info");
-        String u_id = userIt.getStringExtra("u_id");
-        String email = userIt.getStringExtra("email");
-        String uu_list = userIt.getStringExtra("uu_list");
+        change_intent = userIt.getStringExtra("change");
+        user_name = userIt.getStringExtra("user_name");
+        u_id = userIt.getStringExtra("u_id");
+        email = userIt.getStringExtra("email");
+        uu_list = userIt.getStringExtra("uu_list");
+        if(change_intent.equals("book")){
+            //undo:::::::
+        }
         List<String> temp = new ArrayList<String>(Arrays.asList(uu_list.split("#@")));
         for(int i=0;i<temp.size();i++){
             System.out.println("uu_list book: "+temp.get(i));
@@ -123,14 +132,15 @@ public class Personal extends RobotActivity{
 
 
         isLogin = true;
-        System.out.println("user_info sucess: "+ user_info);
         System.out.println("user uu_list: "+uu_list);
 
         //user_info show on app
-        TextView user_id = (TextView) findViewById(R.id.user_id);
-        TextView user_email = (TextView) findViewById(R.id.user_email);
-        user_id.setText("學號: "+u_id);
-        user_email.setText("信箱: \n"+email);
+        TextView user_id_tv = (TextView) findViewById(R.id.user_id);
+        TextView user_email_tv = (TextView) findViewById(R.id.user_email);
+        TextView user_name_tv = (TextView) findViewById(R.id.user_name);
+        user_id_tv.setText("學號: "+u_id);
+        user_email_tv.setText("信箱: \n"+email);
+        user_name_tv.setText("姓名: "+user_name);
 
 
         // bookButton 初始化
@@ -182,6 +192,9 @@ public class Personal extends RobotActivity{
                 @Override
                 public void onClick(View v) {
                     //undo: 清空user資訊，上船瀏覽資料，寫成一個function，因為超過時間也要這樣做
+
+
+
                     isLogin = false;
                     Intent backIT = new Intent();
                     backIT.setClass(Personal.this,ZenboDialogSample.class);
@@ -353,6 +366,11 @@ public class Personal extends RobotActivity{
     public void changeToBookList(){
         Intent it = new Intent();
         it.putExtra("resJson",resJson.toString());
+        it.putExtra("state","login");
+        it.putExtra("user_name",user_name);
+        it.putExtra("u_id",u_id);
+        it.putExtra("email",email);
+        it.putExtra("uu_list",uu_list);
         it.setClass(Personal.this,BookList.class);
         startActivity(it);
     }

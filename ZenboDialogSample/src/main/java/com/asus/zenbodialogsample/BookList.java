@@ -60,8 +60,11 @@ public class BookList extends RobotActivity{
     static String resHashtag;
     static String resIntroduction;
     static String resRating;
-
-
+    static String state;
+    static String user_name;
+    static String u_id;
+    static String email;
+    static String uu_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,13 @@ public class BookList extends RobotActivity{
         listView = (ListView) findViewById(R.id.bookList);
         bookListClass = BookList.this;
         Intent it = this.getIntent();
+        state = it.getStringExtra("state");
+        if(state.equals("login")){
+            user_name = it.getStringExtra("user_name");
+            u_id = it.getStringExtra("u_id");
+            email = it.getStringExtra("email");
+            uu_list = it.getStringExtra("uu_list");
+        }
         String resJsonString = it.getStringExtra("resJson");
         try {
             final JSONObject[] resJson = {new JSONObject(resJsonString)};
@@ -195,7 +205,13 @@ public class BookList extends RobotActivity{
 
                                     System.out.println("切換頁面到Book");
                                     Intent bookIt = new Intent();
-
+                                    bookIt.putExtra("state",state);
+                                    if(state.equals("login")){
+                                        bookIt.putExtra("user_name",user_name);
+                                        bookIt.putExtra("u_id",u_id);
+                                        bookIt.putExtra("email",email);
+                                        bookIt.putExtra("uu_list",uu_list);
+                                    }
                                     bookIt.putExtra("mms_id",finalBook_number);
                                     bookIt.putExtra("resAuthor",resAuthor);
                                     bookIt.putExtra("resBookName",resBookName);

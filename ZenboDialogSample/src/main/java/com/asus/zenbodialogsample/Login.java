@@ -53,6 +53,7 @@ public class Login extends RobotActivity{
     static String u_id;
     static String email;
     static String uu_list;
+    static String user_name;
 
 
     @Override
@@ -172,6 +173,7 @@ public class Login extends RobotActivity{
                     u_id = resJson.getString("uid");
                     email = resJson.getString("email");
                     uu_list = resJson.getString("book_info");
+                    user_name = resJson.getString("name");
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -188,6 +190,8 @@ public class Login extends RobotActivity{
                         //go back to login
                         Intent userIt = new Intent();
                         System.out.println("comfirm user info: " + user_info);
+                        userIt.putExtra("change","login");
+                        userIt.putExtra("user_name",user_name);
                         userIt.putExtra("u_id",u_id);
                         userIt.putExtra("email",email);
                         userIt.putExtra("uu_list",uu_list);

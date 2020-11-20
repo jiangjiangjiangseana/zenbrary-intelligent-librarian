@@ -152,6 +152,7 @@ public class Guest extends RobotActivity {
 
     public void changeToBookList(){
         Intent it = new Intent();
+        it.putExtra("state","guest");
         it.putExtra("resJson",resJson.toString());
         it.setClass(Guest.this,BookList.class);
         startActivity(it);

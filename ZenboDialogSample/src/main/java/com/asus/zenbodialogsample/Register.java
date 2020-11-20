@@ -75,6 +75,7 @@ public class Register extends RobotActivity{
         confirmBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditText edit_user_name = (EditText) findViewById(R.id.editText_user_name);
                 EditText edit_student_id = (EditText) findViewById(R.id.editText_studentId);
                 EditText edit_account = (EditText) findViewById(R.id.editText_account);
                 EditText edit_pw = (EditText) findViewById(R.id.editText_pw);
@@ -82,7 +83,7 @@ public class Register extends RobotActivity{
                 EditText edit_department = (EditText) findViewById(R.id.editText_department);
                 RadioButton gender_male = (RadioButton) findViewById(R.id.gender_male);
 
-
+                String user_name = edit_user_name.getText().toString();
                 String student_id = edit_student_id.getText().toString();
                 String account = edit_account.getText().toString();
                 String password = edit_pw.getText().toString();
@@ -94,10 +95,10 @@ public class Register extends RobotActivity{
                 }else{
                     gender = "female";
                 }
-                System.out.println("information: "+student_id+account+password+confirm_pw+department+gender);
+                System.out.println("information: "+user_name+" "+student_id+account+password+confirm_pw+department+gender);
                 //connect to server register function
                 if(password.equals(confirm_pw)) {
-                    registerAPI(student_id, account, password, department, gender);
+                    registerAPI(user_name,student_id, account, password, department, gender);
                 }else{
                     System.out.println("confirm fail");
                     //undo: show comfirm fail message to user!!!!!
@@ -140,12 +141,12 @@ public class Register extends RobotActivity{
         super.onDestroy();
     }
 
-    public void registerAPI(final String student_id, final String account, final String password, final String department, final String gender){
+    public void registerAPI(final String user_name,final String student_id, final String account, final String password, final String department, final String gender){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("start running register");
-                String rawData = "{\"uid\":\""+ parseInt(student_id) +"\",\"email\":\""+account+"\",\"gender\":\""+gender+"\",\"department\":\""+department+"\",\"password\":\""+password+"\"}";
+                String rawData = "{\"uid\":\""+ parseInt(student_id) +"\",\"name\":\""+user_name+"\",\"email\":\""+account+"\",\"gender\":\""+gender+"\",\"department\":\""+department+"\",\"password\":\""+password+"\"}";
                 String charset = "UTF-8";
                 System.out.println("register request: "+rawData);
 

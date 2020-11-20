@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,29 +18,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
-import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
-import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Arrays;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -68,6 +60,12 @@ public class Book extends RobotActivity {
     static float score;
     static String hashtagReview;
     static String requestMms_id;
+    static String user_name;
+    static String u_id;
+    static String email;
+    static String uu_list;
+    static CharSequence start_time;
+    static CharSequence exit_time;
 
 
 
@@ -81,6 +79,7 @@ public class Book extends RobotActivity {
         setContentView(R.layout.activity_book);
         bookClass = Book.this;
         Intent bookIt = this.getIntent();
+        final String visit_state = bookIt.getStringExtra("state");
         requestMms_id = bookIt.getStringExtra("mms_id");
         String resAuthor = bookIt.getStringExtra("resAuthor");
         String resBookName = bookIt.getStringExtra("resBookName");
@@ -91,6 +90,18 @@ public class Book extends RobotActivity {
         String resRating = bookIt.getStringExtra("resRating");
         final String resIntroduction = bookIt.getStringExtra("resIntroduction");
         System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction+" "+resRating );
+        if(visit_state.equals("login")){
+            user_name = bookIt.getStringExtra("user_name");
+            u_id = bookIt.getStringExtra("u_id");
+            email = bookIt.getStringExtra("email");
+            uu_list = bookIt.getStringExtra("uu_list");
+            System.out.println("book request state is login,start timer!");
+            Calendar mCal = Calendar.getInstance();
+            start_time = DateFormat.format("yyyy-MM-dd kk:mm:ss", mCal.getTime());    // kk:24小時制, hh:12小時制
+            System.out.println("starting request this book time is: "+start_time+", the book's mms_id is: "+requestMms_id);
+        }
+
+
         //(todo)處理loca and avai,讓他分開
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
@@ -176,9 +187,27 @@ public class Book extends RobotActivity {
         backButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(visit_state.equals("login")){
+                    System.out.println("stop viewing this book,stop timer!");
+                    Calendar mCal = Calendar.getInstance();
+                    exit_time = DateFormat.format("yyyy-MM-dd kk:mm:ss", mCal.getTime());    // kk:24小時制, hh:12小時制
+                    System.out.println("stop viewing this book time is: "+exit_time+", stop viewing mms_id is: "+requestMms_id);
+                    Intent backIT = new Intent();
+                    backIT.putExtra("view_mms_id",requestMms_id);
+                    backIT.putExtra("view_start_time",start_time);
+                    backIT.putExtra("view_exit_time",exit_time);
+                    backIT.putExtra("change","book");
+                    backIT.putExtra("user_name",user_name);
+                    backIT.putExtra("u_id",u_id);
+                    backIT.putExtra("email",email);
+                    backIT.putExtra("uu_list",uu_list);
+                    backIT.setClass(Book.this, Personal.class);
+                    startActivity(backIT);
+                }else{
                 Intent backIT = new Intent();
-                backIT.setClass(Book.this, ZenboDialogSample.class);
+                backIT.setClass(Book.this, Guest.class);
                 startActivity(backIT);
+                }
             }
         });
 
