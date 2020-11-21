@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#C2CCD6"
     android:orientation="horizontal"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
@@ -19,9 +15,9 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="10dp"
-        tools:src="@tools:sample/avatars" />
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/book"/>
 
 
     <TextView
@@ -29,11 +25,10 @@
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:text="書名: "
-        android:textSize="30dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="90dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:textSize="35dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="320dp"
+        android:textColor="#1b365e"
         app:autoSizeTextType="uniform" />
 
     <TextView
@@ -42,10 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bookName"
         android:text="作者: "
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:layout_marginLeft="320dp"
+        android:textColor="#1b365e"
         app:autoSizeTextType="uniform" />
 
 
@@ -55,10 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/authorName"
         android:text="位置: "
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:layout_marginLeft="320dp"
+        android:textColor="#1b365e"
         app:autoSizeTextType="uniform" />
 
     <TextView
@@ -67,10 +62,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/location"
         android:text="狀態: "
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:layout_marginLeft="320dp"
+        android:textColor="#1b365e"
         app:autoSizeTextType="uniform" />
 
 
@@ -83,10 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/imageView"
         android:padding="5dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="37dp"
         android:layout_marginLeft="10dp"
-        android:background="#ECE3ED"
-        android:textColor="#A180A6"
+        android:background="#3f4a5a"
+        android:textColor="#ffff"
         android:text="書籍簡介" />
 
 
@@ -94,63 +89,58 @@
         android:id="@+id/score_tv"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_below="@+id/introduceButton"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="320dp"
+        android:layout_below="@+id/available"
+        android:layout_marginTop="30dp"
         android:text="評分: \n"
         android:textSize="35dp"
-        android:textColor="#A180A6"
+        android:textColor="#1b365e"
         ></TextView>
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="900dp"
-        android:padding="5dp"
-        android:background="#ECE3ED"
-        android:textColor="#A180A6"
-        android:layout_marginTop="50dp"
-        android:text="返回首頁" />
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="25dp" />
 
 
 
 
     <TextView
         android:id="@+id/recommend"
-        android:layout_width="500dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/backButton"
+        android:layout_below="@+id/imageView"
         android:text="相似書籍: "
         android:textSize="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="850dp"
-        android:textColor="#B0ABBC" />
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="#1b365e" />
 
     <ListView
         android:id="@+id/recommendList"
         android:layout_width="300dp"
         android:layout_height="450dp"
         android:layout_below="@+id/recommend"
-        android:layout_marginLeft="850dp"
-        android:layout_marginTop="30dp"
-        android:background="#C2C2F8"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:background="#3f4a5a"
         android:foregroundTint="#AA3434"
-        android:gravity="center"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp" />
+        android:dividerHeight="20dp"
+        android:divider="#C2CCD6"
+        android:gravity="center" />
 
 
     <Button
         android:id="@+id/hashtagBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="900dp"
-        android:layout_below="@+id/recommendList"
+        android:layout_marginLeft="480dp"
         android:padding="5dp"
-        android:background="#ECE3ED"
-        android:textColor="#A180A6"
-        android:layout_marginTop="50dp"
+        android:background="#3f4a5a"
+        android:textColor="#ffff"
+        android:layout_marginTop="37dp"
         android:text="新增Hashtag" />
 
 
