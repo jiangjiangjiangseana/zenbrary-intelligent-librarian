@@ -18,16 +18,18 @@
         android:textSize="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:textColor="#1b365e"
         />
 
     <RatingBar
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:saveEnabled="true"
         android:numStars="5"
-        android:background="#DEDAE6"/>
+        android:background="#dec1b9"/>
 
     <TextView
         android:id="@+id/hashtag_text"
@@ -37,15 +39,17 @@
         android:textSize="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
-        android:textColor="#B0ABBC"
+        android:textColor="#1b365e"
         />
 
 
     <EditText
         android:id="@+id/editText_hashtag"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#E2DDF3"
+        android:layout_width="600dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#dec1b9"
         android:ems="10"
         android:layout_below="@+id/hashtag_text"
         android:layout_marginBottom="10dp"

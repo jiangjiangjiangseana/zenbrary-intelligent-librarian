@@ -16,8 +16,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="熱門書籍"
-        android:textColor="#A180A6"
-        android:background="#E1D7E3"
+        android:textColor="#ffff"
+        android:background="#1b365e"
         ></Button>
 
     <Button
@@ -25,9 +25,10 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/hotBtn"
+        android:layout_marginRight="3dp"
         android:text="相似讀者都看"
-        android:textColor="#A180A6"
-        android:background="#E1D7E3"
+        android:textColor="#ffff"
+        android:background="#1b365e"
         ></Button>
 
 
@@ -38,7 +39,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ECE3ED">
+            android:background="#C2CCD6">
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/imageview1"
                 android:layout_width="400dp"
@@ -50,9 +51,9 @@
                 android:id="@+id/textview1"
                 android:layout_width="400dp"
                 android:layout_height="100dp"
-                android:background="#CCC0CD"
+                android:background="#a3b4c4"
                 android:textSize="20dp"
-                android:textColor="#5C515E"
+                android:textColor="#1b365e"
                 android:textAlignment="center"
                 android:layout_below="@id/imageview1"></TextView>
 
@@ -70,7 +71,7 @@
                 android:layout_height="100dp"
                 android:layout_toRightOf="@id/imageview1"
                 android:textSize="20dp"
-                android:textColor="#5C515E"
+                android:textColor="#1b365e"
                 android:textAlignment="center"
                 android:layout_below="@id/imageview2"></TextView>
 
