@@ -5,41 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#F8F8FF"
+    android:background="#C2CCD6"
     android:orientation="horizontal"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
-
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_below="@+id/textview_info"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="180dp"
-        android:backgroundTint="#929AC3"
-        android:text="@string/login"
-        android:textSize="50dp"
-        />
-
-
-
+        android:layout_width="483dp"
+        android:layout_height="729dp"
+        android:background="@drawable/pplfirst"
+        android:layout_marginTop="171dp"/>
 
     <Button
         android:id="@+id/guestButton"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_toRightOf="@+id/loginButton"
-        android:backgroundTint="#929AC3"
-        android:layout_centerVertical="true"
-        android:text="訪客 Guest"
-        android:textSize="50dp"
-        />
+        android:layout_width="445dp"
+        android:layout_height="635dp"
+        android:background="@drawable/zenbofirst"
+        android:layout_marginTop="275dp"
+        android:layout_marginLeft="830dp"/>
+    <ImageView
+        android:layout_width="1280dp"
+        android:layout_height="800dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/zenbrary"/>
 
 
 </RelativeLayout>
