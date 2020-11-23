@@ -640,6 +640,7 @@ id add
 id alertTitle
 id always
 id announce
+id assoBtn
 id async
 id authorName
 id available
@@ -702,8 +703,10 @@ id hotBtn
 id icon
 id icon_group
 id ifRoom
+id iiBtn
 id image
 id imageView
+id imageView_p
 id imageview1
 id imageview10
 id imageview2
@@ -749,9 +752,7 @@ id radio
 id radio_gender
 id ratingBar1
 id recentBtn
-id recommend
 id recommendBtn
-id recommendList
 id registerButton
 id right_icon
 id right_side

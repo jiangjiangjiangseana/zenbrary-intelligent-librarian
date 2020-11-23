@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -67,6 +68,15 @@ public class Book extends RobotActivity {
     static CharSequence start_time;
     static CharSequence exit_time;
 
+    static ArrayList<String> ii_list_mms_id = new ArrayList<>();
+    static ArrayList<String> ii_list_book_name = new ArrayList<>();
+    static ArrayList<String> ii_list_book_author = new ArrayList<>();
+    static ArrayList<String> ii_list_cover = new ArrayList<>();
+    static ArrayList<String> asso_list_mms_id = new ArrayList<>();
+    static ArrayList<String> asso_list_book_name = new ArrayList<>();
+    static ArrayList<String> asso_list_book_author = new ArrayList<>();
+    static ArrayList<String> asso_list_cover = new ArrayList<>();
+
 
 
     @Override
@@ -85,11 +95,12 @@ public class Book extends RobotActivity {
         String resBookName = bookIt.getStringExtra("resBookName");
         String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
         String resRecommendation = bookIt.getStringExtra("resRecommendation");
+        String resAssoRecommendation = bookIt.getStringExtra("resAssoRecommendation");
         String resCover = bookIt.getStringExtra("resCover");
         String resHashtag = bookIt.getStringExtra("resHashtag");
         String resRating = bookIt.getStringExtra("resRating");
         final String resIntroduction = bookIt.getStringExtra("resIntroduction");
-        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction+" "+resRating );
+        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction+" "+resRating+" "+resAssoRecommendation );
         if(visit_state.equals("login")){
             user_name = bookIt.getStringExtra("user_name");
             u_id = bookIt.getStringExtra("u_id");
@@ -118,20 +129,109 @@ public class Book extends RobotActivity {
         System.out.println("local: " + loca_info);
         System.out.println("avai:" + avai_info);
 
-        System.out.println("recommendation: " + resRecommendation + resRecommendation.getClass());
-        final List<String> recommendation = new ArrayList<String>(Arrays.asList(resRecommendation.split("@@")));
-        System.out.println("recommendation result: " + recommendation);
-        final List<String> recommendation_bookName = new ArrayList<String>();
-        final List<String> recommendation_number = new ArrayList<String>();
-        for (int i = 0; i < recommendation.size(); i++) {
-            System.out.println("recommendation第" + i + "組: " + recommendation.get(i));
-            String reco_couple = recommendation.get(i);
-            List<String> temp = new ArrayList<String>(Arrays.asList(reco_couple.split("##")));
-            recommendation_bookName.add(temp.get(0));
-            recommendation_number.add(temp.get(1));
+//        System.out.println("recommendation: " + resRecommendation + resRecommendation.getClass());
+//        final List<String> recommendation = new ArrayList<String>(Arrays.asList(resRecommendation.split("@@")));
+//        System.out.println("recommendation result: " + recommendation);
+//        final List<String> recommendation_bookName = new ArrayList<String>();
+//        final List<String> recommendation_number = new ArrayList<String>();
+//        for (int i = 0; i < recommendation.size(); i++) {
+//            System.out.println("recommendation第" + i + "組: " + recommendation.get(i));
+//            String reco_couple = recommendation.get(i);
+//            List<String> temp = new ArrayList<String>(Arrays.asList(reco_couple.split("##")));
+//            recommendation_bookName.add(temp.get(0));
+//            recommendation_number.add(temp.get(1));
+//        }
+//        System.out.println("reco_bookName: " + recommendation_bookName);
+//        System.out.println("reco_number:" + recommendation_number);
+
+        List<String> temp1 = new ArrayList<String>(Arrays.asList(resRecommendation.split("#@")));
+        System.out.println("start to translate iilist");
+        for (int i = 0; i < temp1.size(); i++) {
+            System.out.println("book top ten: " + temp1.get(i));
+            String book = temp1.get(i);
+            int index1 = book.indexOf("@@");
+            int index2 = book.indexOf("@#");
+            int index3 = book.indexOf("##");
+            String mms_id = book.substring(0, index1);
+            String name = book.substring(index1 + 2, index2-1);
+            String author = book.substring(index2 + 2, index3 - 1);
+            String cover = book.substring(index3 + 2);
+            ii_list_mms_id.add(mms_id);
+            ii_list_book_name.add(name);
+            ii_list_book_author.add(author);
+            ii_list_cover.add(cover);
         }
-        System.out.println("reco_bookName: " + recommendation_bookName);
-        System.out.println("reco_number:" + recommendation_number);
+
+        List<String> temp2 = new ArrayList<String>(Arrays.asList(resAssoRecommendation.split("#@")));
+        System.out.println("start to translate assolist");
+        for (int i = 0; i < temp2.size(); i++) {
+            System.out.println("book asso: " + temp2.get(i));
+            String book = temp2.get(i);
+            int index1 = book.indexOf("@@");
+            int index2 = book.indexOf("@#");
+            int index3 = book.indexOf("##");
+            String mms_id = book.substring(0, index1);
+            String name = book.substring(index1 + 2, index2-1);
+            String author = book.substring(index2 + 2, index3 - 1);
+            String cover = book.substring(index3 + 2);
+            asso_list_mms_id.add(mms_id);
+            asso_list_book_name.add(name);
+            asso_list_book_author.add(author);
+            asso_list_cover.add(cover);
+        }
+
+
+        System.out.println("start to change recommendation ii_list.");
+        ImageView imageview1 = (ImageView) findViewById(R.id.imageview1);
+        ImageView imageview2 = (ImageView) findViewById(R.id.imageview2);
+        ImageView imageview3 = (ImageView) findViewById(R.id.imageview3);
+        ImageView imageview4 = (ImageView) findViewById(R.id.imageview4);
+        ImageView imageview5 = (ImageView) findViewById(R.id.imageview5);
+        ImageView imageview6 = (ImageView) findViewById(R.id.imageview6);
+        ImageView imageview7 = (ImageView) findViewById(R.id.imageview7);
+        ImageView imageview8 = (ImageView) findViewById(R.id.imageview8);
+        ImageView imageview9 = (ImageView) findViewById(R.id.imageview9);
+        ImageView imageview10 = (ImageView) findViewById(R.id.imageview10);
+        TextView tv1 = (TextView) findViewById(R.id.textview1);
+        TextView tv2 = (TextView) findViewById(R.id.textview2);
+        TextView tv3 = (TextView) findViewById(R.id.textview3);
+        TextView tv4 = (TextView) findViewById(R.id.textview4);
+        TextView tv5 = (TextView) findViewById(R.id.textview5);
+        TextView tv6 = (TextView) findViewById(R.id.textview6);
+        TextView tv7 = (TextView) findViewById(R.id.textview7);
+        TextView tv8 = (TextView) findViewById(R.id.textview8);
+        TextView tv9 = (TextView) findViewById(R.id.textview9);
+        TextView tv10 = (TextView) findViewById(R.id.textview10);
+        new Book.DownloadImageTask(imageview1)
+                .execute(ii_list_cover.get(0));
+        new Book.DownloadImageTask(imageview2)
+                .execute(ii_list_cover.get(1));
+        new Book.DownloadImageTask(imageview3)
+                .execute(ii_list_cover.get(2));
+        new Book.DownloadImageTask(imageview4)
+                .execute(ii_list_cover.get(3));
+        new Book.DownloadImageTask(imageview5)
+                .execute(ii_list_cover.get(4));
+        new Book.DownloadImageTask(imageview6)
+                .execute(ii_list_cover.get(5));
+        new Book.DownloadImageTask(imageview7)
+                .execute(ii_list_cover.get(6));
+        new Book.DownloadImageTask(imageview8)
+                .execute(ii_list_cover.get(7));
+        new Book.DownloadImageTask(imageview9)
+                .execute(ii_list_cover.get(8));
+        new Book.DownloadImageTask(imageview10)
+                .execute(ii_list_cover.get(9));
+        tv1.setText(ii_list_book_name.get(0));
+        tv2.setText(ii_list_book_name.get(1));
+        tv3.setText(ii_list_book_name.get(2));
+        tv4.setText(ii_list_book_name.get(3));
+        tv5.setText(ii_list_book_name.get(4));
+        tv6.setText(ii_list_book_name.get(5));
+        tv7.setText(ii_list_book_name.get(6));
+        tv8.setText(ii_list_book_name.get(7));
+        tv9.setText(ii_list_book_name.get(8));
+        tv10.setText(ii_list_book_name.get(9));
 
 
         TextView bookName = (TextView) findViewById(R.id.bookName);
@@ -144,7 +244,6 @@ public class Book extends RobotActivity {
         authorName.setText("作者: " + resAuthor);
         location.setText("位置: " + loca_info);
         available.setText("狀態: " + avai_info);
-
         rating.setText("評分: "+resRating);
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
                 .execute(resCover);
@@ -165,22 +264,22 @@ public class Book extends RobotActivity {
         } else {
             robotAPI.robot.speak("這本書現在不再各圖書館內唷");
         }
-        //推薦清單initial
-        ListView recommendList = (ListView) findViewById(R.id.recommendList);
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendation_bookName);
-        recommendList.setAdapter(adapter);
-        recommendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
-                String recommendationName = recommendation_bookName.get(i);
-                System.out.println("1111111");
-                //change string to arraylist
-                String recommendationNumber = recommendation_number.get(i);
-                System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
-                requestBook(recommendationNumber);
-            }
-        });
+//        //推薦清單initial
+//        ListView recommendList = (ListView) findViewById(R.id.recommendList);
+//        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendation_bookName);
+//        recommendList.setAdapter(adapter);
+//        recommendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
+//                String recommendationName = recommendation_bookName.get(i);
+//                System.out.println("1111111");
+//                //change string to arraylist
+//                String recommendationNumber = recommendation_number.get(i);
+//                System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
+//                requestBook(recommendationNumber);
+//            }
+//        });
 
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
@@ -237,11 +336,156 @@ public class Book extends RobotActivity {
         });
 
 
+        //iilistBtn初始化
+        Button iilistBtn = findViewById(R.id.iiBtn);
+        iilistBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("start to change recommendation ii_list.");
+                ImageView imageview1 = (ImageView) findViewById(R.id.imageview1);
+                ImageView imageview2 = (ImageView) findViewById(R.id.imageview2);
+                ImageView imageview3 = (ImageView) findViewById(R.id.imageview3);
+                ImageView imageview4 = (ImageView) findViewById(R.id.imageview4);
+                ImageView imageview5 = (ImageView) findViewById(R.id.imageview5);
+                ImageView imageview6 = (ImageView) findViewById(R.id.imageview6);
+                ImageView imageview7 = (ImageView) findViewById(R.id.imageview7);
+                ImageView imageview8 = (ImageView) findViewById(R.id.imageview8);
+                ImageView imageview9 = (ImageView) findViewById(R.id.imageview9);
+                ImageView imageview10 = (ImageView) findViewById(R.id.imageview10);
+                TextView tv1 = (TextView) findViewById(R.id.textview1);
+                TextView tv2 = (TextView) findViewById(R.id.textview2);
+                TextView tv3 = (TextView) findViewById(R.id.textview3);
+                TextView tv4 = (TextView) findViewById(R.id.textview4);
+                TextView tv5 = (TextView) findViewById(R.id.textview5);
+                TextView tv6 = (TextView) findViewById(R.id.textview6);
+                TextView tv7 = (TextView) findViewById(R.id.textview7);
+                TextView tv8 = (TextView) findViewById(R.id.textview8);
+                TextView tv9 = (TextView) findViewById(R.id.textview9);
+                TextView tv10 = (TextView) findViewById(R.id.textview10);
+                new Book.DownloadImageTask(imageview1)
+                        .execute(ii_list_cover.get(0));
+                new Book.DownloadImageTask(imageview2)
+                        .execute(ii_list_cover.get(1));
+                new Book.DownloadImageTask(imageview3)
+                        .execute(ii_list_cover.get(2));
+                new Book.DownloadImageTask(imageview4)
+                        .execute(ii_list_cover.get(3));
+                new Book.DownloadImageTask(imageview5)
+                        .execute(ii_list_cover.get(4));
+                new Book.DownloadImageTask(imageview6)
+                        .execute(ii_list_cover.get(5));
+                new Book.DownloadImageTask(imageview7)
+                        .execute(ii_list_cover.get(6));
+                new Book.DownloadImageTask(imageview8)
+                        .execute(ii_list_cover.get(7));
+                new Book.DownloadImageTask(imageview9)
+                        .execute(ii_list_cover.get(8));
+                new Book.DownloadImageTask(imageview10)
+                        .execute(ii_list_cover.get(9));
+                tv1.setText(ii_list_book_name.get(0));
+                tv2.setText(ii_list_book_name.get(1));
+                tv3.setText(ii_list_book_name.get(2));
+                tv4.setText(ii_list_book_name.get(3));
+                tv5.setText(ii_list_book_name.get(4));
+                tv6.setText(ii_list_book_name.get(5));
+                tv7.setText(ii_list_book_name.get(6));
+                tv8.setText(ii_list_book_name.get(7));
+                tv9.setText(ii_list_book_name.get(8));
+                tv10.setText(ii_list_book_name.get(9));
+            }
+        });
+
+
+        //assolistBtn初始化
+        Button assoBtn = findViewById(R.id.assoBtn);
+        assoBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("start to change recommendation asso.");
+                ImageView imageview1 = (ImageView) findViewById(R.id.imageview1);
+                ImageView imageview2 = (ImageView) findViewById(R.id.imageview2);
+                ImageView imageview3 = (ImageView) findViewById(R.id.imageview3);
+                ImageView imageview4 = (ImageView) findViewById(R.id.imageview4);
+                ImageView imageview5 = (ImageView) findViewById(R.id.imageview5);
+                ImageView imageview6 = (ImageView) findViewById(R.id.imageview6);
+                ImageView imageview7 = (ImageView) findViewById(R.id.imageview7);
+                ImageView imageview8 = (ImageView) findViewById(R.id.imageview8);
+                ImageView imageview9 = (ImageView) findViewById(R.id.imageview9);
+                ImageView imageview10 = (ImageView) findViewById(R.id.imageview10);
+                TextView tv1 = (TextView) findViewById(R.id.textview1);
+                TextView tv2 = (TextView) findViewById(R.id.textview2);
+                TextView tv3 = (TextView) findViewById(R.id.textview3);
+                TextView tv4 = (TextView) findViewById(R.id.textview4);
+                TextView tv5 = (TextView) findViewById(R.id.textview5);
+                TextView tv6 = (TextView) findViewById(R.id.textview6);
+                TextView tv7 = (TextView) findViewById(R.id.textview7);
+                TextView tv8 = (TextView) findViewById(R.id.textview8);
+                TextView tv9 = (TextView) findViewById(R.id.textview9);
+                TextView tv10 = (TextView) findViewById(R.id.textview10);
+                new Book.DownloadImageTask(imageview1)
+                        .execute(asso_list_cover.get(0));
+                new Book.DownloadImageTask(imageview2)
+                        .execute(asso_list_cover.get(1));
+                new Book.DownloadImageTask(imageview3)
+                        .execute(asso_list_cover.get(2));
+                new Book.DownloadImageTask(imageview4)
+                        .execute(asso_list_cover.get(3));
+                new Book.DownloadImageTask(imageview5)
+                        .execute(asso_list_cover.get(4));
+                new Book.DownloadImageTask(imageview6)
+                        .execute(asso_list_cover.get(5));
+                new Book.DownloadImageTask(imageview7)
+                        .execute(asso_list_cover.get(6));
+                new Book.DownloadImageTask(imageview8)
+                        .execute(asso_list_cover.get(7));
+                new Book.DownloadImageTask(imageview9)
+                        .execute(asso_list_cover.get(8));
+                new Book.DownloadImageTask(imageview10)
+                        .execute(asso_list_cover.get(9));
+                tv1.setText(asso_list_book_name.get(0));
+                tv2.setText(asso_list_book_name.get(1));
+                tv3.setText(asso_list_book_name.get(2));
+                tv4.setText(asso_list_book_name.get(3));
+                tv5.setText(asso_list_book_name.get(4));
+                tv6.setText(asso_list_book_name.get(5));
+                tv7.setText(asso_list_book_name.get(6));
+                tv8.setText(asso_list_book_name.get(7));
+                tv9.setText(asso_list_book_name.get(8));
+                tv10.setText(asso_list_book_name.get(9));
+            }
+        });
+
 
 
 }
 
 
+
+    //轉url圖片的class
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 
 
     //限制內建返回按鍵
@@ -273,31 +517,7 @@ public class Book extends RobotActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-//轉url圖片的class
-class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 
     public void hashtag_alert(){
         robotAPI.robot.speak("填寫hashtag請用空格隔開");
