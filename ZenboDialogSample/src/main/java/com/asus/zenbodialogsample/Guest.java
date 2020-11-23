@@ -130,7 +130,7 @@ public class Guest extends RobotActivity {
         robotAPI.robot.jumpToPlan(DOMAIN, "lanuchHelloWolrd_Plan");
 
         // show hint
-        mTextView.setText(getResources().getString(R.string.dialog_example));
+//        mTextView.setText(getResources().getString(R.string.dialog_example));
     }
 
 

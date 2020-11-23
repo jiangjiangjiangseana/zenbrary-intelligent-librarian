@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -88,6 +89,16 @@ public class Activity extends RobotActivity {
 //        Spanned span = Html.fromHtml("<img src=\""+R.drawable.cloud_server+"\"/><font color = \"ffffff\">test</font>",imgGetter,null);
 //        button1.setText(span);
 
+        //backButton 初始化
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backIT = new Intent();
+                backIT.setClass(Activity.this,Guest.class);
+                startActivity(backIT);
+            }
+        });
 
     }
 

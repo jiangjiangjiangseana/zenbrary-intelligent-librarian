@@ -8,8 +8,8 @@
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
     <ImageView
-        android:layout_width="493dp"
-        android:layout_height="739dp"
+        android:layout_width="463dp"
+        android:layout_height="700dp"
         android:background="@drawable/login"
         android:layout_marginTop="162dp"/>
 
@@ -18,13 +18,13 @@
         android:layout_height="600dp"
         android:background="@drawable/register"
         android:layout_marginLeft="580dp"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="150dp"/>
 
     <TextView
         android:id="@+id/textview_info"
         android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="250dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="260dp"
         android:layout_marginLeft="750dp"
         android:gravity="center"
         android:text="@string/login"
@@ -49,9 +49,11 @@
         android:id="@+id/login_account"
         android:layout_width="500dp"
         android:layout_marginLeft="630dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/account"
         android:background="#dec1b9"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
@@ -71,31 +73,35 @@
         android:id="@+id/login_pw"
         android:layout_marginLeft="630dp"
         android:layout_width="500dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:layout_below="@+id/pw"
         android:background="#dec1b9"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
         android:inputType="textPassword" />
 
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/textview_info"
         android:layout_marginLeft="630dp"
         android:layout_marginTop="230dp"
         android:text="@string/login"
+        android:textSize="40dp"
         android:backgroundTint="#1b365e"/>
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_below="@+id/textview_info"
         android:layout_marginTop="230dp"
         android:layout_marginLeft="900dp"
         android:text="註冊 Register"
+        android:textSize="40dp"
         android:backgroundTint="#1b365e"/>
 
 

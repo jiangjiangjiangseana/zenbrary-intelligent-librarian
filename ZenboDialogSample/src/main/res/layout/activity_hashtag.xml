@@ -51,6 +51,8 @@
         android:layout_marginTop="5dp"
         android:background="#dec1b9"
         android:ems="10"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
         android:layout_below="@+id/hashtag_text"
         android:layout_marginBottom="10dp"
         >

@@ -145,7 +145,7 @@ public class Book extends RobotActivity {
         location.setText("位置: " + loca_info);
         available.setText("狀態: " + avai_info);
 
-        rating.setText("評分: \n"+"   "+resRating);
+        rating.setText("評分: "+resRating);
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
                 .execute(resCover);
 

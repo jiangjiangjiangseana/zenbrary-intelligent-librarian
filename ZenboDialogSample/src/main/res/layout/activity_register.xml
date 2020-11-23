@@ -13,20 +13,30 @@
         android:layout_height="800dp"
         android:background="@drawable/register"
         android:layout_marginLeft="220dp"
-        android:layout_marginTop="100dp"/>
-
-
+        android:layout_marginTop="94dp"/>
     <TextView
         android:id="@+id/textview_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="220dp"
         android:gravity="center"
         android:text="註冊 Register"
         android:textColor="#1b365e"
-        android:textSize="45dp"
+        android:textSize="30dp"
         />
+
+    <ScrollView
+        android:layout_width="866dp"
+        android:layout_height="430dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="200dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:orientation="vertical" >
+
 
 
     <TextView
@@ -36,7 +46,7 @@
         android:gravity="center"
         android:text="姓名 Ｎame: "
         android:textColor="#1b365e"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/textview_info"
         android:textSize="25dp"
         />
@@ -44,12 +54,14 @@
 
     <EditText
         android:id="@+id/editText_user_name"
-        android:layout_width="700dp"
-        android:layout_height="30dp"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/user_name"
         android:background="#dec1b9"
         android:ems="10"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -59,7 +71,7 @@
         android:gravity="center"
         android:text="學號 Student ID: "
         android:textColor="#1b365e"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/editText_user_name"
         android:textSize="25dp"
         />
@@ -67,12 +79,14 @@
 
     <EditText
         android:id="@+id/editText_studentId"
-        android:layout_width="700dp"
-        android:layout_height="30dp"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/studentId"
         android:background="#dec1b9"
         android:ems="10"
-        android:layout_marginLeft="300dp"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
+        android:layout_marginLeft="130dp"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -82,7 +96,7 @@
         android:gravity="center"
         android:text="信箱 E-mail: "
         android:textColor="#1b365e"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/editText_studentId"
         android:textSize="25dp"
         />
@@ -90,12 +104,14 @@
 
     <EditText
         android:id="@+id/editText_account"
-        android:layout_width="700dp"
-        android:layout_height="30dp"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/account"
         android:background="#dec1b9"
         android:ems="10"
-        android:layout_marginLeft="300dp"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
+        android:layout_marginLeft="130dp"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -106,18 +122,20 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:text="密碼 Password: "
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:textColor="#1b365e"
         android:textSize="25dp"/>
 
     <EditText
         android:id="@+id/editText_pw"
-        android:layout_width="700dp"
-        android:layout_height="30dp"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:ems="10"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
         android:layout_below="@+id/pw"
         android:background="#dec1b9"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:inputType="textPassword"
         />
 
@@ -129,19 +147,21 @@
         android:text="確認密碼 Password Confirm: "
         android:textColor="#1b365e"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/editText_pw"
         android:textSize="25dp"/>
 
 
     <EditText
         android:id="@+id/editText_confirm"
-        android:layout_width="700dp"
-        android:layout_height="wrap_content"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/confirm"
         android:background="#dec1b9"
         android:ems="10"
-        android:layout_marginLeft="300dp"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
+        android:layout_marginLeft="130dp"
         android:inputType="textPassword" />
 
     <TextView
@@ -151,7 +171,7 @@
         android:gravity="center"
         android:text="性別 Gender: "
         android:textColor="#1b365e"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/editText_confirm"
         android:textSize="25dp"
@@ -163,7 +183,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_below="@+id/gender"
         android:background="#dec1b9"
         tools:ignore="DuplicateIds">
@@ -175,16 +195,16 @@
             android:checked="true"
             android:textColor="#1b365e"
             android:text="生理男 Male"
-            android:textSize="25dp"/>
+            android:textSize="30dp"/>
 
         <RadioButton
             android:id="@+id/gender_female"
-            android:layout_width="210dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textColor="#1b365e"
             android:text="生理女 Female"
-            android:textSize="25dp" />
+            android:textSize="30dp" />
 
     </RadioGroup>
 
@@ -195,7 +215,7 @@
         android:gravity="center"
         android:text="系所 Department: "
         android:textColor="#1b365e"
-        android:layout_marginLeft="300dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/radio_gender"
         android:textSize="25dp"/>
@@ -203,12 +223,14 @@
 
     <EditText
         android:id="@+id/editText_department"
-        android:layout_width="700dp"
-        android:layout_height="30dp"
+        android:layout_width="650dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/department"
         android:background="#dec1b9"
         android:ems="10"
-        android:layout_marginLeft="300dp"
+        android:textSize="30dp"
+        android:textColor="#1b365e"
+        android:layout_marginLeft="130dp"
         android:inputType="textEmailAddress" />
 
 
@@ -217,12 +239,14 @@
         android:layout_width="300dp"
         android:layout_height="54dp"
         android:layout_below="@+id/editText_department"
-        android:layout_marginLeft="500dp"
+        android:layout_marginLeft="300dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="#1b365e"
         android:text="確認 confirm"
         android:textSize="25dp"/>
 
+    </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/backButton"
