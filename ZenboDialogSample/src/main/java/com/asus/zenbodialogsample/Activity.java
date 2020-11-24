@@ -44,11 +44,15 @@ public class Activity extends RobotActivity {
         System.out.println("First week:"+firstWeek);
         final ArrayList<String> dates = new ArrayList<>(Arrays.asList(firstWeek.get(0).substring(2).split(",")));
         final ArrayList<String> firstActivity = new ArrayList<>(Arrays.asList(resFirstWeek.split("\\[\\[")));
+
+        System.out.println("firstActivity:"+firstActivity);
         for (int i = 0; i<dates.size(); i++){
             System.out.println("Dates: "+dates.get(i));
-            for (int j = 1; j<firstActivity.size();j++){
-                System.out.println("Activities:"+firstActivity.get(j));
-            }
+            System.out.println("Activities:"+firstActivity.get(i+2));
+            final ArrayList<String> event = new ArrayList<>(Arrays.asList(firstActivity.get(i+2).split("],")));
+            System.out.println("Event:"+event);
+//            for (int j=0; j)
+            break;
         }
 
 
