@@ -62,7 +62,7 @@ public class Activity extends RobotActivity {
                 System.out.println("Activities:"+firstActivity.get(i+2));
                 final ArrayList<String> event = new ArrayList<>(Arrays.asList(firstActivity.get(i+2).split("],")));
                 System.out.println("Event:"+event);
-                
+                addActivity(1);
             }
 
 
