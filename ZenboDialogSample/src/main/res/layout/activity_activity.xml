@@ -107,51 +107,53 @@
         android:layout_marginTop="100dp">
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="750dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="730dp"
-            android:layout_height="350dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/notes"/>
-            <TextView
-                android:id="@+id/activityInfoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-280dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動時間:上午8點 \n\n 活動資訊:走畫文山畫展 \n\n 活動類別:展覽"
-                android:textSize="40dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView"-->
+<!--            android:layout_width="730dp"-->
+<!--            android:layout_height="350dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:background="@drawable/notes"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/activityInfoText"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="-280dp"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                android:text="活動時間:上午8點 \n\n 活動資訊:走畫文山畫展 \n\n 活動類別:展覽"-->
+<!--                android:textSize="40dp" />-->
 
 
 
-        <ImageView
-            android:layout_width="730dp"
-            android:layout_height="350dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="55dp"
-            android:background="@drawable/notes" />
-            <TextView
-                android:id="@+id/activityTime1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-280dp"
-                android:layout_marginLeft="50dp"
-                android:text="活動時間:下午2點 \n\n 活動類別:參訪 \n\n 活動資訊:新北市文化局(20人)"
-                android:textSize="40dp" />
+<!--        <ImageView-->
+<!--            android:layout_width="730dp"-->
+<!--            android:layout_height="350dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="55dp"-->
+<!--            android:background="@drawable/notes" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/activityTime1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="-280dp"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                android:text="活動時間:下午2點 \n\n 活動類別:參訪 \n\n 活動資訊:新北市文化局(20人)"-->
+<!--                android:textSize="40dp" />-->
 
 
 
 
-        <ImageView
-            android:layout_width="730dp"
-            android:layout_height="350dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="55dp"
-            android:background="@drawable/notes" />
+<!--        <ImageView-->
+<!--            android:layout_width="730dp"-->
+<!--            android:layout_height="350dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="55dp"-->
+<!--            android:background="@drawable/notes" />-->
 
         </LinearLayout>
     </ScrollView>

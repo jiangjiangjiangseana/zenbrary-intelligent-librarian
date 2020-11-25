@@ -1,13 +1,19 @@
 package com.asus.zenbodialogsample;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -17,9 +23,11 @@ import com.robot.asus.robotactivity.RobotActivity;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class Activity extends RobotActivity {
 
@@ -46,10 +54,15 @@ public class Activity extends RobotActivity {
         final ArrayList<String> firstActivity = new ArrayList<>(Arrays.asList(resFirstWeek.split("\\[\\[")));
         for (int i = 0; i<dates.size(); i++){
             System.out.println("Dates: "+dates.get(i));
+
             for (int j = 1; j<firstActivity.size();j++){
                 System.out.println("Activities:"+firstActivity.get(j));
+                addActivity(1);
             }
         }
+
+
+
 
 
         // set button
@@ -105,6 +118,25 @@ public class Activity extends RobotActivity {
         });
 
     }
+
+    LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+
+    public void addActivity(int size){
+        layout.removeAllViews();
+        for (int i = 0; i < size; i++){
+            ImageView imageView = new ImageView(this);
+            Drawable drawable = getResources().getDrawable(R.drawable.notes);
+            imageView.setImageDrawable(drawable);
+            RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(730,350);
+            param.leftMargin = 10;
+            param.topMargin = 55;
+            layout.addView(imageView,param);
+
+        }
+
+    }
+
+
 
     @Override
     protected void onResume() {
