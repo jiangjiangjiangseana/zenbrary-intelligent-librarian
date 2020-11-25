@@ -90,7 +90,6 @@ public class Personal extends RobotActivity{
     static String user_name;
     static String email;
     static String uu_list;
-    static String change_intent;
     static String resBookTopTen;
 
 
@@ -104,15 +103,12 @@ public class Personal extends RobotActivity{
         System.out.println("success to change to user");
         personal = Personal.this;
         Intent userIt = this.getIntent();
-        change_intent = userIt.getStringExtra("change");
         user_name = userIt.getStringExtra("user_name");
         u_id = userIt.getStringExtra("u_id");
         email = userIt.getStringExtra("email");
         uu_list = userIt.getStringExtra("uu_list");
         robotAPI.robot.speak("哈囉!"+user_name);
-        if(change_intent.equals("book")){
-            //undo:::::::
-        }
+
         List<String> temp = new ArrayList<String>(Arrays.asList(uu_list.split("#@")));
         if(!uu_list.equals("null")) {
             System.out.println("start to translate uu_list");
@@ -134,12 +130,6 @@ public class Personal extends RobotActivity{
         }else{
             System.out.println("no uu_list");
         }
-
-        System.out.println("list of mms_id: "+uu_list_mms_id);
-        System.out.println("list of book_name: "+uu_list_book_name);
-        System.out.println("list of book_author: "+uu_list_book_author);
-        System.out.println("list of cover: "+uu_list_cover);
-
 
         isLogin = true;
         System.out.println("user uu_list: "+uu_list);

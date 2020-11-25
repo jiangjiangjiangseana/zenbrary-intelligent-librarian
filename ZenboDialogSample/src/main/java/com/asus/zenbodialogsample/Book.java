@@ -291,10 +291,9 @@ public class Book extends RobotActivity {
                     Calendar mCal = Calendar.getInstance();
                     exit_time = DateFormat.format("yyyy-MM-dd kk:mm:ss", mCal.getTime());    // kk:24小時制, hh:12小時制
                     System.out.println("stop viewing this book time is: "+exit_time+", stop viewing mms_id is: "+requestMms_id);
+                    upload_browse_log();
                     Intent backIT = new Intent();
                     backIT.putExtra("view_mms_id",requestMms_id);
-                    backIT.putExtra("view_start_time",start_time);
-                    backIT.putExtra("view_exit_time",exit_time);
                     backIT.putExtra("change","book");
                     backIT.putExtra("user_name",user_name);
                     backIT.putExtra("u_id",u_id);
@@ -627,6 +626,102 @@ public class Book extends RobotActivity {
             }
 
     }).start();
+    }
+
+    public void upload_browse_log(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String uploadBrowseLogUrl = "http://140.119.19.18:5000/api/v1/browsing_upload/";
+                System.out.println("start running");
+                String uniqueID = UUID.randomUUID().toString();
+                String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"user_id\":\""+uniqueID+"\",\"start_time\":\""+start_time+"\",\"end_time\":\""+exit_time+"\",\"session_id\":\""+uniqueID+"\"}";
+                String charset = "UTF-8";
+                System.out.println("browse log upload request: "+rawData);
+//undooooooooooooooooooooooooooooo
+                URLConnection connection = null;
+                try {
+                    connection = new URL(uploadBrowseLogUrl).openConnection();
+                } catch (Exception e) {
+                    Log.d(TAG,"connection failed");
+                    e.printStackTrace();
+                }
+                connection.setDoOutput(true); // Triggers POST.
+                connection.setRequestProperty("Accept-Charset", charset);
+                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                try (OutputStream output = connection.getOutputStream()) {
+                    Log.d("output format",output.toString());
+                    output.write(rawData.getBytes(charset));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                InputStream response = null;
+                try {
+                    response = connection.getInputStream();
+                    System.out.println("receiving book_info : "+response.toString() + " " + response);
+                } catch (Exception e) {
+                    System.out.println("error in receiving book_info");
+                    e.printStackTrace();
+                }
+                try {
+                    System.out.println("start translate book_info: ");
+                    String text;
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        text =  writer.toString();
+                    } else {
+                        text =  "";
+                    }
+                    System.out.println("response book_info: "+text);
+
+                    JSONObject resJson;
+                    resJson = new JSONObject(text);
+                    System.out.println("resJson: "+ resJson);
+
+                    resrecAuthor = resJson.getString("author");
+                    resrecBookName = resJson.getString("book_name");
+                    resrecLocandAvai = resJson.getString("location_and_available");
+                    resrecRecommendation = resJson.getString("item_recommendation");
+                    resrecCover = resJson.getString("cover");
+                    resrecHashtag = resJson.getString("hashtag");
+                    resrecIntroduction = resJson.getString("introduction");
+                    resrecRating = resJson.getString("rating");
+                    System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate book_info");
+                }
+
+
+                bookClass.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        System.out.println("切換頁面到Book");
+                        Intent bookIt = new Intent();
+
+                        bookIt.setClass(Book.this,Book.class);
+                        startActivity(bookIt);
+
+
+                    }
+                });
+            }
+        }).start();
     }
 
     public void requestBook(final String resrecmms_id){
