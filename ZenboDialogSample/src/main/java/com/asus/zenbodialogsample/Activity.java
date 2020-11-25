@@ -56,19 +56,18 @@ public class Activity extends RobotActivity {
         System.out.println("firstActivity:"+firstActivity);
         for (int i = 0; i<dates.size(); i++){
             System.out.println("Dates: "+dates.get(i));
-<<<<<<< HEAD
+
 
             for (int j = 1; j<firstActivity.size();j++){
-                System.out.println("Activities:"+firstActivity.get(j));
-                addActivity(1);
+                System.out.println("Activities:"+firstActivity.get(i+2));
+                final ArrayList<String> event = new ArrayList<>(Arrays.asList(firstActivity.get(i+2).split("],")));
+                System.out.println("Event:"+event);
+                
             }
-=======
-            System.out.println("Activities:"+firstActivity.get(i+2));
-            final ArrayList<String> event = new ArrayList<>(Arrays.asList(firstActivity.get(i+2).split("],")));
-            System.out.println("Event:"+event);
-//            for (int j=0; j)
+
+
             break;
->>>>>>> 511bad3d0e9d7e7262888307d1cf70fe9d9c415e
+
         }
 
 
