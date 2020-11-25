@@ -81,12 +81,17 @@ public class Personal extends RobotActivity{
     static ArrayList<String> uu_list_book_name = new ArrayList<>();
     static ArrayList<String> uu_list_book_author = new ArrayList<>();
     static ArrayList<String> uu_list_cover = new ArrayList<>();
+    static ArrayList<String> top_ten_mms_id = new ArrayList<>();
+    static ArrayList<String> top_ten_book_name = new ArrayList<>();
+    static ArrayList<String> top_ten_book_author = new ArrayList<>();
+    static ArrayList<String> top_ten_cover = new ArrayList<>();
     static ArrayList<ArrayList> browse_log = new ArrayList<>();
     static String u_id;
     static String user_name;
     static String email;
     static String uu_list;
     static String change_intent;
+    static String resBookTopTen;
 
 
 
@@ -96,8 +101,7 @@ public class Personal extends RobotActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
-        robotAPI.robot.speak("哈囉!");
-        System.out.println("sucess to change to user");
+        System.out.println("success to change to user");
         personal = Personal.this;
         Intent userIt = this.getIntent();
         change_intent = userIt.getStringExtra("change");
@@ -105,6 +109,7 @@ public class Personal extends RobotActivity{
         u_id = userIt.getStringExtra("u_id");
         email = userIt.getStringExtra("email");
         uu_list = userIt.getStringExtra("uu_list");
+        robotAPI.robot.speak("哈囉!"+user_name);
         if(change_intent.equals("book")){
             //undo:::::::
         }
@@ -214,9 +219,8 @@ public class Personal extends RobotActivity{
             @Override
             public void onClick(View v) {
                 robotAPI.vision.cancelDetectFace();
+                robotAPI.robot.speak("請稍等");
                 requestTopTen();
-                recommend_alert();
-                robotAPI.robot.speak("這些是我推薦給你的書籍");
             }
         });
     }
@@ -247,7 +251,7 @@ public class Personal extends RobotActivity{
 
 
     public void requestTopTen(){
-        final String topTenUrl = "http://149.119.19.18:5000/api/v1/book_top_ten/";
+        final String topTenUrl = "http://140.119.19.18:5000/api/v1/book_top_ten/";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -277,13 +281,13 @@ public class Personal extends RobotActivity{
                 InputStream response = null;
                 try {
                     response = connection.getInputStream();
-                    System.out.println("receiving calendar_result : "+response.toString() + " " + response);
+                    System.out.println("receiving top ten_result : "+response.toString() + " " + response);
                 } catch (Exception e) {
-                    System.out.println("error in receiving calendar_result");
+                    System.out.println("error in receiving top ten_result");
                     e.printStackTrace();
                 }
                 try {
-                    System.out.println("start translate calendar_result: ");
+                    System.out.println("start translate top ten_result: ");
                     String text;
                     if (response != null) {
                         Writer writer = new StringWriter();
@@ -302,33 +306,46 @@ public class Personal extends RobotActivity{
                     } else {
                         text =  "";
                     }
-                    System.out.println("response calendar_info: "+text);
+                    System.out.println("response top ten_info: "+text);
                     JSONObject resJson;
                     resJson = new JSONObject(text);
-                    System.out.println("calendar_resJson: "+ resJson);
-
-                    rescurrentDate = resJson.getString("current_date");
-                    resfirstWeek = resJson.getString("first_week_calendar");
-                    ressecWeek = resJson.getString("second_week_calendar");
-                    System.out.println("response calendar_info: "+rescurrentDate +" "+resfirstWeek+ " "+ ressecWeek);
+                    System.out.println("top ten_resJson: "+ resJson);
+                    resBookTopTen = resJson.getString("book_top_ten");
+                    System.out.println("response book_top_ten_info: "+resBookTopTen);
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    System.out.println("error in translate calendar_info");
+                    System.out.println("error in translate book_top_ten_info");
                 }
+                if(!resBookTopTen.equals("null")) {
+                    List<String> temp = new ArrayList<String>(Arrays.asList(resBookTopTen.split("#@")));
+                    System.out.println("start to translate book_top_ten");
+                    for (int i = 0; i < temp.size(); i++) {
+                        System.out.println("book top ten: " + temp.get(i));
+                        String book = temp.get(i);
+                        int index1 = book.indexOf("@@");
+                        int index2 = book.indexOf("@#");
+                        int index3 = book.indexOf("##");
+                        String mms_id = book.substring(0, index1);
+                        String name = book.substring(index1 + 2, index2);
+                        String author = book.substring(index2 + 2, index3 - 1);
+                        String cover = book.substring(index3 + 2);
+                        top_ten_mms_id.add(mms_id);
+                        top_ten_book_name.add(name);
+                        top_ten_book_author.add(author);
+                        top_ten_cover.add(cover);
+
+                    }
+                }else{
+                    System.out.println("no top_ten");
+                }
+                System.out.println("top ten cover: "+top_ten_cover);
 
 
                 personal.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        System.out.println("切換到Activity");
-                        Intent calendarIt = new Intent();
-                        calendarIt.putExtra("rescurrentData",rescurrentDate);
-                        calendarIt.putExtra("resfirstWeek",resfirstWeek);
-                        calendarIt.putExtra("ressecWeek",ressecWeek);
-                        calendarIt.setClass(Personal.this,Activity.class);
-                        startActivity(calendarIt);
-
+                        recommend_alert();
                     }
                 });
             }
@@ -373,12 +390,119 @@ public class Personal extends RobotActivity{
         lp.width = 1000;
         lp.height = 700;
         dialog.getWindow().setAttributes(lp);
+        robotAPI.robot.speak("這些是熱門書籍");
+            System.out.println("start to change recommendation top ten book list.");
+            ImageView imageview1 = dialog.findViewById(R.id.imageview1);
+            ImageView imageview2 = dialog.findViewById(R.id.imageview2);
+            ImageView imageview3 = dialog.findViewById(R.id.imageview3);
+            ImageView imageview4 = dialog.findViewById(R.id.imageview4);
+            ImageView imageview5 = dialog.findViewById(R.id.imageview5);
+            ImageView imageview6 = dialog.findViewById(R.id.imageview6);
+            ImageView imageview7 = dialog.findViewById(R.id.imageview7);
+            ImageView imageview8 = dialog.findViewById(R.id.imageview8);
+            ImageView imageview9 = dialog.findViewById(R.id.imageview9);
+            ImageView imageview10 = dialog.findViewById(R.id.imageview10);
+            TextView tv1 = dialog.findViewById(R.id.textview1);
+            TextView tv2 = dialog.findViewById(R.id.textview2);
+            TextView tv3 = dialog.findViewById(R.id.textview3);
+            TextView tv4 = dialog.findViewById(R.id.textview4);
+            TextView tv5 = dialog.findViewById(R.id.textview5);
+            TextView tv6 = dialog.findViewById(R.id.textview6);
+            TextView tv7 = dialog.findViewById(R.id.textview7);
+            TextView tv8 = dialog.findViewById(R.id.textview8);
+            TextView tv9 = dialog.findViewById(R.id.textview9);
+            TextView tv10 = dialog.findViewById(R.id.textview10);
+            new Personal.DownloadImageTask(imageview1)
+                    .execute(top_ten_cover.get(0));
+            new Personal.DownloadImageTask(imageview2)
+                    .execute(top_ten_cover.get(1));
+            new Personal.DownloadImageTask(imageview3)
+                    .execute(top_ten_cover.get(2));
+            new Personal.DownloadImageTask(imageview4)
+                    .execute(top_ten_cover.get(3));
+            new Personal.DownloadImageTask(imageview5)
+                    .execute(top_ten_cover.get(4));
+            new Personal.DownloadImageTask(imageview6)
+                    .execute(top_ten_cover.get(5));
+            new Personal.DownloadImageTask(imageview7)
+                    .execute(top_ten_cover.get(6));
+            new Personal.DownloadImageTask(imageview8)
+                    .execute(top_ten_cover.get(7));
+            new Personal.DownloadImageTask(imageview9)
+                    .execute(top_ten_cover.get(8));
+            new Personal.DownloadImageTask(imageview10)
+                    .execute(top_ten_cover.get(9));
+            tv1.setText(top_ten_book_name.get(0));
+            tv2.setText(top_ten_book_name.get(1));
+            tv3.setText(top_ten_book_name.get(2));
+            tv4.setText(top_ten_book_name.get(3));
+            tv5.setText(top_ten_book_name.get(4));
+            tv6.setText(top_ten_book_name.get(5));
+            tv7.setText(top_ten_book_name.get(6));
+            tv8.setText(top_ten_book_name.get(7));
+            tv9.setText(top_ten_book_name.get(8));
+            tv10.setText(top_ten_book_name.get(9));
 
         //hotBtn初始化
         Button hotBtn = dialog.findViewById(R.id.hotBtn);
         hotBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!resBookTopTen.equals("null")) {
+                    System.out.println("start to change recommendation top ten book list.");
+                    ImageView imageview1 = dialog.findViewById(R.id.imageview1);
+                    ImageView imageview2 = dialog.findViewById(R.id.imageview2);
+                    ImageView imageview3 = dialog.findViewById(R.id.imageview3);
+                    ImageView imageview4 = dialog.findViewById(R.id.imageview4);
+                    ImageView imageview5 = dialog.findViewById(R.id.imageview5);
+                    ImageView imageview6 = dialog.findViewById(R.id.imageview6);
+                    ImageView imageview7 = dialog.findViewById(R.id.imageview7);
+                    ImageView imageview8 = dialog.findViewById(R.id.imageview8);
+                    ImageView imageview9 = dialog.findViewById(R.id.imageview9);
+                    ImageView imageview10 = dialog.findViewById(R.id.imageview10);
+                    TextView tv1 = dialog.findViewById(R.id.textview1);
+                    TextView tv2 = dialog.findViewById(R.id.textview2);
+                    TextView tv3 = dialog.findViewById(R.id.textview3);
+                    TextView tv4 = dialog.findViewById(R.id.textview4);
+                    TextView tv5 = dialog.findViewById(R.id.textview5);
+                    TextView tv6 = dialog.findViewById(R.id.textview6);
+                    TextView tv7 = dialog.findViewById(R.id.textview7);
+                    TextView tv8 = dialog.findViewById(R.id.textview8);
+                    TextView tv9 = dialog.findViewById(R.id.textview9);
+                    TextView tv10 = dialog.findViewById(R.id.textview10);
+                    new Personal.DownloadImageTask(imageview1)
+                            .execute(top_ten_cover.get(0));
+                    new Personal.DownloadImageTask(imageview2)
+                            .execute(top_ten_cover.get(1));
+                    new Personal.DownloadImageTask(imageview3)
+                            .execute(top_ten_cover.get(2));
+                    new Personal.DownloadImageTask(imageview4)
+                            .execute(top_ten_cover.get(3));
+                    new Personal.DownloadImageTask(imageview5)
+                            .execute(top_ten_cover.get(4));
+                    new Personal.DownloadImageTask(imageview6)
+                            .execute(top_ten_cover.get(5));
+                    new Personal.DownloadImageTask(imageview7)
+                            .execute(top_ten_cover.get(6));
+                    new Personal.DownloadImageTask(imageview8)
+                            .execute(top_ten_cover.get(7));
+                    new Personal.DownloadImageTask(imageview9)
+                            .execute(top_ten_cover.get(8));
+                    new Personal.DownloadImageTask(imageview10)
+                            .execute(top_ten_cover.get(9));
+                    tv1.setText(top_ten_book_name.get(0));
+                    tv2.setText(top_ten_book_name.get(1));
+                    tv3.setText(top_ten_book_name.get(2));
+                    tv4.setText(top_ten_book_name.get(3));
+                    tv5.setText(top_ten_book_name.get(4));
+                    tv6.setText(top_ten_book_name.get(5));
+                    tv7.setText(top_ten_book_name.get(6));
+                    tv8.setText(top_ten_book_name.get(7));
+                    tv9.setText(top_ten_book_name.get(8));
+                    tv10.setText(top_ten_book_name.get(9));
+                }else{
+                    System.out.println("has no top_ten");
+                }
 
             }
         });

@@ -216,7 +216,8 @@ public class BookList extends RobotActivity{
                                     bookIt.putExtra("resAuthor",resAuthor);
                                     bookIt.putExtra("resBookName",resBookName);
                                     bookIt.putExtra("resLocandAvai",resLocandAvai.toString());
-                                    bookIt.putExtra("resRecommendation",resRecommendation.toString());
+                                    bookIt.putExtra("resRecommendation",resRecommendation);
+                                    bookIt.putExtra("resAssoRecommendation",resAssoRecommendation);
                                     bookIt.putExtra("resCover",resCover);
                                     bookIt.putExtra("resHashtag",resHashtag);
                                     bookIt.putExtra("resIntroduction",resIntroduction);

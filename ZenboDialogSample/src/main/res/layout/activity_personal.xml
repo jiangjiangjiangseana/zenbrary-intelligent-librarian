@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_p"
         android:layout_width="271dp"
         android:layout_height="244dp"
         android:layout_marginLeft="10dp"
@@ -23,7 +23,7 @@
         android:id="@+id/user_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/imageView_p"
         android:text="姓名: 資管大亨"
         android:textSize="30dp"
         android:layout_marginTop="50dp"
@@ -57,7 +57,7 @@
         android:id="@+id/recentBtn"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_toRightOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView_p"
         android:text="最近瀏覽"
         android:textSize="30dp"
         android:background="#1b365e"
@@ -84,7 +84,7 @@
         android:layout_height="145dp"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView_p"
         android:background="@drawable/askbook" />
 
     <Button
@@ -93,7 +93,7 @@
         android:layout_height="148dp"
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/questionButton"
-        android:layout_toRightOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView_p"
         android:background="@drawable/askequipment" />
 
     <Button
@@ -102,7 +102,7 @@
         android:layout_height="145dp"
         android:layout_below="@+id/bookButton"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView_p"
         android:background="@drawable/askactivity"
         />
 
@@ -115,14 +115,14 @@
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/activityButton"
         android:background="@drawable/askquestion"
-        android:layout_toRightOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView_p"
         />
 
     <Button
         android:id="@+id/recommendBtn"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView_p"
         android:layout_below="@id/recentBtn"
         android:text="我的推薦"
         android:textSize="30dp"
