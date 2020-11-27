@@ -7,31 +7,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
-import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
 
@@ -91,6 +78,16 @@ public class Personal extends RobotActivity{
     static String email;
     static String uu_list;
     static String resBookTopTen;
+
+    static String resrecAuthor;
+    static String resrecBookName;
+    static String resrecLocandAvai;
+    static String resrecRecommendation;
+    static String resrecCover;
+    static String resrecHashtag;
+    static String resrecIntroduction;
+    static String resrecRating;
+    static String resrecAssoRecommendation;
 
 
 
@@ -432,6 +429,75 @@ public class Personal extends RobotActivity{
             tv8.setText(top_ten_book_name.get(7));
             tv9.setText(top_ten_book_name.get(8));
             tv10.setText(top_ten_book_name.get(9));
+        imageview1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(0));
+            }
+        });
+        //imageView2 Onclick define
+        imageview2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(1));
+            }
+        });
+        //imageView3 Onclick define
+        imageview3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(2));
+            }
+        });
+        //imageView4 Onclick define
+        imageview4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(3));
+            }
+        });
+        //imageView5 Onclick define
+        imageview5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(4));
+            }
+        });
+        //imageView6 Onclick define
+        imageview6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(5));
+            }
+        });
+        //imageView7 Onclick define
+        imageview7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(6));
+            }
+        });
+        //imageView8 onclick define
+        imageview8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(7));
+            }
+        });
+        //imageView9 Onclick define
+        imageview9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(8));
+            }
+        });
+        //imageView10 Onclick define
+        imageview10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestBook(top_ten_mms_id.get(9));
+            }
+        });
 
         //hotBtn初始化
         Button hotBtn = dialog.findViewById(R.id.hotBtn);
@@ -490,6 +556,75 @@ public class Personal extends RobotActivity{
                     tv8.setText(top_ten_book_name.get(7));
                     tv9.setText(top_ten_book_name.get(8));
                     tv10.setText(top_ten_book_name.get(9));
+                    imageview1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(0));
+                        }
+                    });
+                    //imageView2 Onclick define
+                    imageview2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(1));
+                        }
+                    });
+                    //imageView3 Onclick define
+                    imageview3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(2));
+                        }
+                    });
+                    //imageView4 Onclick define
+                    imageview4.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(3));
+                        }
+                    });
+                    //imageView5 Onclick define
+                    imageview5.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(4));
+                        }
+                    });
+                    //imageView6 Onclick define
+                    imageview6.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(5));
+                        }
+                    });
+                    //imageView7 Onclick define
+                    imageview7.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(6));
+                        }
+                    });
+                    //imageView8 onclick define
+                    imageview8.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(7));
+                        }
+                    });
+                    //imageView9 Onclick define
+                    imageview9.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(8));
+                        }
+                    });
+                    //imageView10 Onclick define
+                    imageview10.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(top_ten_mms_id.get(9));
+                        }
+                    });
                 }else{
                     System.out.println("has no top_ten");
                 }
@@ -554,6 +689,75 @@ public class Personal extends RobotActivity{
                     tv8.setText(uu_list_book_name.get(7));
                     tv9.setText(uu_list_book_name.get(8));
                     tv10.setText(uu_list_book_name.get(9));
+                    imageview1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(0));
+                        }
+                    });
+                    //imageView2 Onclick define
+                    imageview2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(1));
+                        }
+                    });
+                    //imageView3 Onclick define
+                    imageview3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(2));
+                        }
+                    });
+                    //imageView4 Onclick define
+                    imageview4.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(3));
+                        }
+                    });
+                    //imageView5 Onclick define
+                    imageview5.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(4));
+                        }
+                    });
+                    //imageView6 Onclick define
+                    imageview6.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(5));
+                        }
+                    });
+                    //imageView7 Onclick define
+                    imageview7.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(6));
+                        }
+                    });
+                    //imageView8 onclick define
+                    imageview8.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(7));
+                        }
+                    });
+                    //imageView9 Onclick define
+                    imageview9.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(8));
+                        }
+                    });
+                    //imageView10 Onclick define
+                    imageview10.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestBook(uu_list_mms_id.get(9));
+                        }
+                    });
                 }else{
                     System.out.println("has no uu_list");
                     robotAPI.robot.speak("尚無推薦唷!請多登入查詢書籍!");
@@ -562,6 +766,111 @@ public class Personal extends RobotActivity{
             }
         });
 
+    }
+
+    public void requestBook(final String resrecmms_id){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("start running");
+                String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
+                String uniqueID = UUID.randomUUID().toString();
+                String rawData = "{\"mms_id\":\""+ resrecmms_id +"\",\"session_id\":\""+uniqueID+"\"}";
+                String charset = "UTF-8";
+                System.out.println("book info request: "+rawData);
+
+                URLConnection connection = null;
+                try {
+                    connection = new URL(bookUrl).openConnection();
+                } catch (Exception e) {
+                    Log.d(TAG,"connection failed");
+                    e.printStackTrace();
+                }
+                connection.setDoOutput(true); // Triggers POST.
+                connection.setRequestProperty("Accept-Charset", charset);
+                connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+                try (OutputStream output = connection.getOutputStream()) {
+                    Log.d("output format",output.toString());
+                    output.write(rawData.getBytes(charset));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                InputStream response = null;
+                try {
+                    response = connection.getInputStream();
+                    System.out.println("receiving book_info : "+response.toString() + " " + response);
+                } catch (Exception e) {
+                    System.out.println("error in receiving book_info");
+                    e.printStackTrace();
+                }
+                try {
+                    System.out.println("start translate book_info: ");
+                    String text;
+                    if (response != null) {
+                        Writer writer = new StringWriter();
+                        char[] buffer = new char[1024];
+                        try {
+                            Reader reader = new BufferedReader(
+                                    new InputStreamReader(response, "UTF-8"));
+                            int n;
+                            while ((n = reader.read(buffer)) != -1) {
+                                writer.write(buffer, 0, n);
+                            }
+                        } finally {
+                            response.close();
+                        }
+                        text =  writer.toString();
+                    } else {
+                        text =  "";
+                    }
+                    System.out.println("response book_info: "+text);
+
+                    JSONObject resJson;
+                    resJson = new JSONObject(text);
+                    System.out.println("resJson: "+ resJson);
+
+                    resrecAuthor = resJson.getString("author");
+                    resrecBookName = resJson.getString("book_name");
+                    resrecLocandAvai = resJson.getString("location_and_available");
+                    resrecRecommendation = resJson.getString("item_recommendation");
+                    resrecAssoRecommendation = resJson.getString("asso_recommendation");
+                    resrecCover = resJson.getString("cover");
+                    resrecHashtag = resJson.getString("hashtag");
+                    resrecIntroduction = resJson.getString("introduction");
+                    resrecRating = resJson.getString("rating");
+                    System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
+                } catch (Exception  e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    System.out.println("error in translate book_info");
+                }
+
+
+                personal.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        System.out.println("切換頁面到Book");
+                        Intent bookIt = new Intent();
+                        bookIt.putExtra("mms_id",resrecmms_id);
+                        bookIt.putExtra("resAuthor",resrecAuthor);
+                        bookIt.putExtra("resBookName",resrecBookName);
+                        bookIt.putExtra("resLocandAvai",resrecLocandAvai.toString());
+                        bookIt.putExtra("resRecommendation",resrecRecommendation.toString());
+                        bookIt.putExtra("resAssoRecommendation",resrecAssoRecommendation);
+                        bookIt.putExtra("resCover",resrecCover);
+                        bookIt.putExtra("resHashtag",resrecHashtag);
+                        bookIt.putExtra("resIntroduction",resrecIntroduction);
+                        bookIt.putExtra("resRating",resrecRating);
+                        bookIt.setClass(Personal.this,Book.class);
+                        startActivity(bookIt);
+
+
+                    }
+                });
+            }
+        }).start();
     }
 
     public static void doAnswerStuff(String answer){
