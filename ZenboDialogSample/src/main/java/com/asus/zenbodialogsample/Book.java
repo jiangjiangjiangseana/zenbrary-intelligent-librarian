@@ -636,22 +636,22 @@ public class Book extends RobotActivity {
                 String uploadBrowseLogUrl = "http://140.119.19.18:5000/api/v1/browsing_upload/";
                 System.out.println("start running");
                 String uniqueID = UUID.randomUUID().toString();
-                String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"user_id\":\""+uniqueID+"\",\"start_time\":\""+start_time+"\",\"end_time\":\""+exit_time+"\",\"session_id\":\""+uniqueID+"\"}";
+                String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"user_id\":\""+u_id+"\",\"start_time\":\""+start_time+"\",\"end_time\":\""+exit_time+"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("browse log upload request: "+rawData);
-//undooooooooooooooooooooooooooooo
+
                 URLConnection connection = null;
                 try {
                     connection = new URL(uploadBrowseLogUrl).openConnection();
                 } catch (Exception e) {
-                    Log.d(TAG,"connection failed");
+                    Log.d(TAG,"browse log connection failed");
                     e.printStackTrace();
                 }
                 connection.setDoOutput(true); // Triggers POST.
                 connection.setRequestProperty("Accept-Charset", charset);
                 connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
                 try (OutputStream output = connection.getOutputStream()) {
-                    Log.d("output format",output.toString());
+                    Log.d("browse logoutput format",output.toString());
                     output.write(rawData.getBytes(charset));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -659,13 +659,13 @@ public class Book extends RobotActivity {
                 InputStream response = null;
                 try {
                     response = connection.getInputStream();
-                    System.out.println("receiving book_info : "+response.toString() + " " + response);
+                    System.out.println("receiving browse log response : "+response.toString() + " " + response);
                 } catch (Exception e) {
-                    System.out.println("error in receiving book_info");
+                    System.out.println("error in receiving browse log");
                     e.printStackTrace();
                 }
                 try {
-                    System.out.println("start translate book_info: ");
+                    System.out.println("start translate browse log: ");
                     String text;
                     if (response != null) {
                         Writer writer = new StringWriter();
@@ -684,42 +684,18 @@ public class Book extends RobotActivity {
                     } else {
                         text =  "";
                     }
-                    System.out.println("response book_info: "+text);
+                    System.out.println("response browse log : "+text);
 
                     JSONObject resJson;
                     resJson = new JSONObject(text);
-                    System.out.println("resJson: "+ resJson);
-
-                    resrecAuthor = resJson.getString("author");
-                    resrecBookName = resJson.getString("book_name");
-                    resrecLocandAvai = resJson.getString("location_and_available");
-                    resrecRecommendation = resJson.getString("item_recommendation");
-                    resrecCover = resJson.getString("cover");
-                    resrecHashtag = resJson.getString("hashtag");
-                    resrecIntroduction = resJson.getString("introduction");
-                    resrecRating = resJson.getString("rating");
-                    System.out.println("response chinese: "+resrecAuthor +" "+resrecBookName+ " "+ resrecLocandAvai+ " "+ resrecRecommendation);
+                    System.out.println("browse log resJson: "+ resJson);
+                    String res = resJson.getString("res");
+                    System.out.println("browse log response state: "+res);
                 } catch (Exception  e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    System.out.println("error in translate book_info");
+                    System.out.println("error in translate browse log");
                 }
-
-
-                bookClass.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-
-                        System.out.println("切換頁面到Book");
-                        Intent bookIt = new Intent();
-
-                        bookIt.setClass(Book.this,Book.class);
-                        startActivity(bookIt);
-
-
-                    }
-                });
             }
         }).start();
     }

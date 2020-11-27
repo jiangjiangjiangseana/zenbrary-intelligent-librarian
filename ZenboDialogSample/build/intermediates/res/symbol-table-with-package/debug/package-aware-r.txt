@@ -633,8 +633,6 @@ id action_mode_close_button
 id action_text
 id actions
 id activityButton
-id activityInfoText
-id activityTime1
 id activity_chooser_view_content
 id add
 id alertTitle
@@ -720,6 +718,7 @@ id imageview9
 id info
 id introduceButton
 id italic
+id layout1
 id line1
 id line3
 id listMode
@@ -762,6 +761,7 @@ id screen
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scrollview1
 id search_badge
 id search_bar
 id search_button

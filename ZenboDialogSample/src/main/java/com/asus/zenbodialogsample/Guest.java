@@ -54,6 +54,7 @@ public class Guest extends RobotActivity {
     static boolean personDetected ;
     static String day;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

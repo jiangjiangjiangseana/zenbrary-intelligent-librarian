@@ -102,12 +102,13 @@
         android:layout_marginLeft="860dp" />
 
     <ScrollView
+        android:id="@+id/scrollview1"
         android:layout_width="750dp"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp">
 
-        <LinearLayout
-            android:id="@+id/layout"
+        <AbsoluteLayout
+            android:id="@+id/layout1"
             android:layout_width="750dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -155,7 +156,7 @@
 <!--            android:layout_marginTop="55dp"-->
 <!--            android:background="@drawable/notes" />-->
 
-        </LinearLayout>
+        </AbsoluteLayout>
     </ScrollView>
 
 
