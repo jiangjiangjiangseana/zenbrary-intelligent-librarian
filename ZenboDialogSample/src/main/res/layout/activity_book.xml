@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/bookName"
-        android:layout_width="600dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
         android:text="書名: "
         android:textSize="35dp"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/authorName"
-        android:layout_width="600dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bookName"
         android:text="作者: "
@@ -46,7 +46,7 @@
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="600dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/authorName"
         android:text="位置: "
@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/available"
-        android:layout_width="600dp"
+        android:layout_width="650dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/location"
         android:text="狀態: "
@@ -88,7 +88,7 @@
     <TextView
         android:id="@+id/score_tv"
         android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="320dp"
         android:layout_below="@+id/available"
         android:layout_marginTop="15dp"
@@ -160,8 +160,8 @@
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="400dp"
-        android:layout_marginTop="100dp"
-        android:layout_below="@+id/imageView">
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/iiBtn">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

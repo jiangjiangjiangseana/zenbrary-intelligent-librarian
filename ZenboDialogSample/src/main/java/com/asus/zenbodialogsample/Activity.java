@@ -56,6 +56,7 @@ public class Activity extends RobotActivity {
     public String calendarUrl = "http://140.119.19.18:5000/api/v1/calendar/";
     static int count;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         count = 0;
         super.onCreate(savedInstanceState);
@@ -345,7 +346,7 @@ public class Activity extends RobotActivity {
         AbsoluteLayout layout = (AbsoluteLayout) findViewById(R.id.layout1);
         layout.removeAllViews();
         int y = 20;
-        int z = 50;
+        int z = 100;
         for (int i = 0; i < size; i++){
             ImageView imageView = new ImageView(this);
             Drawable drawable = getResources().getDrawable(R.drawable.notes);
@@ -362,12 +363,13 @@ public class Activity extends RobotActivity {
             System.out.println("Event:"+events.get(i));
             final ArrayList<String> event = new ArrayList<>(Arrays.asList(events.get(i).split(",")));
             TextView textView = new TextView(getApplicationContext());
-            textView.setText("活動時間:"+event.get(0)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3));
+            textView.setText("活動時間:"+event.get(0).substring(1)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3));
             System.out.println("活動時間:"+event.get(0)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3));
             textView.setPadding(10,10,10,10);
             textView.setTextColor(Color.rgb(0,0,0));
             textView.setTextSize(30);
-            AbsoluteLayout.LayoutParams param1 = new AbsoluteLayout.LayoutParams(700,300,180,z);
+            textView.setWidth(350);
+            AbsoluteLayout.LayoutParams param1 = new AbsoluteLayout.LayoutParams(400,300,130,z);
             z += 400;
             layout.addView(textView,param1);
 

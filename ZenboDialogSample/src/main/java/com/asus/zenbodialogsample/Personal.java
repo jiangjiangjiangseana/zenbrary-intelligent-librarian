@@ -62,6 +62,7 @@ public class Personal extends RobotActivity{
     static String rescurrentDate;
     static String resfirstWeek;
     static String ressecWeek;
+    static String question;
     static Personal personal;
     static boolean isLogin;
     static ArrayList<String> uu_list_mms_id = new ArrayList<>();
@@ -78,6 +79,7 @@ public class Personal extends RobotActivity{
     static String email;
     static String uu_list;
     static String resBookTopTen;
+    static String visit_state = "login";
 
     static String resrecAuthor;
     static String resrecBookName;
@@ -853,6 +855,13 @@ public class Personal extends RobotActivity{
 
                         System.out.println("切換頁面到Book");
                         Intent bookIt = new Intent();
+                        if(visit_state.equals("login")){
+                            bookIt.putExtra("user_name",user_name);
+                            bookIt.putExtra("u_id",u_id);
+                            bookIt.putExtra("email",email);
+                            bookIt.putExtra("uu_list",uu_list);
+                            bookIt.putExtra("state",visit_state);
+                        }
                         bookIt.putExtra("mms_id",resrecmms_id);
                         bookIt.putExtra("resAuthor",resrecAuthor);
                         bookIt.putExtra("resBookName",resrecBookName);
@@ -1077,17 +1086,19 @@ public class Personal extends RobotActivity{
             //robotAPI.vision.cancelDetectFace();
             String text;
             final String[] resClass = new String[1];
-            final String question;
             try {
                 text = "onResult: " + jsonObject.getJSONObject("event_slu_query").getString("user_utterance");
                 String str[] = text.split(",");
-                List<String> al = new ArrayList<String>();
-                al = Arrays.asList(str);
-                int end = al.get(1).lastIndexOf("]");
-                question = al.get(1).substring(11, end - 3);
-                Log.d(TAG, "my question is : " + question);
-                Log.d(TAG, "start connect");
-
+                try {
+                    List<String> al = new ArrayList<String>();
+                    al = Arrays.asList(str);
+                    int end = al.get(1).lastIndexOf("]");
+                    question = al.get(1).substring(11, end - 3);
+                    Log.d(TAG, "my question is : " + question);
+                    Log.d(TAG, "start connect");
+                }catch(Exception e){
+                    System.out.println("error in tell question");
+                }
 
                 new Thread(new Runnable() {
                     @Override

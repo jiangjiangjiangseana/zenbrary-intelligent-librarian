@@ -18,6 +18,14 @@
         android:layout_height="700dp"
         android:layout_marginTop="20sp"></ImageView>
 
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="120dp"
+        android:background="#ffff">
+    </ImageView>
+
     <TextView
         android:id="@+id/faci_name_textView"
         android:layout_width="400dp"

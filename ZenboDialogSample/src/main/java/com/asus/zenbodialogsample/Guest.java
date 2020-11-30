@@ -13,6 +13,7 @@ import com.asus.robotframework.API.RobotErrorCode;
 import com.asus.robotframework.API.RobotFace;
 import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.robot.asus.robotactivity.RobotActivity;
 import com.asus.robotframework.API.VisionConfig.PersonDetectConfig;
@@ -26,6 +27,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -53,6 +56,7 @@ public class Guest extends RobotActivity {
     static String targetUrl;
     static boolean personDetected ;
     static String day;
+    static String question;
 
 
     @Override
@@ -72,6 +76,7 @@ public class Guest extends RobotActivity {
                 robotAPI.vision.cancelDetectFace();
                 targetUrl = "http://140.119.19.18:5000/api/v1/book_list/";
                 int aaaab = robotAPI.robot.speakAndListen("您想找什麼書呢?", new SpeakConfig().timeout(15));
+                System.out.println("request book requirment");
             }
         });
         // equipmentButton 初始化
@@ -339,23 +344,37 @@ public class Guest extends RobotActivity {
         public void onResult(JSONObject jsonObject) {
             //robotAPI.vision.cancelDetectFace();
             String text;
+            JsonArray user_input;
+            System.out.println("onResult zenbo");
             final String[] resClass = new String[1];
-            final String question;
             try {
                 text = "onResult: " + jsonObject.getJSONObject("event_slu_query").getString("user_utterance");
-                String str[] = text.split(",");
-                List<String> al = new ArrayList<String>();
-                al = Arrays.asList(str);
-                int end = al.get(1).lastIndexOf("]");
-                question = al.get(1).substring(11, end - 3);
-                Log.d(TAG, "my question is : " + question);
-                Log.d(TAG, "start connect");
+                System.out.println("onresult result: "+text);
+                String[] str_arr = text.replace("[", "").replace("]", "").split(",");
+                System.out.println("arr0 is " + str_arr[0]);
+
+                    List<String> al = new ArrayList<String>();
+                    al = Arrays.asList(text.split(","));
+                    System.out.println("al: " + al);
+                    if(al.size()>2){
+                        question = al.get(1).substring(11,al.get(1).length()-1);
+                    }else {
+                        int end;
+                        end = al.get(1).lastIndexOf("]");
+                        question = al.get(1).substring(11, end - 3);
+                    }
+                    System.out.println("al.get(1):" +al.get(1));
+
+                    Log.d(TAG, "my question is : " + question);
+                    Log.d(TAG, "start connect");
+
 
 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         System.out.println("start runningggggg");
+                        System.out.println("question is :"+question);
                         String uniqueID = UUID.randomUUID().toString();
                         String rawData = "{\"question\":\""+question+"\",\"session_id\":\""+uniqueID+"\"}";
                         Log.d("show raw Data: ",rawData);

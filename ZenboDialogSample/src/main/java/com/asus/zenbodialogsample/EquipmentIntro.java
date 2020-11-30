@@ -90,7 +90,7 @@ public class EquipmentIntro extends RobotActivity{
             Intent failIt = new Intent();
             failIt.setClass(EquipmentIntro.this,Guest.class);
             startActivity(failIt);
-            robotAPI.robot.speakAndListen("不好意思，請重複一次",new SpeakConfig().timeout(15));
+            robotAPI.robot.speak("不好意思，請重試一次");
         }else{
         TextView faci_name_tv = (TextView) findViewById(R.id.faci_name_textView);
         faci_name_tv.setText(faci_name);

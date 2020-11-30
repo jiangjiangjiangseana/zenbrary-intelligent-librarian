@@ -567,9 +567,11 @@ drawable change
 drawable chinese_lit
 drawable cloud_server
 drawable dragon
+drawable equipment
 drawable female
 drawable forest
 drawable grandma
+drawable helpword
 drawable ic_launcher
 drawable kafka
 drawable login

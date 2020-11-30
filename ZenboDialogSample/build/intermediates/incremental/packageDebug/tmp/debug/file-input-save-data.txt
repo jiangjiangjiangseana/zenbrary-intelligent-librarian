@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Nov 25 19:35:06 CST 2020
+#Mon Nov 30 13:08:38 CST 2020
 1.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\out
 2.path=classes.dex
 0.baseType=DIRECTORY

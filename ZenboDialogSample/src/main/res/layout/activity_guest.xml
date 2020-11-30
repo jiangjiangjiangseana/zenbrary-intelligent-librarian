@@ -23,7 +23,7 @@
         android:layout_width="409dp"
         android:layout_height="145dp"
         android:background="@drawable/askbook"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="450dp"
         android:layout_marginLeft="160dp"
 
         />
@@ -33,7 +33,7 @@
         android:layout_width="558dp"
         android:layout_height="148dp"
         android:background="@drawable/askequipment"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="450dp"
         android:layout_marginLeft="580dp"
         />
 
@@ -61,10 +61,10 @@
     <Button
         android:id="@+id/backButton"
         android:layout_width="330dp"
-        android:layout_height="80dp"
+        android:layout_height="200dp"
         android:layout_marginLeft="130dp"
         android:layout_marginBottom="700dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
 
         android:background="@drawable/back"
 

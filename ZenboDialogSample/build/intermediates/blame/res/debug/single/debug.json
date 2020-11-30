@@ -800,6 +800,10 @@
         "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\e1a69dd866d87be545f7a81cf9d51f30\\res\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png"
     },
     {
+        "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable_helpword.png.flat",
+        "source": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\src\\main\\res\\drawable\\helpword.png"
+    },
+    {
         "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\drawable-mdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
@@ -1526,6 +1530,10 @@
     {
         "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
         "source": "C:\\Users\\jaing\\.gradle\\caches\\transforms-2\\files-2.1\\31d97597f136f42cf8a79126dd3888e1\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable_equipment.png.flat",
+        "source": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\src\\main\\res\\drawable\\equipment.png"
     },
     {
         "merged": "C:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
