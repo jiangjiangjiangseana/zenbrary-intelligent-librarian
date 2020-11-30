@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#F8F8FF"
+    android:background="@drawable/equipment"
     tools:context="com.asus.zenbodialogsample.ZenboDialogSample">
 
 
@@ -25,7 +25,7 @@
         android:layout_toRightOf="@id/floor_image"
         android:layout_marginLeft="50dp"
         android:textSize="50dp"
-        android:textColor="#9370DB"
+        android:textColor="#1b365e"
         android:textAlignment="center"
         android:layout_marginTop="40dp"
         ></TextView>
@@ -38,7 +38,7 @@
         android:layout_below="@id/faci_name_textView"
         android:layout_marginLeft="50dp"
         android:textSize="35dp"
-        android:textColor="#A180A6"
+        android:textColor="#1b365e"
         android:layout_marginTop="20dp"
         ></TextView>
 
@@ -49,8 +49,8 @@
         android:layout_marginLeft="280dp"
         android:layout_toRightOf="@id/floor_image"
         android:padding="5dp"
-        android:background="#ECE3ED"
-        android:textColor="#A180A6"
+        android:background="#1b365e"
+        android:textColor="#C2CCD6"
         android:layout_marginTop="640dp"
         android:text="返回前頁" />
 
