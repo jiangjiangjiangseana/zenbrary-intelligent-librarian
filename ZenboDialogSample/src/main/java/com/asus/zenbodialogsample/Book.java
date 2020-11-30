@@ -113,7 +113,7 @@ public class Book extends RobotActivity {
             System.out.println("starting request this book time is: "+start_time+", the book's mms_id is: "+requestMms_id);
         }
 
-        
+
         //change string to arraylist
         List<String> localAndAvai = new ArrayList<String>(Arrays.asList(resLocandAvai.split("]")));
         System.out.println("split result: " + localAndAvai);
