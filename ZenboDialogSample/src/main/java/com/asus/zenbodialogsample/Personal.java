@@ -846,6 +846,8 @@ public class Personal extends RobotActivity{
                     e.printStackTrace();
                     System.out.println("error in translate book_info");
                 }
+                robotAPI.robot.speak("請稍等");
+
 
 
                 personal.runOnUiThread(new Runnable() {

@@ -721,6 +721,7 @@ id info
 id introduceButton
 id italic
 id layout1
+id layoutmain
 id line1
 id line3
 id listMode

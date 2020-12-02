@@ -435,6 +435,7 @@ public class Guest extends RobotActivity {
                             e.printStackTrace();
                             System.out.println("error in tell class");
                         }
+                        robotAPI.robot.speak("請稍等");
 
                         guest.runOnUiThread(new Runnable() {
                             @Override

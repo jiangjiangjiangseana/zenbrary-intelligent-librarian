@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -50,6 +51,15 @@ public class Book extends RobotActivity {
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     static Book bookClass;
     static String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
+    static String resAuthor;
+    static String resBookName;
+    static String resLocandAvai;
+    static String resRecommendation;
+    static String resAssoRecommendation;
+    static String resCover;
+    static String resHashtag;
+    static String resIntroduction;
+    static String resRating;
     static String resrecAuthor;
     static String resrecBookName;
     static String resrecLocandAvai;
@@ -85,6 +95,14 @@ public class Book extends RobotActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         robotAPI.vision.cancelDetectFace();
+        ii_list_mms_id = new ArrayList<>();
+        ii_list_book_name = new ArrayList<>();
+        ii_list_book_author = new ArrayList<>();
+        ii_list_cover = new ArrayList<>();
+        asso_list_mms_id = new ArrayList<>();
+        asso_list_book_name = new ArrayList<>();
+        asso_list_book_author = new ArrayList<>();
+        asso_list_cover = new ArrayList<>();
         System.out.println("book create score: "+score+" "+"hashtags: "+hashtagReview);
         //undo: book hashtag book score
         System.out.println("sucess to change to book");
@@ -93,16 +111,17 @@ public class Book extends RobotActivity {
         Intent bookIt = this.getIntent();
         visit_state = bookIt.getStringExtra("state");
         requestMms_id = bookIt.getStringExtra("mms_id");
-        String resAuthor = bookIt.getStringExtra("resAuthor");
-        String resBookName = bookIt.getStringExtra("resBookName");
-        String resLocandAvai = bookIt.getStringExtra("resLocandAvai");
-        String resRecommendation = bookIt.getStringExtra("resRecommendation");
-        String resAssoRecommendation = bookIt.getStringExtra("resAssoRecommendation");
-        String resCover = bookIt.getStringExtra("resCover");
-        String resHashtag = bookIt.getStringExtra("resHashtag");
-        String resRating = bookIt.getStringExtra("resRating");
+        resAuthor = bookIt.getStringExtra("resAuthor");
+        resBookName = bookIt.getStringExtra("resBookName");
+        resLocandAvai = bookIt.getStringExtra("resLocandAvai");
+        resRecommendation = bookIt.getStringExtra("resRecommendation");
+        System.out.println("new resRecommendation: "+resRecommendation);
+        resAssoRecommendation = bookIt.getStringExtra("resAssoRecommendation");
+        resCover = bookIt.getStringExtra("resCover");
+        resHashtag = bookIt.getStringExtra("resHashtag");
+        resRating = bookIt.getStringExtra("resRating");
         final String resIntroduction = bookIt.getStringExtra("resIntroduction");
-        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resCover+" "+resHashtag+" "+resIntroduction+" "+resRating+" "+resAssoRecommendation );
+        System.out.println("book_info sucess receive: " + resAuthor + resBookName  +resRating+" "+resAssoRecommendation );
         if(visit_state!=null && visit_state.equals("login")){
             user_name = bookIt.getStringExtra("user_name");
             u_id = bookIt.getStringExtra("u_id");
@@ -130,20 +149,6 @@ public class Book extends RobotActivity {
         System.out.println("local: " + loca_info);
         System.out.println("avai:" + avai_info);
 
-//        System.out.println("recommendation: " + resRecommendation + resRecommendation.getClass());
-//        final List<String> recommendation = new ArrayList<String>(Arrays.asList(resRecommendation.split("@@")));
-//        System.out.println("recommendation result: " + recommendation);
-//        final List<String> recommendation_bookName = new ArrayList<String>();
-//        final List<String> recommendation_number = new ArrayList<String>();
-//        for (int i = 0; i < recommendation.size(); i++) {
-//            System.out.println("recommendation第" + i + "組: " + recommendation.get(i));
-//            String reco_couple = recommendation.get(i);
-//            List<String> temp = new ArrayList<String>(Arrays.asList(reco_couple.split("##")));
-//            recommendation_bookName.add(temp.get(0));
-//            recommendation_number.add(temp.get(1));
-//        }
-//        System.out.println("reco_bookName: " + recommendation_bookName);
-//        System.out.println("reco_number:" + recommendation_number);
 
         List<String> temp1 = new ArrayList<String>(Arrays.asList(resRecommendation.split("#@")));
         System.out.println("start to translate iilist");
@@ -157,11 +162,15 @@ public class Book extends RobotActivity {
             String name = book.substring(index1 + 2, index2-1);
             String author = book.substring(index2 + 2, index3 - 1);
             String cover = book.substring(index3 + 2);
+            System.out.println("notyet iilist_"+i+" "+ii_list_book_name);
             ii_list_mms_id.add(mms_id);
             ii_list_book_name.add(name);
             ii_list_book_author.add(author);
             ii_list_cover.add(cover);
+            System.out.println("already iilist_"+i+" "+ii_list_book_name);
         }
+
+        System.out.println("阿阿book recommendation is iilist:"+ii_list_book_name);
 
         List<String> temp2 = new ArrayList<String>(Arrays.asList(resAssoRecommendation.split("#@")));
         System.out.println("start to translate assolist");
@@ -175,12 +184,13 @@ public class Book extends RobotActivity {
             String name = book.substring(index1 + 2, index2-1);
             String author = book.substring(index2 + 2, index3 - 1);
             String cover = book.substring(index3 + 2);
+
             asso_list_mms_id.add(mms_id);
             asso_list_book_name.add(name);
             asso_list_book_author.add(author);
             asso_list_cover.add(cover);
         }
-
+        System.out.println("阿阿book recommendation is assolist:"+asso_list_book_name);
 
         System.out.println("start to change recommendation ii_list.");
         ImageView imageview1 = (ImageView) findViewById(R.id.imageview1);
@@ -334,22 +344,7 @@ public class Book extends RobotActivity {
         } else {
             robotAPI.robot.speak("這本書現在不再各圖書館內唷");
         }
-//        //推薦清單initial
-//        ListView recommendList = (ListView) findViewById(R.id.recommendList);
-//        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendation_bookName);
-//        recommendList.setAdapter(adapter);
-//        recommendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(Book.this, "點選第 " + (i + 1) + " 個 \n" + recommendation_bookName.get(i), Toast.LENGTH_SHORT).show();
-//                String recommendationName = recommendation_bookName.get(i);
-//                System.out.println("1111111");
-//                //change string to arraylist
-//                String recommendationNumber = recommendation_number.get(i);
-//                System.out.println("recommendation_Name: " + recommendationName.getClass() + "  " + recommendationNumber);
-//                requestBook(recommendationNumber);
-//            }
-//        });
+
 
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
@@ -934,11 +929,12 @@ public class Book extends RobotActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("start running recommend book request");
+                System.out.println("start running");
+                String bookUrl = "http://140.119.19.18:5000/api/v1/book/";
                 String uniqueID = UUID.randomUUID().toString();
                 String rawData = "{\"mms_id\":\""+ resrecmms_id +"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
-                System.out.println("recommend book info request: "+rawData);
+                System.out.println("book info request: "+rawData);
 
                 URLConnection connection = null;
                 try {
@@ -959,13 +955,13 @@ public class Book extends RobotActivity {
                 InputStream response = null;
                 try {
                     response = connection.getInputStream();
-                    System.out.println("receiving recommend book_info : "+response.toString() + " " + response);
+                    System.out.println("receiving book_info : "+response.toString() + " " + response);
                 } catch (Exception e) {
-                    System.out.println("error in receiving recommend book_info");
+                    System.out.println("error in receiving book_info");
                     e.printStackTrace();
                 }
                 try {
-                    System.out.println("start translate recommend book_info: ");
+                    System.out.println("start translate book_info: ");
                     String text;
                     if (response != null) {
                         Writer writer = new StringWriter();
@@ -990,6 +986,14 @@ public class Book extends RobotActivity {
                     resJson = new JSONObject(text);
                     System.out.println("resJson: "+ resJson);
 
+                    asso_list_book_name = new ArrayList<>();
+                    asso_list_book_author = new ArrayList<>();
+                    asso_list_mms_id = new ArrayList<>();
+                    asso_list_cover = new ArrayList<>();
+                    ii_list_book_name = new ArrayList<>();
+                    ii_list_book_author = new ArrayList<>();
+                    ii_list_mms_id = new ArrayList<>();
+                    ii_list_cover = new ArrayList<>();
                     resrecAuthor = resJson.getString("author");
                     resrecBookName = resJson.getString("book_name");
                     resrecLocandAvai = resJson.getString("location_and_available");
@@ -1011,10 +1015,9 @@ public class Book extends RobotActivity {
                     @Override
                     public void run() {
 
-
                         System.out.println("切換頁面到Book");
                         Intent bookIt = new Intent();
-                        if(visit_state.equals("login")){
+                        if(visit_state!=null &&visit_state.equals("login")){
                             bookIt.putExtra("user_name",user_name);
                             bookIt.putExtra("u_id",u_id);
                             bookIt.putExtra("email",email);
@@ -1025,7 +1028,7 @@ public class Book extends RobotActivity {
                         bookIt.putExtra("resAuthor",resrecAuthor);
                         bookIt.putExtra("resBookName",resrecBookName);
                         bookIt.putExtra("resLocandAvai",resrecLocandAvai.toString());
-                        bookIt.putExtra("resRecommendation",resrecRecommendation.toString());
+                        bookIt.putExtra("resRecommendation",resrecRecommendation);
                         bookIt.putExtra("resAssoRecommendation",resrecAssoRecommendation);
                         bookIt.putExtra("resCover",resrecCover);
                         bookIt.putExtra("resHashtag",resrecHashtag);
@@ -1033,6 +1036,7 @@ public class Book extends RobotActivity {
                         bookIt.putExtra("resRating",resrecRating);
                         bookIt.setClass(Book.this,Book.class);
                         startActivity(bookIt);
+                        System.out.println("resrecrecommendation is"+resrecRecommendation+"\n"+resrecAssoRecommendation);
 
 
                     }
