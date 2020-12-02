@@ -30,11 +30,11 @@
 
     <Button
         android:id="@+id/equipmentButton"
-        android:layout_width="558dp"
-        android:layout_height="148dp"
+        android:layout_width="450dp"
+        android:layout_height="140dp"
         android:background="@drawable/askequipment"
         android:layout_marginTop="450dp"
-        android:layout_marginLeft="580dp"
+        android:layout_marginLeft="630dp"
         />
 
     <Button
