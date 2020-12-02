@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsoluteLayout;
@@ -41,6 +42,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 
@@ -55,6 +58,9 @@ public class Activity extends RobotActivity {
     static String ressecWeek;
     public String calendarUrl = "http://140.119.19.18:5000/api/v1/calendar/";
     static int count;
+    private Timer timer;
+    private TimerTask task;
+    private int currentTime;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -377,12 +383,83 @@ public class Activity extends RobotActivity {
         }
 
     }
+        private void backToZenboDialog(){
+         Intent backIt = new Intent();
+         backIt.setClass(Activity.this,ZenboDialogSample.class);
+         startActivity(backIt);
+        }
+
+        private void initTimer() {
+        // 初始化计时器
+        task = new MyTask();
+        timer = new Timer();
+    }
+
+
+    class MyTask extends TimerTask {
+        @Override
+        public void run() {
+            // 初始化计时器
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    currentTime++;
+                    if (currentTime == 10) {
+                        //在这里弹窗然后停止计时
+                        backToZenboDialog();
+                        stopTimer();
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //有按下动作时取消定时
+                stopTimer();
+                break;
+            case MotionEvent.ACTION_UP:
+                //抬起时启动定时
+                startTimer();
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+
+    }
+
+    private void startTimer() {
+        //启动计时器
+        /**
+         * java.util.Timer.schedule(TimerTask task, long delay, long period)：
+         * 这个方法是说，delay/1000秒后执行task,然后进过period/1000秒再次执行task，
+         * 这个用于循环任务，执行无数次，当然，你可以用timer.cancel();取消计时器的执行。
+         */
+        initTimer();
+        try {
+            timer.schedule(task, 100000, 1000);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            initTimer();
+            timer.schedule(task, 100000, 1000);
+        }
+    }
+
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        currentTime = 0;
+        }
 
 
 
     @Override
     protected void onResume() {
         super.onResume();
+        startTimer();
 
 
     }
@@ -390,6 +467,7 @@ public class Activity extends RobotActivity {
 
     @Override
     protected void onPause() {
+        stopTimer();
         super.onPause();
 
 
@@ -398,6 +476,7 @@ public class Activity extends RobotActivity {
 
     @Override
     protected void onDestroy() {
+        stopTimer();
         super.onDestroy();
     }
 
