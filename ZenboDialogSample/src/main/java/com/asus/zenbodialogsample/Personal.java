@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -78,6 +79,7 @@ public class Personal extends RobotActivity{
     static String user_name;
     static String email;
     static String uu_list;
+    static String gender;
     static String resBookTopTen;
     static String visit_state = "login";
 
@@ -98,13 +100,14 @@ public class Personal extends RobotActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal);
+        setContentView(R.layout.activity_person);
         System.out.println("success to change to user");
         personal = Personal.this;
         Intent userIt = this.getIntent();
         user_name = userIt.getStringExtra("user_name");
         u_id = userIt.getStringExtra("u_id");
         email = userIt.getStringExtra("email");
+        gender = userIt.getStringExtra("gender");
         uu_list = userIt.getStringExtra("uu_list");
         robotAPI.robot.speak("哈囉!"+user_name);
 
@@ -134,12 +137,18 @@ public class Personal extends RobotActivity{
         System.out.println("user uu_list: "+uu_list);
 
         //user_info show on app
+        ImageView imageView_pro = (ImageView) findViewById(R.id.imageView_p);
         TextView user_id_tv = (TextView) findViewById(R.id.user_id);
         TextView user_email_tv = (TextView) findViewById(R.id.user_email);
         TextView user_name_tv = (TextView) findViewById(R.id.user_name);
         user_id_tv.setText("學號: "+u_id);
         user_email_tv.setText("信箱: \n"+email);
         user_name_tv.setText("姓名: "+user_name);
+        if(gender.equals("female")){
+            Drawable drawable = getResources().getDrawable(R.drawable.female);
+            imageView_pro.setImageDrawable(drawable);
+        }
+
 
 
         // bookButton 初始化

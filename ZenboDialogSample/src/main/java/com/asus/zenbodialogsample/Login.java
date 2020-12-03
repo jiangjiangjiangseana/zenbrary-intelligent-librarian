@@ -54,6 +54,7 @@ public class Login extends RobotActivity{
     static String email;
     static String uu_list;
     static String user_name;
+    static String gender;
 
 
     @Override
@@ -171,6 +172,7 @@ public class Login extends RobotActivity{
                     System.out.println("resJson: "+ resJson);
                     responseState = resJson.getString("res");
                     u_id = resJson.getString("uid");
+                    gender = resJson.getString("gender");
                     email = resJson.getString("email");
                     uu_list = resJson.getString("book_info");
                     user_name = resJson.getString("name");
@@ -194,6 +196,7 @@ public class Login extends RobotActivity{
                         userIt.putExtra("user_name",user_name);
                         userIt.putExtra("u_id",u_id);
                         userIt.putExtra("email",email);
+                        userIt.putExtra("gender",gender);
                         userIt.putExtra("uu_list",uu_list);
                         userIt.putExtra("user_info", user_info.toString());
                         userIt.setClass(Login.this, Personal.class);

@@ -1,0 +1,15 @@
+#Internal package file, do not edit.
+#Thu Dec 03 20:22:09 CST 2020
+1.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\out
+2.path=classes.dex
+0.baseType=DIRECTORY
+2.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out
+2.set=DEX
+1.baseType=DIRECTORY
+count=3
+1.set=DEX
+0.path=classes.dex
+0.set=DEX
+0.base=C\:\\Users\\jaing\\AndroidStudioProjects\\zenbo project\\zenbocode\\ZenboDialogSample\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+2.baseType=DIRECTORY
+1.path=classes_0.dex
