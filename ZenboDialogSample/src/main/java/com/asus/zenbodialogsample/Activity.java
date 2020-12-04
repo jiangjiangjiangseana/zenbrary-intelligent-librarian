@@ -341,13 +341,6 @@ public class Activity extends RobotActivity {
         }).start();
     }
 
-
-//    public final void getEvent(int e){
-//        System.out.println("Activities:"+firstActivity.get(e+2));
-//        events = new ArrayList<>(Arrays.asList(firstActivity.get(e+2).split("],")));
-//        System.out.println(events);
-//    }
-
     public void addActivity(int size){
         AbsoluteLayout layout = (AbsoluteLayout) findViewById(R.id.layout1);
         layout.removeAllViews();
@@ -378,8 +371,6 @@ public class Activity extends RobotActivity {
             AbsoluteLayout.LayoutParams param1 = new AbsoluteLayout.LayoutParams(400,300,130,z);
             z += 400;
             layout.addView(textView,param1);
-
-
         }
 
     }
@@ -454,32 +445,21 @@ public class Activity extends RobotActivity {
         currentTime = 0;
         }
 
-
-
     @Override
     protected void onResume() {
         super.onResume();
         startTimer();
-
-
     }
-
-
     @Override
     protected void onPause() {
         stopTimer();
         super.onPause();
-
-
     }
-
-
     @Override
     protected void onDestroy() {
         stopTimer();
         super.onDestroy();
     }
-
     public static RobotCallback robotCallback = new RobotCallback() {
         @Override
         public void onResult(int cmd, int serial, RobotErrorCode err_code, Bundle result) {

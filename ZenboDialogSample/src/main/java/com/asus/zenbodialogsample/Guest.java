@@ -6,19 +6,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
 import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.robot.asus.robotactivity.RobotActivity;
-import com.asus.robotframework.API.VisionConfig.PersonDetectConfig;
-import com.asus.robotframework.API.VisionConfig;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -27,8 +21,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -38,9 +30,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.UUID;
 import android.widget.Button;
-
-import static java.lang.Integer.parseInt;
-
 
 public class Guest extends RobotActivity {
     public final static String TAG = "ZenboDialogSample";
@@ -268,7 +257,6 @@ public class Guest extends RobotActivity {
                     System.out.println("error in translate calendar_info");
                 }
 
-
                 guest.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -311,9 +299,6 @@ public class Guest extends RobotActivity {
                 int sayActivity = robotAPI.robot.speak("歡迎~!");
                 personDetected = false;
             }
-
-//            robotAPI.robot.stopSpeak();
-
         }
     };
 
@@ -352,7 +337,6 @@ public class Guest extends RobotActivity {
                 System.out.println("onresult result: "+text);
                 String[] str_arr = text.replace("[", "").replace("]", "").split(",");
                 System.out.println("arr0 is " + str_arr[0]);
-
                     List<String> al = new ArrayList<String>();
                     al = Arrays.asList(text.split(","));
                     System.out.println("al: " + al);
@@ -363,12 +347,6 @@ public class Guest extends RobotActivity {
                         end = al.get(1).lastIndexOf("]");
                         question = al.get(1).substring(11, end - 3);
                     }
-                    System.out.println("al.get(1):" +al.get(1));
-
-                    Log.d(TAG, "my question is : " + question);
-                    Log.d(TAG, "start connect");
-
-
 
                 new Thread(new Runnable() {
                     @Override
@@ -471,14 +449,10 @@ public class Guest extends RobotActivity {
 
         @Override
         public void onRetry(JSONObject jsonObject) {
-
         }
     };
-
 
     public Guest() {
         super(robotCallback, robotListenCallback);
     }
-
-
 }
