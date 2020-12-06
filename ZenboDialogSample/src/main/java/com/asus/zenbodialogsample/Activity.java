@@ -58,13 +58,16 @@ public class Activity extends RobotActivity {
     static String ressecWeek;
     public String calendarUrl = "http://140.119.19.18:5000/api/v1/calendar/";
     static int count;
+    static int count1;
     private Timer timer;
     private TimerTask task;
     private int currentTime;
 
 
     protected void onCreate(Bundle savedInstanceState) {
+        day = 0;
         count = 0;
+        count1 = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
 //        TextView activityInfoText = (TextView)findViewById(R.id.activityInfoText);
@@ -197,6 +200,19 @@ public class Activity extends RobotActivity {
             public void onClick(View v){
                 count += 1;
                 System.out.println("count喔喔喔喔"+count);
+                day = count*7;
+                calendarAPI(day);
+
+            }
+        });
+
+
+        Button button9 = (Button)findViewById(R.id.button9);
+        button9.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                count -= 1;
+                System.out.println("count!!!!"+count);
                 day = count*7;
                 calendarAPI(day);
 
@@ -369,8 +385,8 @@ public class Activity extends RobotActivity {
             System.out.println("Event:"+events.get(i));
             final ArrayList<String> event = new ArrayList<>(Arrays.asList(events.get(i).split(",")));
             TextView textView = new TextView(getApplicationContext());
-            textView.setText("活動時間:"+event.get(0).substring(1)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3));
-            System.out.println("活動時間:"+event.get(0)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3));
+            textView.setText("活動時間:"+event.get(0).substring(1)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3).replace(']',' '));
+            System.out.println("活動時間:"+event.get(0)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3).replace(']',' '));
             textView.setPadding(10,10,10,10);
             textView.setTextColor(Color.rgb(0,0,0));
             textView.setTextSize(30);
