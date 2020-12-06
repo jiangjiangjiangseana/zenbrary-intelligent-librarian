@@ -4,45 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
-import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
-import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.UUID;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.view.View;
-import android.widget.Toast;
-
 import static java.lang.Integer.parseInt;
 
 public class Register extends RobotActivity{
@@ -53,13 +32,11 @@ public class Register extends RobotActivity{
     static Register registerClass;
     static String responseState;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         registerClass = Register.this;
-
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new Button.OnClickListener() {
@@ -95,21 +72,33 @@ public class Register extends RobotActivity{
                 }else{
                     gender = "female";
                 }
-                System.out.println("information: "+user_name+" "+student_id+account+password+confirm_pw+department+gender);
+                System.out.println("user register information: "+user_name+" "+student_id+account+password+confirm_pw+department+gender);
                 //connect to server register function
                 if(password.equals(confirm_pw)) {
                     registerAPI(user_name,student_id, account, password, department, gender);
                 }else{
                     System.out.println("confirm fail");
-                    //undo: show comfirm fail message to user!!!!!
                     robotAPI.robot.speak("兩次密碼不一樣唷!");
                 }
-
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     //限制內建返回按鍵
@@ -118,27 +107,6 @@ public class Register extends RobotActivity{
             return true;
         }
         return false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     public void registerAPI(final String user_name,final String student_id, final String account, final String password, final String department, final String gender){
@@ -214,16 +182,13 @@ public class Register extends RobotActivity{
                         System.out.println("切換回到Login");
                         //go back to login
                         Intent loginIt = new Intent();
-                        //loginIt.putExtra("resJson",resJson.toString());
                         loginIt.setClass(Register.this, Login.class);
                         startActivity(loginIt);
                         robotAPI.robot.speak("註冊成功");
                     }else{
-                        //undo: register fail
                         System.out.println("register fail");
                         robotAPI.robot.speak("註冊失敗，請在試一次");
                     }
-
                     }
                 });
             }

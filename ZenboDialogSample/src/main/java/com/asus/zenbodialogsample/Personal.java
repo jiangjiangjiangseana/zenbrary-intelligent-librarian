@@ -21,13 +21,11 @@ import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -41,18 +39,9 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.UUID;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.view.View;
-import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 public class Personal extends RobotActivity{
-//public class Personal extends AppCompatActivity {
-
-    public final static String TAG = "ZenboDialogSample";
-    public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     static String targetUrl;
     public static String  resAnswer;
     static JSONObject resJson;
@@ -64,7 +53,7 @@ public class Personal extends RobotActivity{
     static String ressecWeek;
     static String question;
     static Personal personal;
-    static boolean isLogin;
+    static boolean isLogin = true;
     static ArrayList<String> uu_list_mms_id = new ArrayList<>();
     static ArrayList<String> uu_list_book_name = new ArrayList<>();
     static ArrayList<String> uu_list_book_author = new ArrayList<>();
@@ -78,9 +67,9 @@ public class Personal extends RobotActivity{
     static String user_name;
     static String email;
     static String uu_list;
+    static String gender;
     static String resBookTopTen;
     static String visit_state = "login";
-
     static String resrecAuthor;
     static String resrecBookName;
     static String resrecLocandAvai;
@@ -91,23 +80,20 @@ public class Personal extends RobotActivity{
     static String resrecRating;
     static String resrecAssoRecommendation;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal);
-        System.out.println("success to change to user");
+        setContentView(R.layout.activity_person);
         personal = Personal.this;
         Intent userIt = this.getIntent();
         user_name = userIt.getStringExtra("user_name");
         u_id = userIt.getStringExtra("u_id");
         email = userIt.getStringExtra("email");
+        gender = userIt.getStringExtra("gender");
         uu_list = userIt.getStringExtra("uu_list");
         robotAPI.robot.speak("哈囉!"+user_name);
 
+        //初始化uulist_recommendation
         List<String> temp = new ArrayList<String>(Arrays.asList(uu_list.split("#@")));
         if(!uu_list.equals("null")) {
             System.out.println("start to translate uu_list");
@@ -130,17 +116,18 @@ public class Personal extends RobotActivity{
             System.out.println("no uu_list");
         }
 
-        isLogin = true;
-        System.out.println("user uu_list: "+uu_list);
-
         //user_info show on app
+        ImageView imageView_pro = (ImageView) findViewById(R.id.imageView_p);
         TextView user_id_tv = (TextView) findViewById(R.id.user_id);
         TextView user_email_tv = (TextView) findViewById(R.id.user_email);
         TextView user_name_tv = (TextView) findViewById(R.id.user_name);
         user_id_tv.setText("學號: "+u_id);
         user_email_tv.setText("信箱: \n"+email);
         user_name_tv.setText("姓名: "+user_name);
-
+        if(gender.equals("female")){
+            Drawable drawable = getResources().getDrawable(R.drawable.female);
+            imageView_pro.setImageDrawable(drawable);
+        }
 
         // bookButton 初始化
         Button bButton = findViewById(R.id.bookButton);
@@ -190,17 +177,13 @@ public class Personal extends RobotActivity{
         logoutBt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //undo: 清空user資訊，上船瀏覽資料，寫成一個function，因為超過時間也要這樣做
-
-
-
+                    //undo: 清空user資訊
                     isLogin = false;
                     Intent backIT = new Intent();
                     backIT.setClass(Personal.this,ZenboDialogSample.class);
                     startActivity(backIT);
                 }
             });
-
 
         //recommendBtn初始化
         Button recommendBtn = findViewById(R.id.recommendBtn);
@@ -217,27 +200,12 @@ public class Personal extends RobotActivity{
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
-
 
     @Override
     protected void onPause() {
         super.onPause();
-
-
     }
-
-
-    //限制內建返回按鍵
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            return true;
-        }
-        return false;
-    }
-
 
     public void requestTopTen(){
         final String topTenUrl = "http://140.119.19.18:5000/api/v1/book_top_ten/";
@@ -344,11 +312,8 @@ public class Personal extends RobotActivity{
 
     public void recommend_alert(){
         System.out.println("trigger recommend_alert");
-        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
-        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
         LayoutInflater inflater = LayoutInflater.from(Personal.this);
         final View v = inflater.inflate(R.layout.activity_recommend, null);
-
         Html.ImageGetter imgGetter = new Html.ImageGetter() {
             @Override
             public Drawable getDrawable(String source) {
@@ -358,10 +323,8 @@ public class Personal extends RobotActivity{
                 );
                 drawable.setBounds(0,0,120,100);
                 return drawable;
-
             }
         };
-
         //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
         final AlertDialog dialog = new AlertDialog.Builder(Personal.this)
                 .setTitle("我的推薦")
@@ -374,7 +337,6 @@ public class Personal extends RobotActivity{
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dialog.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = 1000;
         lp.height = 700;
@@ -764,7 +726,6 @@ public class Personal extends RobotActivity{
                     System.out.println("has no uu_list");
                     robotAPI.robot.speak("尚無推薦唷!請多登入查詢書籍!");
                 }
-
             }
         });
 
@@ -780,12 +741,10 @@ public class Personal extends RobotActivity{
                 String rawData = "{\"mms_id\":\""+ resrecmms_id +"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("book info request: "+rawData);
-
                 URLConnection connection = null;
                 try {
                     connection = new URL(bookUrl).openConnection();
                 } catch (Exception e) {
-                    Log.d(TAG,"connection failed");
                     e.printStackTrace();
                 }
                 connection.setDoOutput(true); // Triggers POST.
@@ -826,11 +785,9 @@ public class Personal extends RobotActivity{
                         text =  "";
                     }
                     System.out.println("response book_info: "+text);
-
                     JSONObject resJson;
                     resJson = new JSONObject(text);
                     System.out.println("resJson: "+ resJson);
-
                     resrecAuthor = resJson.getString("author");
                     resrecBookName = resJson.getString("book_name");
                     resrecLocandAvai = resJson.getString("location_and_available");
@@ -847,14 +804,9 @@ public class Personal extends RobotActivity{
                     System.out.println("error in translate book_info");
                 }
                 robotAPI.robot.speak("請稍等");
-
-
-
                 personal.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
                         System.out.println("切換頁面到Book");
                         Intent bookIt = new Intent();
                         if(visit_state.equals("login")){
@@ -876,8 +828,6 @@ public class Personal extends RobotActivity{
                         bookIt.putExtra("resRating",resrecRating);
                         bookIt.setClass(Personal.this,Book.class);
                         startActivity(bookIt);
-
-
                     }
                 });
             }
@@ -892,13 +842,9 @@ public class Personal extends RobotActivity{
             return;
         }
         //判斷回傳的答案是哪種類別並且作適當的回答
-        System.out.println("you can say the answer");
-        //int sayNum = robotAPI.robot.speakAndListen(resAnswer, new SpeakConfig().timeout(8));
         int sayNum = robotAPI.robot.speak(resAnswer);
         resAnswer = null;
     }
-
-
     public void changeToBookList(){
         Intent it = new Intent();
         it.putExtra("resJson",resJson.toString());
@@ -910,14 +856,12 @@ public class Personal extends RobotActivity{
         it.setClass(Personal.this,BookList.class);
         startActivity(it);
     }
-
     public void changeToFacility(){
         Intent facIt = new Intent();
         facIt.putExtra("resJson",resJson.toString());
         facIt.setClass(Personal.this,EquipmentIntro.class);
         startActivity(facIt);
     }
-
     public void calendarAPI(){
         new Thread(new Runnable() {
             @Override
@@ -928,7 +872,6 @@ public class Personal extends RobotActivity{
                 String rawData = "{\"day\":\""+day+"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("calendar request: "+rawData);
-
                 URLConnection connection = null;
                 try {
                     connection = new URL(calendarUrl).openConnection();
@@ -978,7 +921,6 @@ public class Personal extends RobotActivity{
                     JSONObject resJson;
                     resJson = new JSONObject(text);
                     System.out.println("calendar_resJson: "+ resJson);
-
                     rescurrentDate = resJson.getString("current_date");
                     resfirstWeek = resJson.getString("first_week_calendar");
                     ressecWeek = resJson.getString("second_week_calendar");
@@ -988,8 +930,6 @@ public class Personal extends RobotActivity{
                     e.printStackTrace();
                     System.out.println("error in translate calendar_info");
                 }
-
-
                 personal.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -1000,19 +940,23 @@ public class Personal extends RobotActivity{
                         calendarIt.putExtra("ressecWeek",ressecWeek);
                         calendarIt.setClass(Personal.this,Activity.class);
                         startActivity(calendarIt);
-
                     }
                 });
             }
         }).start();}
-
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
+    //限制內建返回按鍵
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            return true;
+        }
+        return false;
+    }
 
     //轉url圖片的class
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -1050,11 +994,9 @@ public class Personal extends RobotActivity{
         public void onStateChange(int cmd, int serial, RobotErrorCode err_code, RobotCmdState state) {
             super.onStateChange(cmd, serial, err_code, state);
         }
-
         @Override
         public void initComplete() {
             super.initComplete();
-
         }
 
     };
@@ -1096,12 +1038,9 @@ public class Personal extends RobotActivity{
                     al = Arrays.asList(str);
                     int end = al.get(1).lastIndexOf("]");
                     question = al.get(1).substring(11, end - 3);
-                    Log.d(TAG, "my question is : " + question);
-                    Log.d(TAG, "start connect");
                 }catch(Exception e){
                     System.out.println("error in tell question");
                 }
-
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -1115,7 +1054,6 @@ public class Personal extends RobotActivity{
                         try {
                             connection = new URL(targetUrl).openConnection();
                         } catch (Exception e) {
-                            Log.d(TAG,"connection failed");
                             e.printStackTrace();
                         }
                         connection.setDoOutput(true); // Triggers POST.

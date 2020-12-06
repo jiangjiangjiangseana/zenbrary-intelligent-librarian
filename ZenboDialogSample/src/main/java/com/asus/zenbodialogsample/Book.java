@@ -110,7 +110,7 @@ public class Book extends RobotActivity {
         asso_list_book_name = new ArrayList<>();
         asso_list_book_author = new ArrayList<>();
         asso_list_cover = new ArrayList<>();
-        System.out.println("book create score: "+score+" "+"hashtags: "+hashtagReview);
+        System.out.println("book create score: " + score + " " + "hashtags: " + hashtagReview);
         //undo: book hashtag book score
         System.out.println("sucess to change to book");
         setContentView(R.layout.activity_book);
@@ -122,14 +122,14 @@ public class Book extends RobotActivity {
         resBookName = bookIt.getStringExtra("resBookName");
         resLocandAvai = bookIt.getStringExtra("resLocandAvai");
         resRecommendation = bookIt.getStringExtra("resRecommendation");
-        System.out.println("new resRecommendation: "+resRecommendation);
+        System.out.println("new resRecommendation: " + resRecommendation);
         resAssoRecommendation = bookIt.getStringExtra("resAssoRecommendation");
         resCover = bookIt.getStringExtra("resCover");
         resHashtag = bookIt.getStringExtra("resHashtag");
         resRating = bookIt.getStringExtra("resRating");
         final String resIntroduction = bookIt.getStringExtra("resIntroduction");
-        System.out.println("book_info sucess receive: " + resAuthor + resBookName  +resRating+" "+resAssoRecommendation );
-        if(visit_state!=null && visit_state.equals("login")){
+        System.out.println("book_info sucess receive: " + resAuthor + resBookName + resRating + " " + resAssoRecommendation);
+        if (visit_state != null && visit_state.equals("login")) {
             user_name = bookIt.getStringExtra("user_name");
             u_id = bookIt.getStringExtra("u_id");
             email = bookIt.getStringExtra("email");
@@ -137,7 +137,7 @@ public class Book extends RobotActivity {
             System.out.println("book request state is login,start timer!");
             Calendar mCal = Calendar.getInstance();
             start_time = DateFormat.format("yyyy-MM-dd kk:mm:ss", mCal.getTime());    // kk:24小時制, hh:12小時制
-            System.out.println("starting request this book time is: "+start_time+", the book's mms_id is: "+requestMms_id);
+            System.out.println("starting request this book time is: " + start_time + ", the book's mms_id is: " + requestMms_id);
         }
 
 
@@ -166,18 +166,18 @@ public class Book extends RobotActivity {
             int index2 = book.indexOf("@#");
             int index3 = book.indexOf("##");
             String mms_id = book.substring(0, index1);
-            String name = book.substring(index1 + 2, index2-1);
+            String name = book.substring(index1 + 2, index2 - 1);
             String author = book.substring(index2 + 2, index3 - 1);
             String cover = book.substring(index3 + 2);
-            System.out.println("notyet iilist_"+i+" "+ii_list_book_name);
+            System.out.println("notyet iilist_" + i + " " + ii_list_book_name);
             ii_list_mms_id.add(mms_id);
             ii_list_book_name.add(name);
             ii_list_book_author.add(author);
             ii_list_cover.add(cover);
-            System.out.println("already iilist_"+i+" "+ii_list_book_name);
+            System.out.println("already iilist_" + i + " " + ii_list_book_name);
         }
 
-        System.out.println("阿阿book recommendation is iilist:"+ii_list_book_name);
+        System.out.println("阿阿book recommendation is iilist:" + ii_list_book_name);
 
         List<String> temp2 = new ArrayList<String>(Arrays.asList(resAssoRecommendation.split("#@")));
         System.out.println("start to translate assolist");
@@ -188,7 +188,7 @@ public class Book extends RobotActivity {
             int index2 = book.indexOf("@#");
             int index3 = book.indexOf("##");
             String mms_id = book.substring(0, index1);
-            String name = book.substring(index1 + 2, index2-1);
+            String name = book.substring(index1 + 2, index2 - 1);
             String author = book.substring(index2 + 2, index3 - 1);
             String cover = book.substring(index3 + 2);
 
@@ -197,7 +197,7 @@ public class Book extends RobotActivity {
             asso_list_book_author.add(author);
             asso_list_cover.add(cover);
         }
-        System.out.println("阿阿book recommendation is assolist:"+asso_list_book_name);
+        System.out.println("阿阿book recommendation is assolist:" + asso_list_book_name);
 
         System.out.println("start to change recommendation ii_list.");
         ImageView imageview1 = (ImageView) findViewById(R.id.imageview1);
@@ -326,19 +326,28 @@ public class Book extends RobotActivity {
         TextView location = (TextView) findViewById(R.id.location);
         TextView available = (TextView) findViewById(R.id.available);
         TextView rating = (TextView) findViewById(R.id.score_tv);
-
+        String locationString = "";
+        String availableString = "";
+        for (int i = 0; i < loca_info.size(); i++) {
+            locationString += loca_info.get(i) + " ";
+        }
+        for (int i = 0; i < avai_info.size(); i++) {
+            availableString += avai_info.get(i) + " ";
+        }
         bookName.setText("書名: " + resBookName);
         authorName.setText("作者: " + resAuthor);
-        location.setText("位置: " + loca_info);
-        available.setText("狀態: " + avai_info);
-        rating.setText("評分: "+resRating);
+        location.setText("位置: " + locationString);
+        available.setText("狀態: " + availableString);
+        if(resRating.equals("null")){
+            resRating = "尚未有評分!";
+        }
+        rating.setText("評分: " + resRating);
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
                 .execute(resCover);
 
         boolean avai = false;
         String loc = "";
         for (int i = 0; i < avai_info.size(); i++) {
-            System.out.println("substring: " + avai_info.get(i));
             String state = avai_info.get(i);
             System.out.println("on the shelf" + state.equals("\"available\""));
             if (state.equals("\"available\"")) {
@@ -352,35 +361,33 @@ public class Book extends RobotActivity {
             robotAPI.robot.speak("這本書現在不再各圖書館內唷");
         }
 
-
         //backButton 初始化
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(visit_state!= null && visit_state.equals("login")){
+                if (visit_state != null && visit_state.equals("login")) {
                     System.out.println("stop viewing this book,stop timer!");
                     Calendar mCal = Calendar.getInstance();
                     exit_time = DateFormat.format("yyyy-MM-dd kk:mm:ss", mCal.getTime());    // kk:24小時制, hh:12小時制
-                    System.out.println("stop viewing this book time is: "+exit_time+", stop viewing mms_id is: "+requestMms_id);
+                    System.out.println("stop viewing this book time is: " + exit_time + ", stop viewing mms_id is: " + requestMms_id);
                     upload_browse_log();
                     Intent backIT = new Intent();
-                    backIT.putExtra("view_mms_id",requestMms_id);
-                    backIT.putExtra("change","book");
-                    backIT.putExtra("user_name",user_name);
-                    backIT.putExtra("u_id",u_id);
-                    backIT.putExtra("email",email);
-                    backIT.putExtra("uu_list",uu_list);
+                    backIT.putExtra("view_mms_id", requestMms_id);
+                    backIT.putExtra("change", "book");
+                    backIT.putExtra("user_name", user_name);
+                    backIT.putExtra("u_id", u_id);
+                    backIT.putExtra("email", email);
+                    backIT.putExtra("uu_list", uu_list);
                     backIT.setClass(Book.this, Personal.class);
                     startActivity(backIT);
-                }else{
-                Intent backIT = new Intent();
-                backIT.setClass(Book.this, Guest.class);
-                startActivity(backIT);
+                } else {
+                    Intent backIT = new Intent();
+                    backIT.setClass(Book.this, Guest.class);
+                    startActivity(backIT);
                 }
             }
         });
-
 
         //hashButton 初始化
         Button hashButton = findViewById(R.id.hashtagBtn);
@@ -392,20 +399,19 @@ public class Book extends RobotActivity {
             }
         });
 
-
         //introduceButton 初始化
         Button introButton = findViewById(R.id.introduceButton);
         introButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String noIntro = "暫無簡介";
-                if(resIntroduction.equals("")){
+                if (resIntroduction.equals("")) {
                     introduce_alert(noIntro);
-                }else{
-                introduce_alert(resIntroduction);}
+                } else {
+                    introduce_alert(resIntroduction);
+                }
             }
         });
-
 
         //iilistBtn初始化
         Button iilistBtn = findViewById(R.id.iiBtn);
@@ -468,7 +474,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(0));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView2 Onclick define
@@ -476,7 +482,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(1));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView3 Onclick define
@@ -484,7 +490,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(2));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView4 Onclick define
@@ -492,7 +498,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(3));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView5 Onclick define
@@ -500,7 +506,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(4));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView6 Onclick define
@@ -508,7 +514,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(5));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView7 Onclick define
@@ -516,7 +522,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(6));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView8 onclick define
@@ -524,7 +530,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(7));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView9 Onclick define
@@ -532,7 +538,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(8));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView10 Onclick define
@@ -540,12 +546,11 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(ii_list_mms_id.get(9));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
             }
         });
-
 
         //assolistBtn初始化
         Button assoBtn = findViewById(R.id.assoBtn);
@@ -607,7 +612,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(0));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView2 Onclick define
@@ -615,7 +620,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(1));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView3 Onclick define
@@ -623,7 +628,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(2));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView4 Onclick define
@@ -631,7 +636,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(3));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView5 Onclick define
@@ -639,7 +644,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(4));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView6 Onclick define
@@ -647,7 +652,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(5));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView7 Onclick define
@@ -655,7 +660,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(6));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView8 onclick define
@@ -663,7 +668,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(7));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView9 Onclick define
@@ -671,7 +676,7 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(8));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
                 //imageView10 Onclick define
@@ -679,18 +684,12 @@ public class Book extends RobotActivity {
                     @Override
                     public void onClick(View view) {
                         requestBook(asso_list_mms_id.get(9));
-                        System.out.println("recommend login"+visit_state);
+                        System.out.println("recommend login" + visit_state);
                     }
                 });
-
             }
         });
-
-
-
-}
-
-
+    }
 
     //轉url圖片的class
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -712,12 +711,10 @@ public class Book extends RobotActivity {
             }
             return mIcon11;
         }
-
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
     }
-
 
     //限制內建返回按鍵
     public boolean onKeyDown(int keyCode, KeyEvent event){
@@ -726,7 +723,6 @@ public class Book extends RobotActivity {
         }
         return false;
     }
-
 
     private void backToZenboDialog(){
         Intent backIt = new Intent();
@@ -739,7 +735,6 @@ public class Book extends RobotActivity {
         task = new Book.MyTask();
         timer = new Timer();
     }
-
 
     class MyTask extends TimerTask {
         @Override
@@ -772,7 +767,6 @@ public class Book extends RobotActivity {
                 break;
         }
         return super.dispatchTouchEvent(ev);
-
     }
 
     private void startTimer() {
@@ -799,23 +793,17 @@ public class Book extends RobotActivity {
         currentTime = 0;
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
         startTimer();
-
     }
-
 
     @Override
     protected void onPause() {
         stopTimer();
         super.onPause();
-
-
     }
-
 
     @Override
     protected void onDestroy() {
@@ -823,17 +811,10 @@ public class Book extends RobotActivity {
         super.onDestroy();
     }
 
-
     public void hashtag_alert(){
         robotAPI.robot.speak("填寫hashtag請用空格隔開");
-        System.out.println("hash function called");
-        //inflate目的是把自己設計xml的Layout轉成View，作用類似於findViewById，它用於一個沒有被載入或者想要動態
-        //載入的介面，當被載入Activity後才可以用findViewById來獲得其中界面的元素
-
         LayoutInflater inflater = LayoutInflater.from(Book.this);
         final View v = inflater.inflate(R.layout.activity_hashtag, null);
-
-        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
         AlertDialog dialog = new AlertDialog.Builder(Book.this)
                 .setTitle("請輸入Hashtag")
                 .setView(v)
@@ -845,7 +826,6 @@ public class Book extends RobotActivity {
                         hashtagReview = hashtag.getText().toString();
                         System.out.println("score: "+score+" "+"hashtags: "+hashtagReview);
                         uploadReview(Float.toString(score),hashtagReview);
-
                     }
                 })
                 .setNeutralButton("取消",new DialogInterface.OnClickListener() {
@@ -871,11 +851,10 @@ public class Book extends RobotActivity {
             }
         };
         mRatingBar.setOnRatingBarChangeListener(ratingBarOnRatingBarChange);//設定監聽器
-
     }
+
     public void introduce_alert(String introduction){
         System.out.println("introduce function called");
-        //語法一：new AlertDialog.Builder(主程式類別).XXX.XXX.XXX;
         AlertDialog dialog = new AlertDialog.Builder(Book.this)
                 .setTitle("書籍簡介")
                 .setMessage(introduction)
@@ -892,7 +871,6 @@ public class Book extends RobotActivity {
         dialog.show();
     }
 
-
     private void uploadReview(final String score, final String hashtags){
         new Thread(new Runnable() {
             @Override
@@ -904,7 +882,6 @@ public class Book extends RobotActivity {
         String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"session_id\":\""+uniqueID+"\",\"hashtag\":\""+hashtags+"\",\"rating\":\""+score+"\"}";
         String charset = "UTF-8";
         System.out.println("upload info request: "+rawData);
-
         URLConnection connection = null;
         try {
             connection = new URL(uploadReviewUrl).openConnection();
@@ -938,14 +915,12 @@ public class Book extends RobotActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 String uploadBrowseLogUrl = "http://140.119.19.18:5000/api/v1/browsing_upload/";
                 System.out.println("start running");
                 String uniqueID = UUID.randomUUID().toString();
                 String rawData = "{\"mms_id\":\""+ requestMms_id +"\",\"user_id\":\""+u_id+"\",\"start_time\":\""+start_time+"\",\"end_time\":\""+exit_time+"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("browse log upload request: "+rawData);
-
                 URLConnection connection = null;
                 try {
                     connection = new URL(uploadBrowseLogUrl).openConnection();
@@ -1016,7 +991,6 @@ public class Book extends RobotActivity {
                 String rawData = "{\"mms_id\":\""+ resrecmms_id +"\",\"session_id\":\""+uniqueID+"\"}";
                 String charset = "UTF-8";
                 System.out.println("book info request: "+rawData);
-
                 URLConnection connection = null;
                 try {
                     connection = new URL(bookUrl).openConnection();
@@ -1118,8 +1092,6 @@ public class Book extends RobotActivity {
                         bookIt.setClass(Book.this,Book.class);
                         startActivity(bookIt);
                         System.out.println("resrecrecommendation is"+resrecRecommendation+"\n"+resrecAssoRecommendation);
-
-
                     }
                 });
             }

@@ -3,9 +3,7 @@ package com.asus.zenbodialogsample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
@@ -22,24 +20,12 @@ import java.util.TimerTask;
 public class ZenboDialogSample extends RobotActivity {
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
-    private static TextView mTextView;
-    public static String  resAnswer;
     static ZenboDialogSample zenboDialogSample;
-    static JSONObject resJson;
-    static String targetUrl;
     static boolean personDetected ;
-    private Timer timer;
-    private TimerTask task;
-    private int currentTime;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_zenbo_dialog_sample);
         zenboDialogSample = ZenboDialogSample.this;
         personDetected = false;
@@ -56,8 +42,6 @@ public class ZenboDialogSample extends RobotActivity {
             }
         });
 
-
-
         // guestButton 初始化
         Button gButton = findViewById(R.id.guestButton);
         gButton.setOnClickListener(new Button.OnClickListener() {
@@ -72,108 +56,29 @@ public class ZenboDialogSample extends RobotActivity {
             }
         });
 
-        int ttt = robotAPI.vision.requestDetectPerson(new VisionConfig.PersonDetectConfig());
-        System.out.println("ttt: "+ttt);
+//        //zenbo detect person
+//        int ttt = robotAPI.vision.requestDetectPerson(new VisionConfig.PersonDetectConfig());
     }
 
-    private void showRobotFace(){
-        robotAPI.robot.setExpression(RobotFace.ACTIVE);
-//        RelativeLayout rl = new RelativeLayout(this);
-//        rl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                robotAPI.robot.setExpression(RobotFace.HIDEFACE);
-//                System.out.println("screen is touched");
-//            }
-//        });
-
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        startTimer();
-//        // close faical
-//        robotAPI.robot.setExpression(RobotFace.HIDEFACE);
-
         // jump dialog domain
         robotAPI.robot.jumpToPlan(DOMAIN, "lanuchHelloWolrd_Plan");
 
     }
-//    private void initTimer() {
-//        // 初始化计时器
-//        task = new MyTask();
-//        timer = new Timer();
-//    }
-
-
-//    class MyTask extends TimerTask {
-//        @Override
-//        public void run() {
-//            // 初始化计时器
-//            runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    currentTime++;
-//                    if (currentTime == 10) {
-//                        //在这里弹窗然后停止计时
-//                        showRobotFace();
-//                        stopTimer();
-//                    }
-//                }
-//            });
-//        }
-//    }
-
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//        switch (ev.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                //有按下动作时取消定时
-//                stopTimer();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                //抬起时启动定时
-//                startTimer();
-//                break;
-//        }
-//        return super.dispatchTouchEvent(ev);
-//
-//    }
-
-//    private void startTimer() {
-//        //启动计时器
-//        /**
-//         * java.util.Timer.schedule(TimerTask task, long delay, long period)：
-//         * 这个方法是说，delay/1000秒后执行task,然后进过period/1000秒再次执行task，
-//         * 这个用于循环任务，执行无数次，当然，你可以用timer.cancel();取消计时器的执行。
-//         */
-//        initTimer();
-//        try {
-//            timer.schedule(task, 10000, 1000);
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//            initTimer();
-//            timer.schedule(task, 10000, 1000);
-//        }
-//    }
-//
-//    private void stopTimer() {
-//        if (timer != null) {
-//            timer.cancel();
-//        }
-//        currentTime = 0;
-//        }
 
     @Override
     protected void onPause() {
         robotAPI.robot.stopSpeakAndListen();
-//        stopTimer();
         super.onPause();
-        //stop listen user utterance
+    }
 
-
-
+    @Override
+    protected void onDestroy() {
+        robotAPI.vision.cancelDetectFace();
+        super.onDestroy();
     }
 
     //限制內建返回按鍵
@@ -182,16 +87,6 @@ public class ZenboDialogSample extends RobotActivity {
             return true;
         }
         return false;
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        robotAPI.vision.cancelDetectFace();
-//        stopTimer();
-        super.onDestroy();
-
-
     }
 
     public static RobotCallback robotCallback = new RobotCallback() {
@@ -218,9 +113,6 @@ public class ZenboDialogSample extends RobotActivity {
             //robotAPI.robot.setExpression(RobotFace.HIDEFACE);
             personDetected = false;
             }
-
-//            robotAPI.robot.stopSpeak();
-
         }
     };
 

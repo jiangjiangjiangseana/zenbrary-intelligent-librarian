@@ -4,43 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
-import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
-import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.UUID;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.view.View;
-import android.widget.Toast;
-import android.widget.EditText;
 
 public class Login extends RobotActivity{
 
@@ -54,6 +34,7 @@ public class Login extends RobotActivity{
     static String email;
     static String uu_list;
     static String user_name;
+    static String gender;
 
 
     @Override
@@ -171,6 +152,7 @@ public class Login extends RobotActivity{
                     System.out.println("resJson: "+ resJson);
                     responseState = resJson.getString("res");
                     u_id = resJson.getString("uid");
+                    gender = resJson.getString("gender");
                     email = resJson.getString("email");
                     uu_list = resJson.getString("book_info");
                     user_name = resJson.getString("name");
@@ -194,6 +176,7 @@ public class Login extends RobotActivity{
                         userIt.putExtra("user_name",user_name);
                         userIt.putExtra("u_id",u_id);
                         userIt.putExtra("email",email);
+                        userIt.putExtra("gender",gender);
                         userIt.putExtra("uu_list",uu_list);
                         userIt.putExtra("user_info", user_info.toString());
                         userIt.setClass(Login.this, Personal.class);
@@ -211,18 +194,12 @@ public class Login extends RobotActivity{
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
-
 
     @Override
     protected void onPause() {
         super.onPause();
-
-
     }
-
 
     @Override
     protected void onDestroy() {

@@ -7,30 +7,23 @@ import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
-import com.asus.robotframework.API.DialogSystem;
 import com.asus.robotframework.API.RobotCallback;
 import com.asus.robotframework.API.RobotCmdState;
 import com.asus.robotframework.API.RobotErrorCode;
-import com.asus.robotframework.API.RobotFace;
-import com.asus.robotframework.API.RobotUtil;
 import com.asus.robotframework.API.SpeakConfig;
 import com.robot.asus.robotactivity.RobotActivity;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -43,7 +36,6 @@ import android.view.View;
 import android.widget.Toast;
 
 public class BookList extends RobotActivity{
-
     public final static String TAG = "ZenboDialogSample";
     public final static String DOMAIN = "9EF85697FF064D54B32FF06D21222BA2";
     private static TextView mTextView;
@@ -263,15 +255,7 @@ public class BookList extends RobotActivity{
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
-
-
-
-
-
-
 
     @Override
     protected void onPause() {
@@ -279,7 +263,6 @@ public class BookList extends RobotActivity{
 
 
     }
-
 
     @Override
     protected void onDestroy() {
@@ -301,14 +284,6 @@ public class BookList extends RobotActivity{
         public void initComplete() {
             super.initComplete();
 
-        }
-
-
-        public boolean onKeyDown(int keyCode, KeyEvent event){
-            if(keyCode == KeyEvent.KEYCODE_BACK){
-                return true;
-            }
-            return false;
         }
     };
 
@@ -346,9 +321,7 @@ public class BookList extends RobotActivity{
         }
     };
 
-
     public BookList() {
         super(robotCallback, robotListenCallback);
     }
-
 }

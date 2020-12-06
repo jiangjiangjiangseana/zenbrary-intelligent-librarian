@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#C2CCD6">
+
+    <ImageView
+        android:id="@+id/imageView_p"
+        android:layout_width="271dp"
+        android:layout_height="244dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/male" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="900dp"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/booklistpic" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView_p"
+        android:text="姓名: 資管大亨"
+        android:textSize="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#1b365e" />
+
+    <TextView
+        android:id="@+id/user_id"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name"
+        android:text="學號: 106000011"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#1b365e" />
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_id"
+        android:text="信箱: abc@nccu.edu.tw"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#1b365e" />
+
+
+    <Button
+        android:id="@+id/recentBtn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@id/imageView_p"
+        android:text="最近瀏覽"
+        android:textSize="30dp"
+        android:background="#1b365e"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="650dp"
+        android:textColor="#ffff"/>
+
+
+    <Button
+        android:id="@+id/bookButton"
+        android:layout_width="409dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/imageView_p"
+        android:background="@drawable/askbook" />
+
+    <Button
+        android:id="@+id/equipmentButton"
+        android:layout_width="450dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/questionButton"
+        android:layout_toRightOf="@id/imageView_p"
+        android:background="@drawable/askequipment" />
+
+    <Button
+        android:id="@+id/activityButton"
+        android:layout_width="432dp"
+        android:layout_height="145dp"
+        android:layout_below="@+id/bookButton"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/imageView_p"
+        android:background="@drawable/askactivity"
+        />
+
+
+
+    <Button
+        android:id="@+id/questionButton"
+        android:layout_width="451dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/activityButton"
+        android:background="@drawable/askquestion"
+        android:layout_toRightOf="@id/imageView_p"
+        />
+
+    <Button
+        android:id="@+id/recommendBtn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@+id/imageView_p"
+        android:layout_below="@id/recentBtn"
+        android:text="我的推薦"
+        android:textSize="30dp"
+        android:background="#1b365e"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="650dp"
+        android:textColor="#ffff"/>
+
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/recommendBtn"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="380dp"
+        android:background="#1b365e"
+        android:text="登出"
+        android:textColor="#ffff"
+        android:textSize="30dp" />
+
+</RelativeLayout>
