@@ -564,6 +564,7 @@ drawable back
 drawable book
 drawable booklistpic
 drawable change
+drawable changeback
 drawable chinese_lit
 drawable cloud_server
 drawable dragon
@@ -658,6 +659,7 @@ id button5
 id button6
 id button7
 id button8
+id button9
 id buttonPanel
 id cancel_action
 id checkbox
@@ -734,7 +736,6 @@ id media_actions
 id message
 id middle
 id multiply
-id name
 id navigation_item_1
 id navigation_item_2
 id navigation_item_3
@@ -862,7 +863,6 @@ layout activity_person
 layout activity_recommend
 layout activity_register
 layout activity_zenbo_dialog_sample
-layout drawer_header
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action

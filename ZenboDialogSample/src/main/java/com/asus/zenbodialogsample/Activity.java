@@ -378,7 +378,7 @@ public class Activity extends RobotActivity {
             System.out.println("Event:"+events.get(i));
             final ArrayList<String> event = new ArrayList<>(Arrays.asList(events.get(i).split(",")));
             TextView textView = new TextView(getApplicationContext());
-            textView.setText("活動時間:"+event.get(0).substring(1)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3).replace(']',' '));
+            textView.setText("活動時間:"+event.get(0).substring(1).replace('"',' ')+" \n\n 活動資訊:"+event.get(2).replace('"',' ')+" \n\n 活動類別:"+event.get(3).replace(']',' '));
             System.out.println("活動時間:"+event.get(0)+" \n\n 活動資訊:"+event.get(2)+" \n\n 活動類別:"+event.get(3).replace(']',' '));
             textView.setPadding(10,10,10,10);
             textView.setTextColor(Color.rgb(0,0,0));
