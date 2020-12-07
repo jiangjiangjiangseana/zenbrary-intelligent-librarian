@@ -327,14 +327,15 @@ public class Book extends RobotActivity {
         TextView available = (TextView) findViewById(R.id.available);
         TextView rating = (TextView) findViewById(R.id.score_tv);
         List<String> hashtag_info = new ArrayList<String>(Arrays.asList(resHashtag.substring(1,resHashtag.length()-1).split(",")));
-        System.out.println("hashtag_list: "+hashtag_info);
-        String hashtag_print = "";
-        for (int i = 0; i < hashtag_info.size(); i++) {
-            System.out.println("hashtag第" + i + "組: " + hashtag_info.get(i));
-            hashtag_print += "# "+hashtag_info.get(i).substring(1,hashtag_info.get(i).length()-1)+ "\n";
-        }
 
-        if(resHashtag!=null) {
+System.out.println("hashtag_info size: "+hashtag_info.size());
+        if(hashtag_info.size() > 1) {
+            System.out.println("hashtag_list: "+hashtag_info);
+            String hashtag_print = "";
+            for (int i = 0; i < hashtag_info.size(); i++) {
+                System.out.println("hashtag第" + i + "組: " + hashtag_info.get(i));
+                hashtag_print += "# "+hashtag_info.get(i).substring(1,hashtag_info.get(i).length()-1)+ "\n";
+            }
             hashtag_tv.setText(hashtag_print);
         }
         String locationString = "";
