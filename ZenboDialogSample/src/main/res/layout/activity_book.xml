@@ -43,6 +43,17 @@
         android:textColor="#1b365e"
         app:autoSizeTextType="uniform" />
 
+    <TextView
+        android:id="@+id/hashtag_tv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/hashtagBtn"
+        android:layout_marginLeft="1130dp"
+        android:textColor="#1b365e"
+        android:textSize="32dp">
+    </TextView>
+
 
     <TextView
         android:id="@+id/location"

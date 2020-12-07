@@ -97,6 +97,12 @@ public class Activity extends RobotActivity {
 //        }
 
 
+        but = 0;
+        System.out.println("Activities:"+firstActivity.get(but+2));
+        events = new ArrayList<>(Arrays.asList(firstActivity.get(but+2).split("],")));
+        System.out.println("events喔喔"+events);
+        addActivity(events.size());
+        robotAPI.robot.speak("今天有活動喔!");
 
 
 

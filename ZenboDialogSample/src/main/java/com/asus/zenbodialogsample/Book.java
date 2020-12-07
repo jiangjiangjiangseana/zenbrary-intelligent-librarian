@@ -320,12 +320,23 @@ public class Book extends RobotActivity {
             }
         });
 
-
+        TextView hashtag_tv = (TextView) findViewById(R.id.hashtag_tv);
         TextView bookName = (TextView) findViewById(R.id.bookName);
         TextView authorName = (TextView) findViewById(R.id.authorName);
         TextView location = (TextView) findViewById(R.id.location);
         TextView available = (TextView) findViewById(R.id.available);
         TextView rating = (TextView) findViewById(R.id.score_tv);
+        List<String> hashtag_info = new ArrayList<String>(Arrays.asList(resHashtag.substring(1,resHashtag.length()-1).split(",")));
+        System.out.println("hashtag_list: "+hashtag_info);
+        String hashtag_print = "";
+        for (int i = 0; i < hashtag_info.size(); i++) {
+            System.out.println("hashtag第" + i + "組: " + hashtag_info.get(i));
+            hashtag_print += "# "+hashtag_info.get(i).substring(1,hashtag_info.get(i).length()-1)+ "\n";
+        }
+
+        if(resHashtag!=null) {
+            hashtag_tv.setText(hashtag_print);
+        }
         String locationString = "";
         String availableString = "";
         for (int i = 0; i < loca_info.size(); i++) {
